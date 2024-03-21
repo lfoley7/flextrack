@@ -1,0 +1,36 @@
+{
+  "name": "cs542-project",
+  "version": "1.0.0",
+  "description": "CS542 Semester RDBMS Project",
+  "main": "app.ts",
+  "scripts": {
+    "test": "npx ts-node app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cscopetski/CS542-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cscopetski/CS542-Project/issues"
+  },
+  "homepage": "https://github.com/cscopetski/CS542-Project#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "express-session": "^1.18.0",
+    "sequelize": "^6.37.1",
+    "sequelize-typescript": "^2.1.6",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "express": "^4.19.1",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
+  }
+}
