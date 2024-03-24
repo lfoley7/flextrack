@@ -10,6 +10,7 @@ import {
   HasOne,
   HasMany,
 } from 'sequelize-typescript';
+import { WorkoutPlan } from './WorkoutPlan.model';
 
 @Table
 export class User extends Model<User> {
@@ -26,4 +27,7 @@ export class User extends Model<User> {
 
   @HasMany(() => Exercise)
   exercises: Exercise[]
+
+  @HasMany(() => WorkoutPlan)
+  workoutPlans: WorkoutPlan[]
 }

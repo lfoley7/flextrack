@@ -6,32 +6,30 @@ import {
     PrimaryKey,
     BelongsTo,
     ForeignKey,
-    AutoIncrement,
     HasMany,
   } from 'sequelize-typescript';
-  import { User } from './User.model';
+import { WorkoutPlan } from './WorkoutPlan.model';
 import { WorkoutSet } from './Set.model';
   
 @Table
-export class Exercise extends Model<Exercise> {
+export class WorkoutSession extends Model<WorkoutSession> {
 
     @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.INTEGER)
-    declare id: number;
-
     @Column(DataType.STRING)
     declare name: string;
 
+    // TODO: type validation on this
+    @PrimaryKey
     @Column(DataType.STRING)
-    declare targetMuscle: string;
+    declare dayOfWeek: string;
 
-    @ForeignKey(() => User)
+    @PrimaryKey
+    @ForeignKey(() => WorkoutPlan)
     @Column(DataType.INTEGER)
-    userId: number;
+    planId: number;
 
-    @BelongsTo(() => User)
-    user: User;
+    @BelongsTo(() => WorkoutPlan)
+    workoutPlan: WorkoutPlan;
 
     @HasMany(() => WorkoutSet)
     sets: WorkoutSet[]

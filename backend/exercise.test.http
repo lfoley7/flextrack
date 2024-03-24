@@ -1,5 +1,5 @@
 # Create Exercise
-POST http://localhost:3000/api/exercise/create HTTP/1.1
+POST http://localhost:5000/api/exercise/create HTTP/1.1
 content-type: application/json
 
 {
@@ -9,5 +9,5 @@ content-type: application/json
 
 ###
 # Get All Exercises
-GET http://localhost:3000/api/exercise/get-all HTTP/1.1
+GET http://localhost:5000/api/exercise/get-all HTTP/1.1
 
