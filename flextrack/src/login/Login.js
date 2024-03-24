@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import './Login.css';
 
+const instance = axios.create({
+    baseURL: 'http://localhost:3000/api/user'
+});
+
 function Login(props) {
     const [showPassword, setShowPassword] = useState(true);
     const navigate = useNavigate();
@@ -12,8 +16,18 @@ function Login(props) {
     const email = createContext();
 
     const verifyAccount = () => {
+        let email = document.getElementById("email-input").value;
+        let password = document.getElementById("pswd").value;
         //Verify Account
-        navigate("/")
+        instance.post("login", { "email": email, "password": password })
+            .then(function (response) {
+                console.log(email + " " + password);
+                navigate("/")
+            })
+            .catch(function (error) {
+                window.alert(error.response.data.error);
+                console.log(error);
+            })
     }
 
     return (
