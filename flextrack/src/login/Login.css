@@ -30,6 +30,7 @@
     background-color: transparent;
 }
 
+#username-input,
 #email-input,
 #pswd {
     width: 25rem;
@@ -42,6 +43,7 @@
     border-radius: 18px;
 }
 
+#email-input:hover,
 #email-input:hover,
 #pswd:hover {
     background-color: rgb(240, 240, 240)l
