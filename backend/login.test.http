@@ -1,5 +1,5 @@
 # Signup: Success
-POST http://localhost:3000/api/user/signup HTTP/1.1
+POST http://localhost:5000/api/user/signup HTTP/1.1
 content-type: application/json
 
 {
@@ -10,7 +10,7 @@ content-type: application/json
 
 ###
 # Signup: Fail [Email already exists]
-POST http://localhost:3000/api/user/signup HTTP/1.1
+POST http://localhost:5000/api/user/signup HTTP/1.1
 content-type: application/json
 
 {
@@ -21,7 +21,7 @@ content-type: application/json
 
 ###
 # Login: Success
-POST http://localhost:3000/api/user/login HTTP/1.1
+POST http://localhost:5000/api/user/login HTTP/1.1
 content-type: application/json
 
 {
@@ -31,7 +31,7 @@ content-type: application/json
 
 ###
 # Login: Fail [Wrong Email]
-POST http://localhost:3000/api/user/login HTTP/1.1
+POST http://localhost:5000/api/user/login HTTP/1.1
 content-type: application/json
 
 {
@@ -41,7 +41,7 @@ content-type: application/json
 
 ###
 # Login: Fail [Wrong Password]
-POST http://localhost:3000/api/user/login HTTP/1.1
+POST http://localhost:5000/api/user/login HTTP/1.1
 content-type: application/json
 
 {

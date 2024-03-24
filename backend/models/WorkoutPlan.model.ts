@@ -10,10 +10,10 @@ import {
     HasMany,
   } from 'sequelize-typescript';
   import { User } from './User.model';
-import { WorkoutSet } from './Set.model';
+import { WorkoutSession } from './WorkoutSession.model';
   
 @Table
-export class Exercise extends Model<Exercise> {
+export class WorkoutPlan extends Model<WorkoutPlan> {
 
     @PrimaryKey
     @AutoIncrement
@@ -23,9 +23,6 @@ export class Exercise extends Model<Exercise> {
     @Column(DataType.STRING)
     declare name: string;
 
-    @Column(DataType.STRING)
-    declare targetMuscle: string;
-
     @ForeignKey(() => User)
     @Column(DataType.INTEGER)
     userId: number;
@@ -33,7 +30,7 @@ export class Exercise extends Model<Exercise> {
     @BelongsTo(() => User)
     user: User;
 
-    @HasMany(() => WorkoutSet)
-    sets: WorkoutSet[]
+    @HasMany(() => WorkoutSession)
+    sessions: WorkoutSession[]
 }
   
