@@ -4,6 +4,7 @@ import router from './routes';
 import bodyParser from 'body-parser';
 import session from "express-session";
 import cookieParser from "cookie-parser";
+import cors from 'cors';
 
 const app = express();
 const port = 5000;
@@ -14,6 +15,11 @@ app.use(
     extended: true,
   })
 );
+
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3000',
+}));
 
 app.use(cookieParser("v6h23871rvh78123r801t71trv7"));
 app.use(
