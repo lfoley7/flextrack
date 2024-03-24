@@ -4,7 +4,7 @@ import axios from "axios";
 import './Register.css';
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000/api/user'
+    baseURL: 'http://localhost:5000/api/user'
 });
 
 function Register(props) {
