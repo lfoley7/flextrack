@@ -5,7 +5,7 @@ import { LoginCredential } from '../models/LoginCredential.model';
 
 const router = express.Router();
 
-router.post("/signup", async (req: Request, res: Response) => {
+router.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
@@ -17,7 +17,7 @@ router.post("/signup", async (req: Request, res: Response) => {
     }
 
     // Create the user
-    const newUser: User = await User.create({ username });
+    const newUser = await User.create({ username });
 
     // Hash the password before storing it
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -29,6 +29,8 @@ router.post("/signup", async (req: Request, res: Response) => {
       password: hashedPassword
     });
 
+    req.session.userId = newUser.id.toString();
+
     res.status(200).json({ user: newUser});
   } catch (error) {
     console.error('Error creating user and credentials:', error);
@@ -36,12 +38,11 @@ router.post("/signup", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/login", async (req: Request, res: Response) => {
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const errorMsg = 'Invalid email or password';
 
   try {
-
     // Find the corresponding credentials
     const credentials = await LoginCredential.findOne({
       where: {
@@ -49,12 +50,12 @@ router.post("/login", async (req: Request, res: Response) => {
       },
       include: User
     });
-
+    
     // If the credentials don't exist
     if (!credentials) {
       return res.status(400).json({ error: errorMsg });
     }
-    credentials.get
+
     // Compare the provided password with the stored hashed password
     const passwordMatch = await bcrypt.compare(password, credentials.password);
 
@@ -63,6 +64,8 @@ router.post("/login", async (req: Request, res: Response) => {
     }
 
     // Passwords match, user is authenticated
+    // Set session variable
+    req.session.userId = credentials.user.id.toString();
     res.json({ message: 'Login successful'});
   } catch (error) {
     console.error('Error during login:', error);
@@ -70,18 +73,14 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 });
 
-// router.get('/get/:id', async (req: Request, res: Response) => {
-//   const userId = req.params.id;
-//   try {
-//     const user = await User.findByPk(userId); 
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
-//     res.json(user);
-//   } catch (error) {
-//     console.error('Error retrieving user:', error);
-//     res.status(500).json({ error: 'Failed to retrieve user' });
-//   }
-// });
+router.get('/logout', async (req: Request, res: Response) => {
+  try {
+    req.session.destroy(() => {});
+    // TODO: redirect here
+  } catch (error) {
+    console.error('Error during logout user:', error);
+    res.status(500).json({ error: 'Failed to logout user' });
+  }
+});
 
 export default router;

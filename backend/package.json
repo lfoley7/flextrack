@@ -27,7 +27,9 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.7",
     "@types/express": "^4.17.21",
+    "@types/express-session": "^1.18.0",
     "express": "^4.19.1",
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",

@@ -1,4 +1,4 @@
-// import sequelize from '../config/sequelize';
+import { Exercise } from './Exercise.model';
 import { LoginCredential } from './LoginCredential.model';
 import {
   Model,
@@ -8,6 +8,7 @@ import {
   PrimaryKey,
   AutoIncrement,
   HasOne,
+  HasMany,
 } from 'sequelize-typescript';
 
 @Table
@@ -22,4 +23,7 @@ export class User extends Model<User> {
 
   @HasOne(() => LoginCredential, 'loginCredentialId')
   loginCredential: LoginCredential
+
+  @HasMany(() => Exercise)
+  exercises: Exercise[]
 }
