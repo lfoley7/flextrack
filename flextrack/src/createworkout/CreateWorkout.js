@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import Exercise from '../pagecreation/Exercise';
 import './CreateWorkout.css';
 
@@ -7,6 +8,8 @@ function CreateWorkout() {
   const [isEditing, setIsEditing] = useState(false);
   const [exercises, setExercises] = useState([]);
   const titleRef = useRef(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isEditing) {
@@ -52,6 +55,7 @@ function CreateWorkout() {
           ref={titleRef}
           type="text"
           value={title}
+          onClick={(e) => e.target.select()}
           onChange={handleTitleChange}
           onBlur={handleBlur}
           onKeyPress={handleKeyPress}
@@ -67,7 +71,8 @@ function CreateWorkout() {
           onNameChange={(newName) => handleNameChange(exercise.id, newName)}
         />
       ))}
-      <button onClick={handleAddExercise}>New Exercise</button>
+      <button className="login" onClick={handleAddExercise}>New Exercise</button>
+      <button className="login" style={{ marginTop: "5rem" }} onClick={() => { navigate("/"); }}>Submit</button>
     </div>
   );
 }
