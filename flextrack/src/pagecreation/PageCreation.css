@@ -1,0 +1,96 @@
+.exercise-wrapper {
+    position: relative;
+    /* Needed to position the pseudo-element correctly */
+    border: 3px solid transparent;
+    /* Maintains border space for the pseudo-element */
+    border-radius: 1rem;
+    /* Rounded corners */
+    text-align: center;
+    width: 30%;
+    overflow: hidden;
+    /* Ensures the pseudo-element's gradient does not overflow the border-radius */
+}
+
+.exercise-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    /* Ensure it's behind the content */
+    background: linear-gradient(#F5852899, #FC664999);
+    /* The gradient */
+    border-radius: 1rem;
+    /* Match the parent's border-radius */
+    pointer-events: none;
+    /* Prevents the pseudo-element from capturing mouse events */
+}
+
+.exercise-input {
+    border: none;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    outline: none;
+    margin-block-start: 0.79em;
+    margin-block-end: 0.79em;
+    font-family: 'Segoe UI';
+}
+
+.exercise-input {
+    cursor: text;
+    text-decoration: underline;
+}
+
+.set-and-weight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.left-group,
+.right-group {
+    display: flex;
+    align-items: center;
+}
+
+.left-group {
+    margin-left: 1rem;
+}
+
+.right-group {
+    margin-right: 1rem;
+}
+
+.weight-input,
+.reps-input {
+    flex: none;
+    width: 1rem;
+    border: 1px solid black;
+    border-radius: .3rem;
+    font-family: 'Segoe UI';
+    font-size: 1rem;
+    padding: 0.2rem;
+}
+
+.weight-input,
+.reps-input {
+    cursor: text;
+}
+
+.newSet {
+    background-image: linear-gradient(to right, #FC6649, #FE5C54);
+    border: none;
+    color: white;
+    padding: 1rem;
+    margin: .5rem 0 .5rem 0;
+    cursor: pointer;
+    width: 10rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}

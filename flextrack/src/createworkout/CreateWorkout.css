@@ -1,0 +1,15 @@
+.title-input {
+    border: none;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    outline: none;
+    margin-block-start: 0.64em;
+    margin-block-end: 0.64em;
+    font-family: 'Segoe UI';
+}
+
+.title-input {
+    cursor: text;
+    text-decoration: underline;
+}
