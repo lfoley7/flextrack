@@ -8,5 +8,5 @@
 
 ## Set up the Backend
 
-- Open a new terminal, and from the main directory, type '''cd backend'''
-- Run the backend with '''npm run test'''!
+- Open a new terminal, and from the main directory, type ```cd backend```
+- Run the backend with ```npm run test```!
