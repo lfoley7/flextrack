@@ -15,6 +15,7 @@ function Dashboard(props) {
             <a onClick={() => { navigate("/social"); }}>Social Page!</a>
             <a onClick={() => { navigate("/challenges"); }}>Challenges Page!</a>
             <a onClick={() => { navigate("/settings"); }}>Settings Page!</a>
+            Your Routine:
         </div>
     )
 };
