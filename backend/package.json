@@ -4,7 +4,9 @@
   "description": "CS542 Semester RDBMS Project",
   "main": "app.ts",
   "scripts": {
-    "test": "npx ts-node app.ts"
+    "build": "tsc",
+    "start": "npx tsx src/server.ts",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000"
   },
   "repository": {
     "type": "git",
@@ -16,15 +18,23 @@
     "url": "https://github.com/cscopetski/CS542-Project/issues"
   },
   "homepage": "https://github.com/cscopetski/CS542-Project#readme",
+  "type": "module",
   "dependencies": {
+    "@mikro-orm/cli": "^6.1.12",
+    "@mikro-orm/core": "^6.1.12",
+    "@mikro-orm/reflection": "^6.1.12",
+    "@mikro-orm/sqlite": "^6.1.12",
+    "@types/node": "^20.12.5",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express-session": "^1.18.0",
+    "fastify": "^4.26.2",
     "sequelize": "^6.37.1",
     "sequelize-typescript": "^2.1.6",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "vitest": "^1.4.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -32,9 +42,23 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/express-session": "^1.18.0",
+    "@types/supertest": "^6.0.2",
+    "cross-env": "^7.0.3",
     "express": "^4.19.1",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.0",
+    "supertest": "^6.3.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.3"
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.4"
+  },
+  "mikro-orm": {
+    "useTsNode": true
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
