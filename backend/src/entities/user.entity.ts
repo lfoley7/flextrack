@@ -1,5 +1,6 @@
-import { Entity, PrimaryKey, Property, OneToOne } from '@mikro-orm/core';
-import { LoginCredential } from './login-credential.entity';
+import { Entity, PrimaryKey, Property, OneToOne, OneToMany } from '@mikro-orm/core';
+import { LoginCredential } from './login-credential.entity.js';
+import { Exercise } from './exercise.entity.js';
 
 @Entity()
 export class User {
@@ -12,6 +13,9 @@ export class User {
 
     @OneToOne()
     login!: LoginCredential;
+
+    @OneToMany(() => Exercise, exercise => exercise.user)
+    exercises!: Exercise[];
 
     constructor(username: string, login: LoginCredential) {
         this.username = username;
