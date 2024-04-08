@@ -4,7 +4,7 @@ import { User } from '../entities/user.entity.js';
 import { LoginCredential } from '../entities/login-credential.entity.js';
 import { initORM } from '../db.js';
 
-export async function registerUserRoutes(router: Router) {
+export async function registerUserRoutes(router: Router): Promise<express.Router> {
 
   const db = await initORM();
 

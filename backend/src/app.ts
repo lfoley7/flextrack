@@ -6,6 +6,7 @@ import cors from 'cors';
 import { MikroORM, RequestContext }from '@mikro-orm/sqlite';
 import { initORM } from './db.js';
 import { registerUserRoutes } from './routes/users.js';
+import { registerExerciseRoutes } from './routes/exercises.js';
 
 export async function bootstrap(port = 5000) {
   const db = await initORM();
@@ -60,7 +61,9 @@ export async function bootstrap(port = 5000) {
   //add routes
   const router = express.Router();
   const userRouter = await registerUserRoutes(express.Router())
+  const exerciseRouter = await registerExerciseRoutes(express.Router())
   router.use('/user',userRouter);
+  router.use('/exercise',exerciseRouter);
 
   app.use("/api", router)
 

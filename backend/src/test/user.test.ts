@@ -1,32 +1,27 @@
 import { initTestApp } from '../utils.js';
 import { Server } from 'http';
-import { SuperTest } from 'supertest';
+import request from "supertest";
 
 let app: Server;
 
+
 beforeAll(async () => {
-  // we use different ports to allow parallel testing
-  app = await initTestApp(30001);
+  app = await initTestApp(3000);
 });
 
 afterAll(async () => {
-  // we close only the fastify app - it will close the database connection via onClose hook automatically
-  app.close();
+  await app.close()
 });
 
-test('list all articles', async () => {
-  // mimic the http request via `app.inject()`
-  const res = await app.({
-    method: 'get',
-    url: '/article',
+describe("POST /api/user/signup", () => {
+  it("should signup new user ", async () => {
+    const res = await request(app).post(
+      "/api/user/signup"
+    ).send({
+      "username": "test",
+      "email": "test@gmail.com",
+      "password": "1234"
   });
-
-  // assert it was successful response
-  expect(res.statusCode).toBe(200);
-
-  // with expected shape
-  expect(res.json()).toMatchObject({
-    items: [],
-    total: 0,
+    expect(res.statusCode).toBe(200);
   });
 });
