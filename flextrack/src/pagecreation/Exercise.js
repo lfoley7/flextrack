@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import "./PageCreation.css";
 
 function Exercise({ name, onNameChange }) {
   const [isEditing, setIsEditing] = useState(false);
   const [localName, setLocalName] = useState(name);
-  const [sets, setSets] = useState([1]);
-  const [weight, setWeight] = useState([10]);
+  const nextId = useRef(2);
+  const [sets, setSets] = useState([{ id: 1, reps: '', weight: 10 }]);
+  const exerciseRef = useRef(null);
+
+  useEffect(() => {
+    if (isEditing) {
+      exerciseRef.current.focus();
+    }
+  }, [isEditing]);
 
   const handleBlur = () => {
     setIsEditing(false);
@@ -23,50 +30,96 @@ function Exercise({ name, onNameChange }) {
   };
 
   const handleAddSet = () => {
-    const newSetValue = sets.length + 1;
-    setSets([...sets, newSetValue]);
+    const newSet = {
+      id: sets.length + 1,
+      reps: '',
+      weight: 10
+    };
+    setSets([...sets, newSet]);
+    nextId.current += 1;
+    console.log(sets);
   };
 
-  const handleAddWeight = () => {
-    const newWeightValue = weight.length + 1;
-    setWeight([...weight, newWeightValue]);
+  const handleDeleteSet = (id) => {
+    const filteredSets = sets.filter(set => set.id !== id);
+    const updatedSets = filteredSets.map((set, index) => ({
+      ...set,
+      id: index + 1
+    }));
+    setSets(updatedSets);
   };
 
   function SetsRepsWeight() {
     return (
-      sets.map((setValue, index) => (
-        <div key={index} className="set-and-weight">
-          <div className="left-group">
-            Set {setValue} -&nbsp;<input className="reps-input" />&nbsp;reps
-          </div>
-          <div className="right-group">
-            <input className="weight-input" defaultValue={`${weight[index] || 1}`} />&nbsp;lbs
-          </div>
-        </div>
-      ))
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Set #</th>
+            <th scope="col">Reps</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sets.map((set, index) => (
+            <tr key={set.id}>
+              <td>Set {index + 1}</td>
+              <td>
+                <input
+                  type="number"
+                  className="form-control reps-input"
+                  defaultValue={set.reps}
+                  onChange={(e) => {
+                    const newSets = [...sets];
+                    newSets[index] = { ...set, reps: e.target.value };
+                    setSets(newSets);
+                  }}
+                  aria-label="Reps"
+                /> reps
+              </td>
+              <td>
+                <input
+                  type="number"
+                  className="form-control weight-input"
+                  defaultValue={set.weight}
+                  onChange={(e) => {
+                    const newSets = [...sets];
+                    newSets[index] = { ...set, weight: e.target.value };
+                    setSets(newSets);
+                  }}
+                  aria-label="Weight"
+                /> lbs
+              </td>
+              <td>
+                <button onClick={() => handleDeleteSet(set.id)} className="delete-entry">Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     );
   }
 
   return (
     <div className="exercise-wrapper">
-      {isEditing ? (
-        <input
-          type="text"
-          value={localName}
-          onClick={(e) => e.target.select()}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onKeyPress={handleKeyPress}
-          className="exercise-input"
-          autoFocus
-        />
-      ) : (
-        <h2 onClick={() => setIsEditing(true)}>{localName}</h2>
-      )}
-      <div>
+      <div className="exercise-content">
+        {isEditing ? (
+          <input
+            ref={exerciseRef}
+            type="text"
+            value={localName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onKeyPress={handleKeyPress}
+            className="exercise-input"
+            autoFocus
+          />
+        ) : (
+          <h2 className="exercise-header" onClick={() => setIsEditing(true)}>{localName}</h2>
+        )}
         <SetsRepsWeight />
+        <button className="newSet" onClick={handleAddSet}>Add Set</button>
       </div>
-      <button className="newSet" onClick={handleAddSet}>Add Set</button>
     </div>
   );
 }

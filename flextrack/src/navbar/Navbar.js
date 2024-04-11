@@ -33,7 +33,7 @@ function Navbar(props) {
                                 onMouseOver={MouseOver}
                                 onMouseOut={MouseOut}
                             >
-                                <div className="button-content" title="For Site Managers and Store Owners" onClick={() => { onHandleNavClick("/login") }}>
+                                <div className="button-content" title="For New and Existing Users" onClick={() => { onHandleNavClick("/login") }}>
                                     {"Sign in"}
                                 </div>
                             </button>

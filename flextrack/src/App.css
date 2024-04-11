@@ -32,7 +32,34 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.custom-background {
+  position: relative;
+  margin-top: 4rem;
+  min-height: calc(100vh - 4rem)
+}
+
+.custom-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/public/gym_background_fulldef.png');
+  background-size: 70%;
+  background-position: center;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+body,
+button,
+a {
+  font-family: 'Poppins', sans-serif !important;
 }

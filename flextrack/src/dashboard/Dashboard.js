@@ -9,12 +9,15 @@ function Dashboard(props) {
 
     return (
         <div className="display-container">
-            Welcome to the Dashboard!
+            <div className="top-message">
+                Welcome to the Dashboard!
+            </div>
             <a onClick={() => { navigate("/"); }}>Dashboard Page!</a>
             <a onClick={() => { navigate("/createWorkout"); }}>Create Workout Page!</a>
             <a onClick={() => { navigate("/social"); }}>Social Page!</a>
             <a onClick={() => { navigate("/challenges"); }}>Challenges Page!</a>
             <a onClick={() => { navigate("/settings"); }}>Settings Page!</a>
+            Your Routine:
         </div>
     )
 };

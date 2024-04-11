@@ -6,10 +6,15 @@
     outline: none;
     margin-block-start: 0.64em;
     margin-block-end: 0.64em;
-    font-family: 'Segoe UI';
+    font-family: 'Poppins', 'Sans-serif';
+    background-color: transparent;
 }
 
 .title-input {
     cursor: text;
+    text-decoration: underline;
+}
+
+.workout-title:hover {
     text-decoration: underline;
 }

@@ -135,7 +135,7 @@
 }
 
 /* Add a hover effect for buttons */
-button:hover {
+.login:hover {
     background-image: linear-gradient(to right, #fa5e3f, #ff4d44);
 }
 
