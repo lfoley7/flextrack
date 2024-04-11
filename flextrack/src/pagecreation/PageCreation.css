@@ -22,6 +22,8 @@
 
 .exercise-header {
     margin-top: 0;
+    font-style: italic;
+    color: #FA713E;
 }
 
 .exercise-header:hover {
@@ -39,6 +41,8 @@
     font-family: 'Poppins', "Sans-serif";
     cursor: text;
     text-decoration: underline;
+    font-style: italic;
+    color: #FA713E;
 }
 
 .set-and-weight {
@@ -111,4 +115,9 @@
     color: #FE5C54;
     background-color: rgb(230, 230, 230);
     border-radius: 1rem;
+}
+
+th,
+td {
+    color: rgb(70, 70, 70);
 }

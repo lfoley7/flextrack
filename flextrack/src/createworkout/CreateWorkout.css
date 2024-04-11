@@ -8,11 +8,15 @@
     margin-block-end: 0.64em;
     font-family: 'Poppins', 'Sans-serif';
     background-color: transparent;
-}
-
-.title-input {
     cursor: text;
     text-decoration: underline;
+    font-style: italic;
+    color: #FC6649;
+}
+
+.workout-title {
+    font-style: italic;
+    color: #FC6649;
 }
 
 .workout-title:hover {
