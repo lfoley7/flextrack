@@ -1,31 +1,31 @@
 .exercise-wrapper {
     position: relative;
-    /* Needed to position the pseudo-element correctly */
-    border: 3px solid transparent;
-    /* Maintains border space for the pseudo-element */
+    background: linear-gradient(#F58528, #FC6649);
     border-radius: 1rem;
-    /* Rounded corners */
     text-align: center;
-    width: 30%;
+    width: 40rem;
     overflow: hidden;
-    /* Ensures the pseudo-element's gradient does not overflow the border-radius */
+    margin-bottom: 1rem;
 }
 
-.exercise-wrapper::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    /* Ensure it's behind the content */
-    background: linear-gradient(#F5852899, #FC664999);
-    /* The gradient */
-    border-radius: 1rem;
-    /* Match the parent's border-radius */
-    pointer-events: none;
-    /* Prevents the pseudo-element from capturing mouse events */
+.exercise-content table {
+    width: 100%;
+    margin: 0;
+}
+
+.exercise-content {
+    background: white;
+    margin: .2rem;
+    padding: 1rem;
+    border-radius: .89rem;
+}
+
+.exercise-header {
+    margin-top: 0;
+}
+
+.exercise-header:hover {
+    text-decoration: underline;
 }
 
 .exercise-input {
@@ -34,12 +34,9 @@
     font-size: 1.5em;
     font-weight: bold;
     outline: none;
-    margin-block-start: 0.79em;
-    margin-block-end: 0.79em;
-    font-family: 'Segoe UI';
-}
-
-.exercise-input {
+    margin-top: 0;
+    margin-bottom: 0.75em;
+    font-family: 'Poppins', "Sans-serif";
     cursor: text;
     text-decoration: underline;
 }
@@ -68,17 +65,19 @@
 .weight-input,
 .reps-input {
     flex: none;
-    width: 1rem;
-    border: 1px solid black;
-    border-radius: .3rem;
-    font-family: 'Segoe UI';
+    width: 2.2rem;
+    border-top: none;
+    border-right: none;
+    border-bottom: 2px solid black;
+    border-left: none;
     font-size: 1rem;
     padding: 0.2rem;
+    cursor: text;
 }
 
-.weight-input,
-.reps-input {
-    cursor: text;
+.weight-input:focus,
+.reps-input:focus {
+    outline: none;
 }
 
 .newSet {
@@ -93,4 +92,23 @@
     border-radius: 10px;
     font-size: 14px;
     font-weight: 500;
+}
+
+.newSet:hover {
+    background-image: linear-gradient(to right, #fa5e3f, #ff4d44);
+}
+
+.delete-entry {
+    color: #FC6649;
+    background-color: white;
+    border: none;
+    padding: .5rem 1rem;
+    margin-bottom: .2rem;
+    font-weight: 600;
+}
+
+.delete-entry:hover {
+    color: #FE5C54;
+    background-color: rgb(230, 230, 230);
+    border-radius: 1rem;
 }

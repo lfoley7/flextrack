@@ -62,7 +62,7 @@ function CreateWorkout() {
           className="title-input"
         />
       ) : (
-        <h1 onClick={toggleEditing}>{title}</h1>
+        <h1 className="workout-title" onClick={toggleEditing}>{title}</h1>
       )}
       {exercises.map((exercise) => (
         <Exercise
