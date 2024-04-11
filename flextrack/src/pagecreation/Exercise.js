@@ -115,7 +115,7 @@ function Exercise({ name, onNameChange }) {
             autoFocus
           />
         ) : (
-          <h2 className="exercise-header" onClick={() => setIsEditing(true)}>{localName}</h2>
+          <i><h2 className="exercise-header" onClick={() => setIsEditing(true)}>{localName}</h2></i>
         )}
         <SetsRepsWeight />
         <button className="newSet" onClick={handleAddSet}>Add Set</button>
