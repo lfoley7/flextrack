@@ -2,15 +2,15 @@ import { useEffect } from "react";
 import * as React from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import './Settings.css';
+import './ViewWorkout.css';
 
-function Settings(props) {
+function Social(props) {
     const navigate = useNavigate();
 
     return (
         <div className="display-container">
             <div className="top-message">
-                Welcome to the Settings Page!
+                Welcome to the View Workout Page!
             </div>
             <a onClick={() => { navigate("/"); }}>Dashboard Page!</a>
             <a onClick={() => { navigate("/createWorkout"); }}>Create Workout Page!</a>
@@ -22,4 +22,4 @@ function Settings(props) {
     )
 };
 
-export default Settings;
+export default Social;

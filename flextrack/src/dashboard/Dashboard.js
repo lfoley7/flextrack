@@ -14,6 +14,7 @@ function Dashboard(props) {
             </div>
             <a onClick={() => { navigate("/"); }}>Dashboard Page!</a>
             <a onClick={() => { navigate("/createWorkout"); }}>Create Workout Page!</a>
+            <a onClick={() => { navigate("/viewWorkout"); }}>View Workout Page!</a>
             <a onClick={() => { navigate("/social"); }}>Social Page!</a>
             <a onClick={() => { navigate("/challenges"); }}>Challenges Page!</a>
             <a onClick={() => { navigate("/settings"); }}>Settings Page!</a>
