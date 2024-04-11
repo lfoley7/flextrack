@@ -10,6 +10,7 @@ import Challenges from "./challenges/Challenges";
 import CreateWorkout from "./createworkout/CreateWorkout";
 import Settings from "./settings/Settings";
 import Social from "./social/Social";
+import ViewWorkout from "./viewworkout/ViewWorkout";
 import './App.css';
 import WebFont from 'webfontloader';
 
@@ -45,6 +46,7 @@ export default function App() {
         <Route path='/createworkout' element={<CreateWorkout />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/social' element={<Social />} />
+        <Route path='/viewworkout' element={<ViewWorkout />} />
       </Routes>
     </div>
   );
