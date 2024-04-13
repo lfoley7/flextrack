@@ -12,12 +12,12 @@ function Dashboard(props) {
             <div className="top-message">
                 Welcome to the Dashboard!
             </div>
-            <a onClick={() => { navigate("/"); }}>Dashboard Page!</a>
-            <a onClick={() => { navigate("/createWorkout"); }}>Create Workout Page!</a>
-            <a onClick={() => { navigate("/viewWorkout"); }}>View Workout Page!</a>
-            <a onClick={() => { navigate("/social"); }}>Social Page!</a>
-            <a onClick={() => { navigate("/challenges"); }}>Challenges Page!</a>
-            <a onClick={() => { navigate("/settings"); }}>Settings Page!</a>
+            <a className="orange-link" onClick={() => { navigate("/"); }}>Dashboard Page!</a>
+            <a className="orange-link" onClick={() => { navigate("/createWorkout"); }}>Create Workout Page!</a>
+            <a className="orange-link" onClick={() => { navigate("/viewWorkout"); }}>View Workout Page!</a>
+            <a className="orange-link" onClick={() => { navigate("/social"); }}>Social Page!</a>
+            <a className="orange-link" onClick={() => { navigate("/challenges"); }}>Challenges Page!</a>
+            <a className="orange-link" onClick={() => { navigate("/settings"); }}>Settings Page!</a>
             Your Routine:
         </div>
     )

@@ -73,7 +73,7 @@ function Register(props) {
                     }}>Register</button>
                     <div>
                         <label>Already a user?&nbsp;</label>
-                        <a onClick={() => { navigate("/login"); }}>Click here to log in!</a>
+                        <a className="orange-link" onClick={() => { navigate("/login"); }}>Click here to log in!</a>
                     </div>
                     <div className="copy-right">Powered by Group 7</div>
                 </div>

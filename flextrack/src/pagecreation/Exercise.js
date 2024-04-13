@@ -65,30 +65,34 @@ function Exercise({ name, onNameChange }) {
             <tr key={set.id}>
               <td>Set {index + 1}</td>
               <td>
-                <input
-                  type="number"
-                  className="form-control reps-input"
-                  defaultValue={set.reps}
-                  onChange={(e) => {
-                    const newSets = [...sets];
-                    newSets[index] = { ...set, reps: e.target.value };
-                    setSets(newSets);
-                  }}
-                  aria-label="Reps"
-                /> reps
+                <div className="d-flex justify-content-center align-items-center">
+                  <input
+                    type="number"
+                    className="form-control reps-input"
+                    defaultValue={set.reps}
+                    onChange={(e) => {
+                      const newSets = [...sets];
+                      newSets[index] = { ...set, reps: e.target.value };
+                      setSets(newSets);
+                    }}
+                    aria-label="Reps"
+                  /> reps
+                </div>
               </td>
               <td>
-                <input
-                  type="number"
-                  className="form-control weight-input"
-                  defaultValue={set.weight}
-                  onChange={(e) => {
-                    const newSets = [...sets];
-                    newSets[index] = { ...set, weight: e.target.value };
-                    setSets(newSets);
-                  }}
-                  aria-label="Weight"
-                /> lbs
+                <div className="d-flex justify-content-center align-items-center">
+                  <input
+                    type="number"
+                    className="form-control weight-input"
+                    defaultValue={set.weight}
+                    onChange={(e) => {
+                      const newSets = [...sets];
+                      newSets[index] = { ...set, weight: e.target.value };
+                      setSets(newSets);
+                    }}
+                    aria-label="Weight"
+                  /> lbs
+                </div>
               </td>
               <td>
                 <button onClick={() => handleDeleteSet(set.id)} className="delete-entry">Delete</button>
@@ -96,7 +100,7 @@ function Exercise({ name, onNameChange }) {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table >
     );
   }
 

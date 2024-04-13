@@ -21,8 +21,9 @@
 }
 
 .exercise-header {
+    font-size: calc(.8rem + 1.2vw);
+    font-weight: 700;
     margin-top: 0;
-    font-style: italic;
     color: #FA713E;
 }
 
@@ -31,13 +32,13 @@
 }
 
 .exercise-input {
+    font-size: calc(.8rem + 1.2vw);
     border: none;
     text-align: center;
-    font-size: 1.5em;
     font-weight: bold;
     outline: none;
-    margin-top: 0;
-    margin-bottom: 0.75em;
+    margin-top: 0 !important;
+    padding: 0 !important;
     font-family: 'Poppins', "Sans-serif";
     cursor: text;
     text-decoration: underline;
@@ -77,6 +78,7 @@
     font-size: 1rem;
     padding: 0.2rem;
     cursor: text;
+    border-radius: 0;
 }
 
 .weight-input:focus,
@@ -113,8 +115,7 @@
 
 .delete-entry:hover {
     color: #FE5C54;
-    background-color: rgb(230, 230, 230);
-    border-radius: 1rem;
+    font-weight: 900;
 }
 
 th,
