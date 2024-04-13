@@ -41,6 +41,7 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 18px;
+    font-size: .8rem;
 }
 
 #email-input:hover,
@@ -157,10 +158,10 @@
     font-size: 12px;
 }
 
-a {
-    color: #F58528;
-    text-decoration: underline;
-    cursor: pointer;
+.orange-link {
+    color: #F58528 !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
 }
 
 #pswd {

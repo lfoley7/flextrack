@@ -64,7 +64,7 @@ function Login(props) {
                     }}>Login</button>
                     <div>
                         <label>New to your fitness journey?&nbsp;</label>
-                        <a onClick={() => { navigate("/register"); }}>Click here to register!</a>
+                        <a className="orange-link" onClick={() => { navigate("/register"); }}>Click here to register!</a>
                     </div>
                     <div className="copy-right">Powered by Group 7</div>
                 </div>
