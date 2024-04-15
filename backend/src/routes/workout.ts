@@ -18,7 +18,7 @@ export async function registerWorkoutRoutes(router: Router): Promise<express.Rou
     }else{
       res.status(500).json({ error: 'Failed to get plans' });
     }
-    const user = await db.user.findOne({id: +userId},{ populate: ['plans.*']});
+    const user = await db.user.findOne({id: +userId},{ populate: ['plans.sessions','plans.sessions.sets']});
   
     if(user == null) {
       console.error('Error getting plans');
