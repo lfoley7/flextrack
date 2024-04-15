@@ -1,0 +1,124 @@
+.exercise-wrapper {
+    position: relative;
+    background: linear-gradient(#F58528, #FC6649);
+    border-radius: 1rem;
+    text-align: center;
+    width: 40rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.exercise-content table {
+    width: 100%;
+    margin: 0;
+}
+
+.exercise-content {
+    background: white;
+    margin: .2rem;
+    padding: 1rem;
+    border-radius: .89rem;
+}
+
+.exercise-header {
+    font-size: calc(.8rem + 1.2vw);
+    font-weight: 700;
+    margin-top: 0;
+    color: #FA713E;
+}
+
+.exercise-header:hover {
+    text-decoration: underline;
+}
+
+.exercise-input {
+    font-size: calc(.8rem + 1.2vw);
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    outline: none;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    font-family: 'Poppins', "Sans-serif";
+    cursor: text;
+    text-decoration: underline;
+    font-style: italic;
+    color: #FA713E;
+}
+
+.set-and-weight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.left-group,
+.right-group {
+    display: flex;
+    align-items: center;
+}
+
+.left-group {
+    margin-left: 1rem;
+}
+
+.right-group {
+    margin-right: 1rem;
+}
+
+.weight-input,
+.reps-input {
+    flex: none;
+    width: 2.2rem;
+    border-top: none;
+    border-right: none;
+    border-bottom: 2px solid black;
+    border-left: none;
+    font-size: 1rem;
+    padding: 0.2rem;
+    cursor: text;
+    border-radius: 0;
+}
+
+.weight-input:focus,
+.reps-input:focus {
+    outline: none;
+}
+
+.newSet {
+    background-image: linear-gradient(to right, #FC6649, #FE5C54);
+    border: none;
+    color: white;
+    padding: 1rem;
+    margin: .5rem 0 .5rem 0;
+    cursor: pointer;
+    width: 10rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.newSet:hover {
+    background-image: linear-gradient(to right, #fa5e3f, #ff4d44);
+}
+
+.delete-entry {
+    color: #FC6649;
+    background-color: white;
+    border: none;
+    padding: .5rem 1rem;
+    margin-bottom: .2rem;
+    font-weight: 600;
+}
+
+.delete-entry:hover {
+    color: #FE5C54;
+    font-weight: 900;
+}
+
+th,
+td {
+    color: rgb(70, 70, 70);
+}
