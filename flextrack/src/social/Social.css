@@ -53,11 +53,11 @@ td {
 }
 
 th {
-    color: #F58528;
+    color: #333;
 }
 
 td {
-    color: #F58528;
+    color: #777;
 }
 
 .username {
@@ -76,6 +76,7 @@ td {
     bottom: .2rem;
     margin-left: .75rem;
     border-radius: .3rem;
+    padding-left: .4rem;
     padding-right: .7rem;
     font-weight: 600;
 }
