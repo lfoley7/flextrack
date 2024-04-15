@@ -1,0 +1,12 @@
+{
+    "date": "4/15/24",
+    "set": {
+        "set_number": 1,
+        "exercise": 1,
+        "day_of_week": "Monday",
+        "workout_type": "Push",
+        "plan": 1
+    },
+    "weight": "155",
+    "reps": "12"
+}
