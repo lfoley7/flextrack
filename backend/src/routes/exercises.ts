@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { initORM } from '../db.js';
+import { initORM } from '../db';
 
 export async function registerExerciseRoutes(router: Router): Promise<express.Router> {
 

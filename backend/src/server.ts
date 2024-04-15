@@ -5,7 +5,7 @@ declare module 'express-session' {
     }
 }
 
-import { bootstrap }  from './app.js';
+import { bootstrap }  from './app';
 
 export const init = (async () => {
     try {

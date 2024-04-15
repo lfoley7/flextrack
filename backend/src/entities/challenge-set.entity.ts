@@ -1,8 +1,5 @@
 import { Entity, PrimaryKey, Property, ManyToOne, OneToMany, Cascade, Collection, PrimaryKeyProp } from '@mikro-orm/core';
-import { User } from './user.entity.js';
-import { WorkoutSession } from './workout-session.entity.js';
 import { Exercise } from './exercise.entity.js';
-import { WorkoutLog } from './workout-log.entity.js';
 import { Challenge } from './challenge.entity.js';
 import { ChallengeLog } from './challenge-log.entity.js';
 
