@@ -19,31 +19,6 @@ function Profile(props) {
         bench: false
     });
 
-    // Function to handle field changes
-    const handleChange = (field, value) => {
-        setUser(prev => ({ ...prev, [field]: value }));
-    };
-
-    // Function to toggle editing state
-    const toggleEdit = (field) => {
-        setIsEditing(prev => ({ ...prev, [field]: !prev[field] }));
-    };
-
-    function editableField(field) {
-        return isEditing[field] ? (
-            <input
-                type="text"
-                value={user[field]}
-                onChange={(e) => handleChange(field, e.target.value)}
-                onBlur={() => toggleEdit(field)}
-                className="exercise-input"
-                autoFocus
-            />
-        ) : (
-            <span onClick={() => toggleEdit(field)}>{user[field]} kg</span>
-        );
-    }
-
     return (
         <div className="display-container mt-40 d-flex" style={{ paddingTop: '12rem' }}>
             <div className="row">
@@ -51,18 +26,7 @@ function Profile(props) {
                     <div className="profile-image-container">
                         <img src="/profile.png" alt="Profile" className="profile-img mb-3" />
                     </div>
-                    {isEditing.username ? (
-                        <input
-                            type="text"
-                            value={user.username}
-                            onChange={(e) => handleChange('username', e.target.value)}
-                            onBlur={() => toggleEdit('username')}
-                            className="username-input"
-                            autoFocus
-                        />
-                    ) : (
-                        <div className="username" onClick={() => toggleEdit('username')}>{user.username}</div>
-                    )}
+                    <div className="username">{user.username}</div>
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
                     <div className="vr" style={{ height: '100%' }}></div>
@@ -78,8 +42,8 @@ function Profile(props) {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{editableField('deadlift')}</td>
-                                            <td>{editableField('squat')}</td>
+                                            <td>{user.deadlift} lbs</td>
+                                            <td>{user.squat} lbs</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -96,8 +60,8 @@ function Profile(props) {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{editableField('ohp')}</td>
-                                            <td>{editableField('bench')}</td>
+                                            <td>{user.ohp} lbs</td>
+                                            <td>{user.bench} lbs</td>
                                         </tr>
                                     </tbody>
                                 </table>

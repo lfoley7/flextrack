@@ -79,8 +79,39 @@ td {
     padding-left: .4rem;
     padding-right: .7rem;
     font-weight: 600;
+    z-index: 2;
 }
 
 .add-friend:hover {
     background-image: linear-gradient(to right, #fa5e3f, #ff4d44);
+}
+
+.added-friend {
+    background-color: white;
+    border: 1px solid #FE5C54;
+    color: #fa5e3f;
+    font-style: italic;
+    position: relative;
+    bottom: .2rem;
+    margin-left: .75rem;
+    border-radius: .3rem;
+    padding-left: .4rem;
+    padding-right: .7rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.view-posts-button {
+    border: none;
+    font-weight: 500;
+    border-radius: .3rem;
+    height: 1.8rem;
+    width: 6.5rem;
+    margin-top: 1rem;
+    background-color: #fa5e3f;
+    color: white;
+}
+
+.view-posts-button:hover {
+    background-color: #ff4d44;
 }

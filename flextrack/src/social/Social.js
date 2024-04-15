@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
@@ -7,14 +7,14 @@ import './Social.css';
 function Social() {
     const navigate = useNavigate();
 
-    const users = [
+    const [users, setUsers] = useState([
         {
             username: "John Do",
             deadlift: "300",
             squat: "250",
             ohp: "120",
             bench: "200",
-            friend: "true"
+            friend: "false"
         },
         {
             username: "Jane Do",
@@ -24,14 +24,21 @@ function Social() {
             bench: "150",
             friend: "false"
         }
-    ];
+    ]);
 
     const onHandleCardClick = () => {
         navigate('/profile');
     };
 
+    const onHandleAddFriend = (index) => {
+        const newUsers = [...users];
+        newUsers[index].friend = "true";
+        setUsers(newUsers);
+    }
+
     return (
         <div className="display-container" style={{ width: '40rem', margin: 'auto', display: 'inherit', paddingTop: '.4rem' }}>
+            <button className="view-posts-button" onClick={() => { navigate('/posts') }}>View Posts</button>
             <div className="search-bar mt-3 mb-3 p-2" style={{
                 borderRadius: '50px',
                 background: 'white',
@@ -59,8 +66,11 @@ function Social() {
                                 </div>
                                 <div style={{ flex: 1 }}>
                                     <label className="username mb-2">{user.username}</label>
-                                    {user.friend === "false" ? <button className='add-friend'>+ Add</button> : null}
-                                    < table className="w-100">
+                                    {user.friend === "false" ? <button className='add-friend' onClick={(e) => {
+                                        e.stopPropagation();
+                                        onHandleAddFriend(index);
+                                    }}>+ Add</button> : <button className='added-friend' onclick={() => { }}>Added</button>}
+                                    <table className="w-100">
                                         <thead>
                                             <tr>
                                                 <th>Deadlift</th>
@@ -81,7 +91,7 @@ function Social() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div >
                 ))
             }
         </div >
