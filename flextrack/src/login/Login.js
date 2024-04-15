@@ -22,7 +22,7 @@ function Login(props) {
         instance.post("login", { "email": email, "password": password })
             .then(function (response) {
                 console.log(email + " " + password);
-                navigate("/")
+                navigate("/dashboard")
             })
             .catch(function (error) {
                 window.alert(error.response.data.error);

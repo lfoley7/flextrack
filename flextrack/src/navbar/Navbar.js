@@ -9,7 +9,7 @@ function Navbar(props) {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "rgba(42,87,131,1)" }}>
             <div className="container-fluid">
-                <a className="navbar-brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>FLEXTRACK</a>
+                <a className="navbar-brand" onClick={() => navigate('/dashboard')} style={{ cursor: 'pointer' }}>FLEXTRACK</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
