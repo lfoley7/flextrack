@@ -20,4 +20,10 @@ export class WorkoutPlan {
 
     @ManyToMany(() => Post, post => post.plans, { owner: true })
     posts = new Collection<Post>(this);
+
+    public addSessions(sessions: WorkoutSession[]) {
+        sessions.forEach((session) => {
+            this.sessions.add(session)
+        });
+    } 
 }

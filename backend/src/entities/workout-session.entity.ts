@@ -19,4 +19,16 @@ export class WorkoutSession {
 
     [PrimaryKeyProp]?: ['day_of_week', 'workout_type', 'plan'];
 
+    public constructor(day_of_week: string, workout_type: string, workout_plan: WorkoutPlan, sets: SessionSet[]) {
+        this.day_of_week = day_of_week;
+        this.workout_type = workout_type;
+        this.plan = workout_plan;
+        this.addSets(sets);
+    }
+
+    public addSets(sets: SessionSet[]) {
+        sets.forEach((set) => {
+            this.sets.add(set)
+        });
+    } 
 }

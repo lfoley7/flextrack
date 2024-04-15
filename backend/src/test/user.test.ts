@@ -1,6 +1,6 @@
-import { initTestApp } from '../utils.js';
 import { Server } from 'http';
 import request from "supertest";
+import { initTestApp } from '../utils';
 
 let app: Server;
 
@@ -10,7 +10,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await app.close()
+
 });
 
 describe("POST /api/user/signup", () => {

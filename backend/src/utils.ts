@@ -1,5 +1,5 @@
-import { bootstrap } from '../src/app.js';
-import { initORM } from '../src/db.js';
+import { bootstrap } from '../src/app';
+import { initORM } from '../src/db';
 
 export async function initTestApp(port: number) {
   // this will create all the ORM services and cache them

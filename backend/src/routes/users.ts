@@ -1,8 +1,8 @@
 import express, { Request, Response, Router } from 'express';
 import bcrypt from 'bcrypt'
-import { User } from '../entities/user.entity.js';
-import { LoginCredential } from '../entities/login-credential.entity.js';
-import { initORM } from '../db.js';
+import { User } from '../entities/user.entity';
+import { LoginCredential } from '../entities/login-credential.entity';
+import { initORM } from '../db';
 
 export async function registerUserRoutes(router: Router): Promise<express.Router> {
 
