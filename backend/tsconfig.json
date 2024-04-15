@@ -1,23 +1,18 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "Node16",
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "target": "es6",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "sourceMap": true,
-    "strictNullChecks": false,
-    "noUnusedLocals": true,
-    "pretty": true,
-    "skipLibCheck": true,
-    "lib": ["es2015"]
+    "target": "ES2022",
+    "strict": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "experimentalDecorators": true
   },
   "include": [
-    "."
+    "./src/**/*.ts"
   ],
-  "typeRoots": [
-    "./types",
-    "./node_modules/@types"
-  ], 
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true
+  }
 }
