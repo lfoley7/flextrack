@@ -1,0 +1,73 @@
+/* Challenges.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+.challenge-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: #FFF3E0;
+    padding: 20px;
+}
+
+.sidebar h1 {
+    color: #FF4500;
+    margin-bottom: 20px;
+}
+
+.challenge-list {
+    border-top: 2px solid #FF4500;
+    border-bottom: 2px solid #FF4500;
+}
+
+.challenge-item {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.challenge-item:hover {
+    background-color: #f7f7f7;
+}
+
+.challenge-title {
+    color: #000000;
+    font-weight: bold;
+}
+
+.challenge-description {
+    color:#555555;
+    font-size: 14px;
+}
+
+.new-challenge-btn {
+    background-color: #FF4500;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.bottom-nav {
+    background-color: #FF4500;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    color: white;
+}
+
+.bottom-nav span {
+    cursor: pointer;
+    font-size: 20px;
+}
