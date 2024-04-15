@@ -1,17 +1,31 @@
-/* Challenges.css */
+/* Resets */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Base font for the document */
+body, html {
     font-family: 'Arial', sans-serif;
 }
 
+/* Main layout styles */
 .challenge-layout {
     display: flex;
     flex-direction: column;
     height: 100vh;
 }
 
+/* Header styles */
+.challenge-header {
+    background-color: #FF4500;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Sidebar/List styles */
 .sidebar {
     background-color: #FFF3E0;
     padding: 20px;
@@ -22,9 +36,9 @@
     margin-bottom: 20px;
 }
 
+/* Challenge list item styles */
 .challenge-list {
-    border-top: 2px solid #FF4500;
-    border-bottom: 2px solid #FF4500;
+    flex-grow: 1;
 }
 
 .challenge-item {
@@ -33,22 +47,25 @@
     margin: 10px 0;
     padding: 10px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .challenge-item:hover {
     background-color: #f7f7f7;
 }
 
-.challenge-title {
-    color: #000000;
+.challenge-name {
+    color: black;
     font-weight: bold;
+    margin-right: 10px;
 }
 
 .challenge-description {
-    color:#555555;
-    font-size: 14px;
+    color: #555;
 }
 
+/* New challenge button styles */
 .new-challenge-btn {
     background-color: #FF4500;
     color: white;
@@ -56,18 +73,64 @@
     padding: 10px;
     margin-top: 20px;
     width: 100%;
+    border-radius: 8px;
     cursor: pointer;
+    text-align: center;
 }
 
+.new-challenge-btn:hover {
+    background-color: #e69500;
+}
+
+/* Bottom navigation styles */
 .bottom-nav {
     background-color: #FF4500;
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
     color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .bottom-nav span {
     cursor: pointer;
-    font-size: 20px;
+    font-size: 20px;
+}
+
+/* Challenge detail styles */
+.exercise-detail {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.exercise-name {
+    background-color: #FFA500;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.set-detail {
+    background-color: #FFF3E0;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.max-button {
+    background-color: #FF4500;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
 }
