@@ -1,3 +1,9 @@
+#sqlite
+*.sqlite
+
+#temp
+/temp/*
+
 # Logs
 logs
 *.log

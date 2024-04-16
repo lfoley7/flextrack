@@ -72,7 +72,7 @@ function CreateWorkout() {
         />
       ))}
       <button className="login" onClick={handleAddExercise}>New Exercise</button>
-      <button className="login" style={{ marginTop: "5rem" }} onClick={() => { navigate("/"); }}>Submit</button>
+      <button className="login" style={{ marginTop: "5rem" }} onClick={() => { navigate("/dashboard"); }}>Submit</button>
     </div>
   );
 }

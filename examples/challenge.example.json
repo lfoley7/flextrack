@@ -1,0 +1,16 @@
+{
+    "id": 1, //this would be automatically generated
+    "name": "2 Plate Bench Off",
+    "description": "1 rep max bench press challenge. Who can bench 2 plates (or more)?",
+    "start": "4/15/24",
+    "end": "4/16/24",
+    "status": "In Progress",
+    "sets": [
+        {
+            "set_number": 1,
+            "exercise": 1,
+            "target_weight": 225,
+            "target_reps": 1
+        }
+    ]
+}

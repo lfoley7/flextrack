@@ -1,14 +1,44 @@
+.card-wrapper {
+    background: linear-gradient(#F58528, #FC6649);
+    padding: .2rem;
+    border-radius: 0.89rem;
+    cursor: 'pointer';
+}
+
+.card {
+    width: 100%;
+    background-color: white !important;
+    --bs-card-border-color: white;
+    color: white;
+    border-radius: 0.75rem;
+}
+
 input:focus {
     outline: none;
 }
 
-.card {
-    width: 40rem;
-    background-color: white !important;
+.card-body {
+    display: flex;
+    align-items: center;
 }
 
 .card img {
     object-fit: cover;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-img-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
 }
 
 table {
@@ -19,14 +49,15 @@ table {
 th,
 td {
     text-align: left;
+    width: 25%;
 }
 
 th {
-    color: #F58528;
+    color: #333;
 }
 
 td {
-    color: #F58528;
+    color: #777;
 }
 
 .username {
@@ -36,7 +67,51 @@ td {
     color: #FC6649;
 }
 
-.card-wrapper {
-    background: linear-gradient(#F58528, #FC6649);
-    padding: .1rem;
+.add-friend {
+    background-image: linear-gradient(to right, #FC6649, #FE5C54);
+    border: none;
+    color: white;
+    font-style: italic;
+    position: relative;
+    bottom: .2rem;
+    margin-left: .75rem;
+    border-radius: .3rem;
+    padding-left: .4rem;
+    padding-right: .7rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.add-friend:hover {
+    background-image: linear-gradient(to right, #fa5e3f, #ff4d44);
+}
+
+.added-friend {
+    background-color: white;
+    border: 1px solid #FE5C54;
+    color: #fa5e3f;
+    font-style: italic;
+    position: relative;
+    bottom: .2rem;
+    margin-left: .75rem;
+    border-radius: .3rem;
+    padding-left: .4rem;
+    padding-right: .7rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.view-posts-button {
+    border: none;
+    font-weight: 500;
+    border-radius: .3rem;
+    height: 1.8rem;
+    width: 6.5rem;
+    margin-top: 1rem;
+    background-color: #fa5e3f;
+    color: white;
+}
+
+.view-posts-button:hover {
+    background-color: #ff4d44;
 }
