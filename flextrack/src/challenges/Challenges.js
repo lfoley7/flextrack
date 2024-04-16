@@ -12,9 +12,9 @@ import './Challenges.css';
             <div className="top-message">
                 Welcome to the Challenges Page!
             </div>
-            <a className="orange-link" onClick={() => { navigate("/"); }}>Dashboard Page!</a>
+            <a className="orange-link" onClick={() => { navigate("/dashboard"); }}>Dashboard Page!</a>
             <a className="orange-link" onClick={() => { navigate("/createWorkout"); }}>Create Workout Page!</a>
-            <a className="orange-link" onClick={() => { navigate("/viewWorkout"); }}>View Workout Page!</a>
+            <a className="orange-link" onClick={() => { navigate("/viewworkout"); }}>View Workout Page!</a>
             <a className="orange-link" onClick={() => { navigate("/social"); }}>Social Page!</a>
             <a className="orange-link" onClick={() => { navigate("/challenges"); }}>Challenges Page!</a>
             <a className="orange-link" onClick={() => { navigate("/settings"); }}>Settings Page!</a>
