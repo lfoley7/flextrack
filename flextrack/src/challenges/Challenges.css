@@ -1,97 +1,88 @@
-/* Resets */
+/* General Resets */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-/* Base font for the document */
-body, html {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif; /* Ensures font consistency across elements */
 }
 
 /* Main layout styles */
 .challenge-layout {
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     height: 100vh;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-/* Header styles */
 .challenge-header {
-    background-color: #FF4500;
+    width: 100%;
+    background-color: #FF4500; /* Bright orange to keep it vibrant and visible */
     color: white;
     padding: 20px;
     text-align: center;
+    font-size: calc(1.375rem + 1.2vw); /* Dynamic size based on the viewport width */
+    font-weight: bold; /* Makes header text bold */
+    margin-bottom: 1rem; /* Adds space below the header */
 }
 
-/* Sidebar/List styles */
-.sidebar {
-    background-color: #FFF3E0;
-    padding: 20px;
-}
-
-.sidebar h1 {
-    color: #FF4500;
-    margin-bottom: 20px;
-}
-
-/* Challenge list item styles */
 .challenge-list {
-    flex-grow: 1;
+    width: 100%;
 }
 
 .challenge-item {
     background-color: #FFFFFF;
     border-radius: 8px;
     margin: 10px 0;
-    padding: 10px;
+    padding: 1rem;
     cursor: pointer;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for 3D effect */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
 .challenge-item:hover {
-    background-color: #f7f7f7;
+    background-color: #f7f7f7; /* Light grey background on hover */
 }
 
 .challenge-name {
-    color: black;
+    color: #333;
     font-weight: bold;
-    margin-right: 10px;
+    text-align: left; /* Aligns text to the left */
+    margin-bottom: 0.5rem; /* Space below each challenge name */
 }
 
-.challenge-description {
-    color: #555;
-}
-
-/* New challenge button styles */
 .new-challenge-btn {
-    background-color: #FF4500;
+    background-color: #FF4500; /* Matching the header background */
     color: white;
     border: none;
-    padding: 10px;
-    margin-top: 20px;
-    width: 100%;
+    padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
+    width: 90%; /* Takes most of the container width */
     text-align: center;
+    margin-top: 20px; /* Space from the last element */
+    font-size: 1rem; /* Reasonable font size for readability */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* More pronounced shadow for better visibility */
 }
 
 .new-challenge-btn:hover {
-    background-color: #e69500;
+    background-color: #e69500; /* Darker shade of orange for hover state */
 }
 
-/* Bottom navigation styles */
+/* Styling for the bottom navigation bar, if included */
 .bottom-nav {
     background-color: #FF4500;
+    color: white;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }
 
 .bottom-nav span {
@@ -99,38 +90,19 @@ body, html {
     font-size: 20px;
 }
 
-/* Challenge detail styles */
+/* Exercise details styling if used */
 .exercise-detail {
     background-color: #fff;
     border-radius: 8px;
-    margin-bottom: 10px;
-    padding: 10px;
+    margin: 10px 0;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .exercise-name {
-    background-color: #FFA500;
-    color: white;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.set-detail {
-    background-color: #FFF3E0;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.max-button {
-    background-color: #FF4500;
-    color: white;
-    border: none;
-    padding: 10px;
-    margin-top: 10px;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 8px;
+    font-size: calc(0.8rem + 1.2vw);
+    color: #FA713E; /* A shade of orange that stands out */
+    font-weight: bold;
+    margin-top: 0;
+    text-align: left; /* Consistent text alignment for exercise names */
 }
