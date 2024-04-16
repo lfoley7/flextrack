@@ -18,7 +18,7 @@ function Dashboard(props) {
             <a className="orange-link" onClick={() => { navigate("/social"); }}>Social Page!</a>
             <a className="orange-link" onClick={() => { navigate("/challenges"); }}>Challenges Page!</a>
             <a className="orange-link" onClick={() => { navigate("/settings"); }}>Settings Page!</a>
-            Your Routine:
+            
         </div>
     )
 };
