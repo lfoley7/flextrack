@@ -56,19 +56,19 @@
     align-items: center;
 }
 
-.table th,
-.table td {
+.profile-table th,
+.profile-table td {
     text-align: center;
     border: none;
     font-size: 1.3rem;
 }
 
-.table th {
+.profile-table th {
     color: #333;
     font-weight: 900;
 }
 
-.table td {
+.porfile-table td {
     color: #777;
     font-weight: 500;
 }
@@ -81,4 +81,15 @@
 
 .right-content {
     padding-left: 20px;
+}
+
+.user-stats p {
+    color: #777;
+    margin: 5px 0;
+}
+
+.user-description {
+    font-style: italic;
+    max-width: 300px;
+    text-align: center;
 }

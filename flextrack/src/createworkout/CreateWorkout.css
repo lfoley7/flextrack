@@ -28,3 +28,10 @@
 .workout-title:hover {
     text-decoration: underline;
 }
+
+.form-select {
+    width: 10rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border: 1px solid #777;
+}

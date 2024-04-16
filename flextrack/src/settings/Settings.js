@@ -9,7 +9,10 @@ function Settings(props) {
         squat: "250",
         ohp: "120",
         bench: "200",
-        friend: "true"
+        friend: "true",
+        height: "6 ft",
+        weight: "180 lbs",
+        description: "A dedicated athlete focused on strength training."
     });
     const [isEditing, setIsEditing] = useState({
         username: false,
@@ -65,6 +68,11 @@ function Settings(props) {
                     ) : (
                         <div className="username" onClick={() => toggleEdit('username')}>{user.username}</div>
                     )}
+                    <div className="user-stats">
+                        <p><strong>Height:</strong> {user.height}</p>
+                        <p><strong>Weight:</strong> {user.weight}</p>
+                        <p className="user-description">{user.description}</p>
+                    </div>
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
                     <div className="vr" style={{ height: '100%' }}></div>

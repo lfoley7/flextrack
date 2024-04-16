@@ -46,17 +46,17 @@ table {
     color: white;
 }
 
-th,
-td {
+.social-table th,
+.social-table td {
     text-align: left;
     width: 25%;
 }
 
-th {
+.social-table th {
     color: #333;
 }
 
-td {
+.social-table td {
     color: #777;
 }
 

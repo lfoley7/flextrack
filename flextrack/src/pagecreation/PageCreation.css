@@ -31,6 +31,30 @@
     text-decoration: underline;
 }
 
+.exercise-header-dropdown {
+    font-size: calc(.8rem + 1.2vw);
+    font-weight: 700;
+    color: #555;
+    background-color: transparent;
+    box-shadow: none;
+    align-items: center;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.exercise-header-dropdown:hover,
+.exercise-header-dropdown:focus {
+    color: #666;
+    background-color: transparent;
+}
+
+.dropdown-menu {
+    width: auto;
+    left: 0;
+}
+
 .exercise-input {
     font-size: calc(.8rem + 1.2vw);
     border: none;

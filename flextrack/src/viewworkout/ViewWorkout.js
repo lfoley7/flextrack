@@ -34,7 +34,7 @@ function ViewWorkout() {
 
     return (
         <div className="display-container">
-            <h1 className="view-workout-title">{workout.title}</h1>
+            <h1 className="view-workout-title" style={{ marginBottom: "2rem" }}>{workout.title}</h1>
             {workout.exercises.map((exercise, exerciseIndex) => (
                 <div key={exerciseIndex} className="exercise-wrapper">
                     <div className="exercise-content">
