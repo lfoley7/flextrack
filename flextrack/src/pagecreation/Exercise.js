@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Dropdown } from 'react-bootstrap';
 import "./PageCreation.css";
 
 function Exercise({ name, onNameChange }) {
@@ -7,6 +8,7 @@ function Exercise({ name, onNameChange }) {
   const nextId = useRef(2);
   const [sets, setSets] = useState([{ id: 1, reps: '', weight: 10 }]);
   const exerciseRef = useRef(null);
+  const exerciseOptions = ['Overhead Press', 'Bench Press', 'Squat', 'Deadlift'];
 
   useEffect(() => {
     if (isEditing) {
@@ -60,10 +62,14 @@ function Exercise({ name, onNameChange }) {
             <th scope="col">Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="align-items-center justify-content-center">
           {sets.map((set, index) => (
             <tr key={set.id}>
-              <td>Set {index + 1}</td>
+              <td>
+                <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '.5rem' }}>
+                  Set {index + 1}
+                </div>
+              </td>
               <td>
                 <div className="d-flex justify-content-center align-items-center">
                   <input
@@ -107,20 +113,19 @@ function Exercise({ name, onNameChange }) {
   return (
     <div className="exercise-wrapper">
       <div className="exercise-content">
-        {isEditing ? (
-          <input
-            ref={exerciseRef}
-            type="text"
-            value={localName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            onKeyPress={handleKeyPress}
-            className="exercise-input"
-            autoFocus
-          />
-        ) : (
-          <i><h2 className="exercise-header" onClick={() => setIsEditing(true)}>{localName}</h2></i>
-        )}
+        <Dropdown>
+          <Dropdown.Toggle variant="secondary" id="dropdown-basic" className="exercise-header-dropdown">
+            {localName}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            {exerciseOptions.map(option => (
+              <Dropdown.Item key={option} onClick={() => setLocalName(option)}>
+                {option}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
         <SetsRepsWeight />
         <button className="newSet" onClick={handleAddSet}>Add Set</button>
       </div>

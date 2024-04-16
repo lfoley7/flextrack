@@ -19,6 +19,9 @@ function Navbar(props) {
                             <a className="nav-link" onClick={() => navigate('/social')} style={{ cursor: 'pointer' }}>Social</a>
                         </li>
                         <li className="nav-item">
+                            <a className="nav-link" onClick={() => navigate('/posts')} style={{ cursor: 'pointer' }}>Posts</a>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link" onClick={() => navigate('/challenges')} style={{ cursor: 'pointer' }}>Challenges</a>
                         </li>
                     </ul>

@@ -70,7 +70,7 @@ function Social() {
                                         e.stopPropagation();
                                         onHandleAddFriend(index);
                                     }}>+ Add</button> : <button className='added-friend' onclick={() => { }}>Added</button>}
-                                    <table className="w-100">
+                                    <table className="social-table w-100">
                                         <thead>
                                             <tr>
                                                 <th>Deadlift</th>
