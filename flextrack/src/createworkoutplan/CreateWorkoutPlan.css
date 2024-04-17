@@ -1,0 +1,22 @@
+.darken:hover {
+    filter: brightness(90%);
+}
+
+.newDay {
+    background-image: linear-gradient(to right, #F58528, #FE5C54);
+    border: none;
+    color: white;
+    padding: 1rem;
+    margin: .5rem 0 .5rem 0;
+    cursor: pointer;
+    width: 15rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+    border-radius: 10px;
+    font-size: .9rem;
+    font-weight: 600;
+    font-style: italic;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

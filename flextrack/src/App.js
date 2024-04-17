@@ -7,6 +7,7 @@ import Navbar from './navbar/Navbar';
 import Login from "./login/Login";
 import Register from "./register/Register";
 import Challenges from "./challenges/Challenges";
+import CreateWorkoutPlan from "./createworkoutplan/CreateWorkoutPlan";
 import CreateWorkout from "./createworkout/CreateWorkout";
 import Settings from "./settings/Settings";
 import Social from "./social/Social";
@@ -46,6 +47,7 @@ export default function App() {
         <Route path='/login' element={<Login email={email} setEmail={setEmail} password={password} setPassword={setPassword} setSignedIn={setSignedIn} />} />
         <Route path='/register' element={<Register />} />
         <Route path='/challenges' element={<Challenges />} />
+        <Route path='/createworkoutplan' element={<CreateWorkoutPlan />} />
         <Route path='/createworkout' element={<CreateWorkout />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/social' element={<Social />} />
