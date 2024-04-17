@@ -4,10 +4,11 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import cors from 'cors';
 import { MikroORM, RequestContext }from '@mikro-orm/sqlite';
-import { initORM } from './db';
-import { registerUserRoutes } from './routes/users';
-import { registerExerciseRoutes } from './routes/exercises';
-import { registerWorkoutRoutes } from './routes/workout';
+import { initORM } from './db.js';
+import { registerUserRoutes } from './routes/users.js';
+import { registerExerciseRoutes } from './routes/exercises.js';
+import { registerWorkoutRoutes } from './routes/workout.js';
+import { registerProfileRoutes } from './routes/profiles.js';
 
 export async function bootstrap(port = 5000) {
   const db = await initORM();
@@ -64,9 +65,11 @@ export async function bootstrap(port = 5000) {
   const userRouter = await registerUserRoutes(express.Router())
   const exerciseRouter = await registerExerciseRoutes(express.Router())
   const workoutRouter = await registerWorkoutRoutes(express.Router())
+  const profileRouter = await registerProfileRoutes(express.Router())
   router.use('/user',userRouter);
   router.use('/exercise',exerciseRouter);
   router.use('/workout',workoutRouter);
+  router.use('/profile',profileRouter);
 
   app.use("/api", router)
 

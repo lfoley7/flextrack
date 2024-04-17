@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Settings.css';
+import Loading from '../loading/Loading';
+import axios from "axios";
+
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: 'http://localhost:5000/api/profile'
+});
 
 function Settings(props) {
-    // Assuming there is only one user in the array for simplicity
-    const [user, setUser] = useState({
-        username: "John Do",
-        deadlift: "300",
-        squat: "250",
-        ohp: "120",
-        bench: "200",
-        friend: "true",
-        height: "6 ft",
-        weight: "180 lbs",
-        description: "A dedicated athlete focused on strength training."
-    });
+    const [user, setUser] = useState();
     const [isEditing, setIsEditing] = useState({
         username: false,
         deadlift: false,
@@ -32,7 +28,37 @@ function Settings(props) {
         setIsEditing(prev => ({ ...prev, [field]: !prev[field] }));
     };
 
-    function editableField(field) {
+    const getProfile = async () => {
+        return await instance.get("get");
+    }
+
+    const updateProfile = async (profile) => {
+        return await instance.post("update", profile);
+    }
+
+    useEffect(() => {
+        getProfile()
+        .then((res) => {
+            console.log(res.data)
+            setUser(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+      }, []);
+
+      useEffect(() => {
+        updateProfile(user)
+        .then((res) => {
+            console.log(res.data)
+            setUser(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+      }, [isEditing]);
+
+    function editableField(field, unit) {
         return isEditing[field] ? (
             <div className="d-flex align-items-center">
                 <input
@@ -45,8 +71,16 @@ function Settings(props) {
                 />
             </div>
         ) : (
-            <span onClick={() => toggleEdit(field)}>{user[field]} lbs</span>
+            <span onClick={() => toggleEdit(field)}>{user[field]} {unit}</span>
         );
+    }
+    
+    if(user === undefined) {
+        return (
+            <>
+              <Loading margin={0} minHeight={"1000px"} />
+            </>
+          );
     }
 
     return (
@@ -69,9 +103,9 @@ function Settings(props) {
                         <div className="username" onClick={() => toggleEdit('username')}>{user.username}</div>
                     )}
                     <div className="user-stats">
-                        <p><strong>Height:</strong> {user.height}</p>
-                        <p><strong>Weight:</strong> {user.weight}</p>
-                        <p className="user-description">{user.description}</p>
+                        <p><strong>Height:</strong> {editableField('height', 'ft')}</p>
+                        <p><strong>Weight:</strong> {editableField('weight', 'lbs')}</p>
+                        <p className="user-description"><strong>Description:</strong>{editableField('description', '')}</p>
                     </div>
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
@@ -113,7 +147,7 @@ function Settings(props) {
                                 </table>
                             </div>
                         </div>
-                        <button className="btn btn-primary login" style={{ width: '20rem' }}>Day 1 - Push</button>
+                        {/* <button className="btn btn-primary login" style={{ width: '20rem' }}>Day 1 - Push</button> */}
                     </div>
                 </div>
             </div>
