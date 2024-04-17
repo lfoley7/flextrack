@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import "./PageCreation.css";
 
-function Exercise({ name, onNameChange }) {
+function Exercise({ name, onNameChange, sets, onSetChange }) {
   const [isEditing, setIsEditing] = useState(false);
   const [localName, setLocalName] = useState(name);
   const nextId = useRef(2);
-  const [sets, setSets] = useState([{ id: 1, reps: '', weight: 10 }]);
+  const [localSets, setSets] = useState(sets);
   const exerciseRef = useRef(null);
   const exerciseOptions = ['Overhead Press', 'Bench Press', 'Squat', 'Deadlift'];
 
@@ -33,22 +33,41 @@ function Exercise({ name, onNameChange }) {
 
   const handleAddSet = () => {
     const newSet = {
-      id: sets.length + 1,
-      reps: '',
+      id: localSets.length + 1,
+      reps: 1,
       weight: 10
     };
-    setSets([...sets, newSet]);
+    onSetChange([...localSets, newSet])
+    setSets([...localSets, newSet]);
     nextId.current += 1;
-    console.log(sets);
+    console.log([...localSets, newSet]);
+  };
+
+  const handleWeightChange = (set, e, index) => {
+    const newSets = [...localSets];
+    newSets[index] = { ...set, weight: parseInt(e.target.value) };
+    setSets(newSets);
+    onSetChange(newSets);
+    console.log(newSets);
+  };
+
+  const handleRepsChange = (set, e, index) => {
+    const newSets = [...localSets];
+    newSets[index] = { ...set, reps: parseInt(e.target.value) };
+    setSets(newSets);
+    onSetChange(newSets);
+    console.log(newSets);
   };
 
   const handleDeleteSet = (id) => {
-    const filteredSets = sets.filter(set => set.id !== id);
+    const filteredSets = localSets.filter(set => set.id !== id);
     const updatedSets = filteredSets.map((set, index) => ({
       ...set,
       id: index + 1
     }));
     setSets(updatedSets);
+    onSetChange(updatedSets);
+    console.log(updatedSets);
   };
 
   function SetsRepsWeight() {
@@ -63,7 +82,7 @@ function Exercise({ name, onNameChange }) {
           </tr>
         </thead>
         <tbody className="align-items-center justify-content-center">
-          {sets.map((set, index) => (
+          {localSets.map((set, index) => (
             <tr key={set.id}>
               <td>
                 <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '.5rem' }}>
@@ -76,11 +95,7 @@ function Exercise({ name, onNameChange }) {
                     type="number"
                     className="form-control reps-input"
                     defaultValue={set.reps}
-                    onChange={(e) => {
-                      const newSets = [...sets];
-                      newSets[index] = { ...set, reps: e.target.value };
-                      setSets(newSets);
-                    }}
+                    onChange={(e) => handleRepsChange(set, e, index)}
                     aria-label="Reps"
                   /> reps
                 </div>
@@ -91,11 +106,7 @@ function Exercise({ name, onNameChange }) {
                     type="number"
                     className="form-control weight-input"
                     defaultValue={set.weight}
-                    onChange={(e) => {
-                      const newSets = [...sets];
-                      newSets[index] = { ...set, weight: e.target.value };
-                      setSets(newSets);
-                    }}
+                    onChange={(e) => handleWeightChange(set, e, index)}
                     aria-label="Weight"
                   /> lbs
                 </div>

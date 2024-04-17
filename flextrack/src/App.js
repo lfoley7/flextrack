@@ -50,7 +50,9 @@ export default function App() {
         <Route path='/settings' element={<Settings />} />
         <Route path='/social' element={<Social />} />
         <Route path='/posts' element={<Posts />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile'>
+          <Route path=":userId" element={<Profile />} />
+        </Route>
         <Route path='/viewworkout' element={<ViewWorkout />} />
         <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>

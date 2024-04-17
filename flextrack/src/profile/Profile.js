@@ -1,25 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams }  from 'react-router-dom';
 import './Profile.css';
+import axios from "axios";
+import Loading from '../loading/Loading';
+
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: 'http://localhost:5000/api/profile'
+});
+
+const getProfile = async (id) => {
+    return await instance.get("get", { params: { id: id } });
+}
 
 function Profile(props) {
-    const [user, setUser] = useState({
-        username: "John Do",
-        deadlift: "300",
-        squat: "250",
-        ohp: "120",
-        bench: "200",
-        friend: "true",
-        height: "6 ft",
-        weight: "180 lbs",
-        description: "A dedicated athlete focused on strength training."
-    });
-    const [isEditing, setIsEditing] = useState({
-        username: false,
-        deadlift: false,
-        squat: false,
-        ohp: false,
-        bench: false
-    });
+
+    let { userId } = useParams();
+
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+        getProfile(userId)
+        .then((res) => {
+            console.log(res.data)
+            setUser(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+      }, []);
+
+      
+    if(user === undefined) {
+        return (
+            <>
+              <Loading margin={0} minHeight={"1000px"} />
+            </>
+          );
+    }
 
     return (
         <div className="display-container mt-40 d-flex" style={{ paddingTop: '12rem' }}>
@@ -30,17 +48,18 @@ function Profile(props) {
                     </div>
                     <div className="username">{user.username}</div>
                     <div className="user-stats">
-                        <p><strong>Height:</strong> {user.height}</p>
-                        <p><strong>Weight:</strong> {user.weight}</p>
+                        <p><strong>Height:</strong> {user.height} ft</p>
+                        <p><strong>Weight:</strong> {user.weight} lbs</p>
+                        <p className="user-description"><strong>Description:</strong>{user.description}</p>
                         <p className="user-description">{user.description}</p>
                     </div>
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
                     <div className="vr" style={{ height: '100%' }}></div>
                     <div className="right-content d-flex flex-column align-items-center">
-                        <div className="row mb-3">
-                            <div className="col" style={{ width: '20rem' }}>
-                                <table className="profile-table">
+                    <div className="row mb-3">
+                            <div className="col" style={{ width: '20rem', height: '5rem' }}>
+                                <table className="table">
                                     <thead>
                                         <tr>
                                             <th>Deadlift</th>
@@ -74,7 +93,7 @@ function Profile(props) {
                                 </table>
                             </div>
                         </div>
-                        <button className="btn btn-primary login" style={{ width: '20rem' }}>Day 1 - Push</button>
+                        {/* <button className="btn btn-primary login" style={{ width: '20rem' }}>Day 1 - Push</button> */}
                     </div>
                 </div>
             </div>
