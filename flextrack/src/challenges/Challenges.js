@@ -115,7 +115,7 @@ function Challenges() {
 export default Challenges;
 */
 
-
+/*
 function Challenges() {
     const navigate = useNavigate();
 
@@ -185,4 +185,74 @@ function Challenges() {
     );
 }
 
-export default Challenges;
+*/
+
+
+function Challenges() {
+    const navigate = useNavigate();
+    const [selectedChallenge, setSelectedChallenge] = useState(null);
+
+    const challenges = [
+        {
+            id: 1,
+            name: 'MIKEYLIFTS204',
+            exercises: [
+                { name: 'Deadlift', sets: ['5 reps', '3 reps', '1 rep', '3 reps'] },
+                { name: 'Bench Press', sets: ['8 reps', '4 reps', '2 reps', '1 rep'] },
+            ]
+        },
+        // Additional challenges can be similarly structured
+        {
+             id: 2,
+             name: 'JAGRUTIGAINZ333',
+            exercises: [
+                { name: 'Deadlift', sets: ['3 reps', '5 reps', '1 rep', '3 reps'] },
+                { name: 'Squats', sets: ['8 reps', '4 reps', '2 reps', '1 rep'] },
+            ]
+        }
+    ];
+
+    const selectChallenge = (challengeId) => {
+        const challenge = challenges.find(c => c.id === challengeId);
+        setSelectedChallenge(challenge);
+    };
+
+    const createNewChallenge = () => {
+        navigate('/friends'); // Redirects to the Friends page for selecting friends to challenge
+    };
+
+    return (
+        <div className="challenge-layout">
+            <header className="challenge-header">
+                <h1>{selectedChallenge ? `${selectedChallenge.name.toUpperCase()} CHALLENGES YOU!` : 'Challenges Home Page'}</h1>
+            </header>
+            <div className="challenge-list">
+                {!selectedChallenge &&
+                    challenges.map((challenge) => (
+                        <div key={challenge.id} className="challenge-item" onClick={() => selectChallenge(challenge.id)}>
+                            <div className="challenge-name">{challenge.name}</div>
+                        </div>
+                    ))
+                }
+                {!selectedChallenge && <button className="new-challenge-btn" onClick={() => { navigate('/social')}}>New Challenge</button>}
+                {selectedChallenge && selectedChallenge.exercises.map((exercise, index) => (
+                    <div key={index} className="exercise-detail">
+                        <h2 className="exercise-name">{exercise.name}</h2>
+                        {exercise.sets.map((set, index) => (
+                            <div key={index} className="set-detail">{set}</div>
+                        ))}
+                        <button className="max-button">Record Your Max</button>
+                    </div>
+                ))}
+            </div>
+            <footer className="bottom-nav">
+                <span onClick={() => navigate('/home')}>HOME</span>
+                <span onClick={() => navigate('/challenges')}>CHALLENGES</span>
+                <span onClick={() => navigate('/friends')}>FRIENDS</span>
+                <span onClick={() => navigate('/settings')}>SETTINGS</span>
+            </footer>
+        </div>
+    );
+}
+
+export default Challenges;
