@@ -13,7 +13,7 @@ import './Challenges.css';
                 Welcome to the Challenges Page!
             </div>
             <a className="orange-link" onClick={() => { navigate("/dashboard"); }}>Dashboard Page!</a>
-            <a className="orange-link" onClick={() => { navigate("/createWorkout"); }}>Create Workout Page!</a>
+            <a className="orange-link" onClick={() => { navigate("/createworkoutplan"); }}>Create Workout Page!</a>
             <a className="orange-link" onClick={() => { navigate("/viewworkout"); }}>View Workout Page!</a>
             <a className="orange-link" onClick={() => { navigate("/social"); }}>Social Page!</a>
             <a className="orange-link" onClick={() => { navigate("/challenges"); }}>Challenges Page!</a>
