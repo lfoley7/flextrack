@@ -64,7 +64,7 @@ function Posts(props) {
                 <div>
                     <div key={index} className="post-wrapper">
                         <div className="post-content">
-                            <div className="post-top d-flex align-items-center" style={{ background: '#F58528' }}>
+                            <div className="post-top d-flex align-items-center">
                                 <div className="posts-profile-image-container">
                                     <img src={"/profile.png"} alt="Profile" className="posts-profile-img" />
                                 </div>
