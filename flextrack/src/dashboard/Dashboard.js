@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import './Dashboard.css';
 
+
 function Dashboard(props) {
     const navigate = useNavigate();
 
@@ -13,7 +14,7 @@ function Dashboard(props) {
                 Welcome to the Dashboard!
             </div>
             <a className="orange-link" onClick={() => { navigate("/dashboard"); }}>Dashboard Page!</a>
-            <a className="orange-link" onClick={() => { navigate("/createWorkout"); }}>Create Workout Page!</a>
+            <a className="orange-link" onClick={() => { navigate("/createworkoutplan"); }}>Create Workout Page!</a>
             <a className="orange-link" onClick={() => { navigate("/viewworkout"); }}>View Workout Page!</a>
             <a className="orange-link" onClick={() => { navigate("/social"); }}>Social Page!</a>
             <a className="orange-link" onClick={() => { navigate("/challenges"); }}>Challenges Page!</a>
@@ -24,3 +25,4 @@ function Dashboard(props) {
 };
 
 export default Dashboard;
+
