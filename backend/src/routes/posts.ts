@@ -11,39 +11,25 @@ export async function registerPostRoutes(router: Router): Promise<express.Router
   const db = await initORM();
 
   router.get("/get-all", async (req, res) => {
-    let userId = "";
     const errorMsg = 'Failed to get posts'
-    
-    // if(req.query.id){
-    //   userId = (req.query.id).toString();
-    // }else if(req.session.userId){
-    //   userId = req.session.userId;
-    // }else{
-    //   res.status(500).json({ error: errorMsg });
-    // }
-    // const user: User = await db.user.findOne({id: +userId},{ populate: ['profile', 'friends']});
 
-    const posts: Post[] = await db.post.findAll({ populate: ['created_by','comments'], orderBy: ['date']});
+    const posts: Post[] = await db.post.findAll({ populate: ['created_by','comments']});
 
-    let post: Post;
-
-    //TODO: finish
-
-
-    if(user == null) {
+    if(posts == null) {
       console.error(errorMsg);
       res.status(500).json({ error: errorMsg });
     }else{
       try {
-        const profiles = await db.profile.findAll();
-        const filteredProfiles = profiles.filter((profile) => {return profile != user.profile})
-
-        const friendProfiles = filteredProfiles.map((profile: FitnessProfile) => {
-            let friend = user.friends.contains(profile.user);
-            return {...profile, friend: friend};
+        posts.sort((a,b) => {
+          if(a.date > b.date) {
+            return 1;
+          }else if (a.date < b.date) {
+            return -1;
+          }else{
+            return 0;
+          }
         })
-        console.log(friendProfiles);
-        res.status(200).json(friendProfiles);
+        res.status(200).json(posts);
         return
       } catch (error) {
           console.error(errorMsg+':', error);
