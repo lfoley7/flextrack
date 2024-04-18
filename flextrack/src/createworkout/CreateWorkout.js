@@ -15,7 +15,6 @@ function CreateWorkout() {
   const [exercises, setExercises] = useState([]);
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedType, setSelectedType] = useState('');
-  const titleRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -66,24 +65,7 @@ function CreateWorkout() {
     await createWorkout(title, selectedDay, selectedType, exercises)
   };
 
-  useEffect(() => {
-    if (isEditing) {
-      titleRef.current.focus();
-    }
-  }, [isEditing]);
-
-  const handleTitleChange = (e) => setTitle(e.target.value);
-
   const toggleEditing = () => setIsEditing(true);
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      setIsEditing(false);
-      e.preventDefault();
-    }
-  };
-
-  const handleBlur = () => setIsEditing(false);
 
   const handleAddExercise = () => {
     const newExercise = {
@@ -116,20 +98,7 @@ function CreateWorkout() {
 
   return (
     <div className="display-container">
-      {isEditing ? (
-        <input
-          ref={titleRef}
-          type="text"
-          value={title}
-          onClick={(e) => e.target.select()}
-          onChange={handleTitleChange}
-          onBlur={handleBlur}
-          onKeyPress={handleKeyPress}
-          className="title-input"
-        />
-      ) : (
-        <h1 className="workout-title" onClick={toggleEditing}>{title}</h1>
-      )}
+      <h1 className="workout-title" onClick={toggleEditing}>{title}</h1>
       <div className="d-flex justify-content-start mb-3">
         <select className="form-select me-2" value={selectedDay} onChange={e => setSelectedDay(e.target.value)} style={{ maxWidth: 200, cursor: 'pointer' }}>
           <option value="">Select a Day</option>
