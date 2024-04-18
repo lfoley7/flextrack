@@ -55,7 +55,6 @@ function Profile(props) {
                     </div>
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                    <div className="vr" style={{ height: '100%' }}></div>
                     <div className="right-content d-flex flex-column align-items-center">
                     <div className="row mb-3">
                             <div className="col" style={{ width: '20rem', height: '5rem' }}>
@@ -77,7 +76,7 @@ function Profile(props) {
                         </div>
                         <div className="row">
                             <div className="col" style={{ width: '20rem' }}>
-                                <table className="table">
+                                <table className="profile-table">
                                     <thead>
                                         <tr>
                                             <th>OHP</th>
@@ -93,7 +92,12 @@ function Profile(props) {
                                 </table>
                             </div>
                         </div>
+<<<<<<< HEAD
                         {/* <button className="btn btn-primary login" style={{ width: '20rem' }}>Day 1 - Push</button> */}
+=======
+                        <button className="btn btn-primary login" style={{ width: '20rem' }}>Push Pull Legs</button>
+                        {/* Add more routines here! */}
+>>>>>>> e4a654500bd00481b4f1d7273671a9b14219dd0c
                     </div>
                 </div>
             </div>

@@ -109,11 +109,10 @@ function Settings(props) {
                     </div>
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                    <div className="vr" style={{ height: '100%' }}></div>
                     <div className="right-content d-flex flex-column align-items-center">
                         <div className="row mb-3">
                             <div className="col" style={{ width: '20rem', height: '5rem' }}>
-                                <table className="table">
+                                <table className="profile-table">
                                     <thead>
                                         <tr>
                                             <th>Deadlift</th>
@@ -131,7 +130,7 @@ function Settings(props) {
                         </div>
                         <div className="row">
                             <div className="col" style={{ width: '20rem' }}>
-                                <table className="table">
+                                <table className="profile-table">
                                     <thead>
                                         <tr>
                                             <th>OHP</th>
@@ -148,6 +147,8 @@ function Settings(props) {
                             </div>
                         </div>
                         {/* <button className="btn btn-primary login" style={{ width: '20rem' }}>Day 1 - Push</button> */}
+                        <button className="btn btn-primary login" style={{ width: '20rem' }}>5 Day Split</button>
+                        {/* Add more routines here! */}
                     </div>
                 </div>
             </div>

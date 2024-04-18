@@ -116,3 +116,7 @@
 .navbar-brand:hover {
     text-shadow: .2px .2px 10px #fff, .2px .2px 10px #ccc;
 }
+
+.nav-link.active {
+    color: #FA713E;
+}

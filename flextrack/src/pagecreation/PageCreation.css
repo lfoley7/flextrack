@@ -18,6 +18,9 @@
     margin: .2rem;
     padding: 1rem;
     border-radius: .89rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .exercise-header {
@@ -32,7 +35,7 @@
 }
 
 .exercise-header-dropdown {
-    font-size: calc(.8rem + 1.2vw);
+    font-size: calc(.6rem + 1.2vw);
     font-weight: 700;
     color: #555;
     background-color: transparent;
