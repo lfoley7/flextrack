@@ -9,6 +9,7 @@ import { registerUserRoutes } from './routes/users.js';
 import { registerExerciseRoutes } from './routes/exercises.js';
 import { registerWorkoutRoutes } from './routes/workout.js';
 import { registerProfileRoutes } from './routes/profiles.js';
+import { registerPostRoutes } from './routes/posts.js';
 
 export async function bootstrap(port = 5000) {
   const db = await initORM();
@@ -66,10 +67,13 @@ export async function bootstrap(port = 5000) {
   const exerciseRouter = await registerExerciseRoutes(express.Router())
   const workoutRouter = await registerWorkoutRoutes(express.Router())
   const profileRouter = await registerProfileRoutes(express.Router())
+  const postRouter = await registerPostRoutes(express.Router())
+  
   router.use('/user',userRouter);
   router.use('/exercise',exerciseRouter);
   router.use('/workout',workoutRouter);
   router.use('/profile',profileRouter);
+  router.use('/post',postRouter)
 
   app.use("/api", router)
 
