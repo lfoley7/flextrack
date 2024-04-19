@@ -92,12 +92,9 @@ function Profile(props) {
                                 </table>
                             </div>
                         </div>
-<<<<<<< HEAD
                         {/* <button className="btn btn-primary login" style={{ width: '20rem' }}>Day 1 - Push</button> */}
-=======
                         <button className="btn btn-primary login" style={{ width: '20rem' }}>Push Pull Legs</button>
                         {/* Add more routines here! */}
->>>>>>> e4a654500bd00481b4f1d7273671a9b14219dd0c
                     </div>
                 </div>
             </div>
