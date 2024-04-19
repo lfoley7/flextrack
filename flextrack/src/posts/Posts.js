@@ -18,10 +18,20 @@ const createPost = async (post) => {
     return await instance.post("create", post);
 }
 
+const addComment = async (comment) => {
+    return await instance.post("add-comment", comment);
+}
+
 function Posts(props) {
+
+    const navigate = useNavigate();
 
     const [posts, setPosts] = useState();
     const [update, setUpdate] = useState(false);
+
+    const onHandleCommentClick = (id) => {
+        navigate('/profile/'+id);
+    };
 
     const handleMakePost = async () => {
         const postText = window.prompt("Write your post text:");
@@ -30,9 +40,27 @@ function Posts(props) {
                 title: "Title",
                 caption: postText,
                 date: new Date(),
-                // comments: []
             };
-            await createPost(newPost);
+            await createPost(newPost).then((res) => {
+                setPosts(res.data);
+            }).catch((err) => {
+                console.log(err);
+            });
+            setUpdate(!update);
+        }
+    };
+
+    const handleAddComment = async (postId) => {
+        const commentText = window.prompt("Write your comment text:");
+        if (commentText) {
+            const newPost = {
+                postId: postId,
+                caption: commentText,
+                date: new Date(),
+            };
+            await addComment(newPost).catch((err) => {
+                console.log(err);
+            });
             setUpdate(!update);
         }
     };
@@ -55,7 +83,7 @@ function Posts(props) {
             </>
         );
     }
-
+    
     return (
         <div className="display-container" style={{ alignItems: 'flex-start' }}>
             <button className="make-posts-button" onClick={handleMakePost}>Make a Post</button>
@@ -68,29 +96,44 @@ function Posts(props) {
                                 <div className="posts-profile-image-container">
                                     <img src={"/profile.png"} alt="Profile" className="posts-profile-img" />
                                 </div>
-                                <h3 style={{ color: 'white', fontWeight: '700', marginLeft: '1rem' }}>{post.created_by.profile.username}</h3>
+                                <h3 onClick={() => onHandleCommentClick(post.created_by.id)} style={{ color: 'white', fontWeight: '700', marginLeft: '1rem' }}>{post.created_by.profile.username}</h3>
                             </div>
                             <div className="post-bottom">
                                 <h4 style={{ color: 'black', fontWeight: '700' }}>{post.title}</h4>
                                 <p style={{ fontStyle: 'italic', color: '#777' }}>{post.caption}</p>
-                                <div className="date-container">
-                                    {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                <div>
+                                    <div className="date-container">
+                                        {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                    </div>
+                                    <div className="comment-button-container">
+                                        <button className='make-comment-button' value={post.id} onClick={(e) => handleAddComment(e.target.value)}>Comment</button>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
                     <div className="comments">
                         {post.comments.map((comment, idx) => (
                             <div
-                                key={idx}
-                                className={`comment d-flex align-items-center ${idx === post.comments.length - 1 ? 'last-comment' : ''}`}
+                                key={comment.id}
+                                className={`comment d-flex-column align-items-center ${idx === post.comments.length - 1 ? 'last-comment' : ''}`}
                             >
-                                <div className="posts-profile-image-container-small">
-                                    <img src="/profile.png" alt="Profile" className="posts-profile-img-small" />
+                                <div className={`d-flex align-items-center`}>
+                                    <div className="posts-profile-image-container-small">
+                                        <img src="/profile.png" alt="Profile" className="posts-profile-img-small" />
+                                    </div>
+                                    <p style={{ color: 'black', fontWeight: '700', marginLeft: '.5rem' }}
+                                        onClick={() => onHandleCommentClick(comment.created_by.id)}>
+                                        {comment.created_by.profile.username}
+                                    </p>
                                 </div>
-                                <p style={{ fontStyle: 'italic', color: '#777', marginLeft: '.5rem' }}>
-                                    {comment.comment}
+                                <p style={{ fontStyle: 'italic', color: '#777' }}>
+                                        {comment.caption}
                                 </p>
+                                <div className="date-container">
+                                    {new Date(comment.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                </div>
                             </div>
                         ))}
                     </div>
