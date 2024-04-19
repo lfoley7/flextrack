@@ -7,9 +7,6 @@ export class Comment {
 
     @PrimaryKey()
     id!: number;
-  
-    @Property()
-    title!: string;
 
     @Property()
     caption!: string;
@@ -24,4 +21,12 @@ export class Comment {
 
     @ManyToOne()
     created_by!: User;
+
+    constructor(post: Post, caption: string, date: Date, user: User) {
+        this.id = post.comments.length;
+        this.post = post;
+        this.caption = caption;
+        this.date = date;
+        this.created_by = user;
+    }
 }
