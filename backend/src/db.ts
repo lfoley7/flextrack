@@ -1,18 +1,19 @@
 import { EntityManager, EntityRepository, MikroORM, Options } from '@mikro-orm/sqlite';
-import { User } from './entities/user.entity';
-import { LoginCredential } from './entities/login-credential.entity';
-import { Exercise } from './entities/exercise.entity';
-import { WorkoutPlan } from './entities/workout-plan.entity';
-import { WorkoutLog } from './entities/workout-log.entity';
-import { WorkoutSession } from './entities/workout-session.entity';
-import { Challenge } from './entities/challenge.entity';
-import { ChallengeLog } from './entities/challenge-log.entity';
-import { ChallengeSet } from './entities/challenge-set.entity';
-import { ChallengeInvite } from './entities/challenge-invite.entity';
-import { FitnessProfile } from './entities/fitness-profile.entity';
-import { Post } from './entities/post.entity';
-import { PostShare } from './entities/post-share.entity';
-import { SessionSet } from './entities/set.entity';
+import { User } from './entities/user.entity.js';
+import { LoginCredential } from './entities/login-credential.entity.js';
+import { Exercise } from './entities/exercise.entity.js';
+import { WorkoutPlan } from './entities/workout-plan.entity.js';
+import { WorkoutLog } from './entities/workout-log.entity.js';
+import { WorkoutSession } from './entities/workout-session.entity.js';
+import { Challenge } from './entities/challenge.entity.js';
+import { ChallengeLog } from './entities/challenge-log.entity.js';
+import { ChallengeSet } from './entities/challenge-set.entity.js';
+import { ChallengeInvite } from './entities/challenge-invite.entity.js';
+import { FitnessProfile } from './entities/fitness-profile.entity.js';
+import { Post } from './entities/post.entity.js';
+import { PostShare } from './entities/post-share.entity.js';
+import { SessionSet } from './entities/set.entity.js';
+import { Comment } from './entities/comments.entity.js';
 
 export interface Services {
   orm: MikroORM;
@@ -31,6 +32,7 @@ export interface Services {
   profile: EntityRepository<FitnessProfile>;
   post: EntityRepository<Post>;
   postShare: EntityRepository<PostShare>;
+  comment: EntityRepository<Comment>;
 }
 
 let cache: Services;
@@ -60,5 +62,6 @@ export async function initORM(options?: Options): Promise<Services> {
     profile: orm.em.getRepository(FitnessProfile),
     post: orm.em.getRepository(Post),
     postShare: orm.em.getRepository(PostShare),
+    comment: orm.em.getRepository(Comment),
   };
 }
