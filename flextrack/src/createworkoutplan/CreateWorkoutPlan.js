@@ -1,8 +1,28 @@
 import React, { useEffect, useState, useRef } from "react";
 import './CreateWorkoutPlan.css';
+import axios from 'axios';
+import Loading from '../loading/Loading';
+
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: 'http://localhost:5000/api/workout'
+});
+
+const getRoutines = async () => {
+    return await instance.get("get-all");
+}
+
+const createWorkoutRoutine = async (post) => {
+    return await instance.post("create", post);
+}
+
+const updateRoutineName = async (id, name) => {
+    return await instance.post("update-name", {id: id, name: name});
+}
 
 function CreateWorkoutPlan(props) {
-    const [title, setTitle] = useState('My Workout');
+    const [routines, setRoutines] = useState();
+    const [title, setTitle] = useState({});
     const [isEditing, setIsEditing] = useState({});
     const titleRefs = useRef({});
 
@@ -36,12 +56,6 @@ function CreateWorkoutPlan(props) {
     };
 
     useEffect(() => {
-        Object.keys(workoutRoutines).forEach(routine => {
-            titleRefs.current[routine] = React.createRef();
-        });
-    }, []);
-
-    useEffect(() => {
         Object.keys(isEditing).forEach(routine => {
             if (isEditing[routine] && titleRefs.current[routine].current) {
                 titleRefs.current[routine].current.focus();
@@ -49,16 +63,60 @@ function CreateWorkoutPlan(props) {
         });
     }, [isEditing]);
 
-    const toggleEditing = (routineName) => {
-        setIsEditing(prev => ({ ...prev, [routineName]: !prev[routineName] }));
+    useEffect(() => {
+        getRoutines()
+        .then((res) => {
+            console.log(res.data)
+            setRoutines(res.data);
+            const loadTitle = {}
+            res.data.forEach(routine => {
+                loadTitle[routine.id] = routine.name;
+                titleRefs.current[routine.id] = React.createRef();
+            });
+            setTitle(loadTitle)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+      }, []);
+
+    if(routines === undefined) {
+        return (
+            <>
+                <Loading margin={0} minHeight={"1000px"} />
+            </>
+        );
+    }
+
+    const toggleEditing = (routineId) => {
+        setIsEditing(prev => ({ ...prev, [routineId]: !prev[routineId] }));
+
     };
 
     const handleTitleChange = (routineName, value) => {
         setTitle(prev => ({ ...prev, [routineName]: value }));
     };
 
-    const handleBlur = (routineName) => {
-        setIsEditing(prev => ({ ...prev, [routineName]: false }));
+    const handleBlur = (routineId) => {
+        setIsEditing(prev => ({ ...prev, [routineId]: false }));
+        updateRoutineName(routineId, title[routineId])
+        .then((res) => {
+            console.log(res.data)
+            getRoutines()
+            .then((res) => {
+                console.log(res.data)
+                setRoutines(res.data);
+                res.data.forEach(routine => {
+                    titleRefs.current[routine.id] = React.createRef();
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
     };
 
     const interpolateColor = (index, total) => {
@@ -77,27 +135,27 @@ function CreateWorkoutPlan(props) {
 
     return (
         <div className="display-container">
-            {Object.entries(workoutRoutines).map(([routineName, details]) => (
-                <div key={routineName} className="exercise-wrapper" style={{ marginTop: "1rem" }}>
+            {routines.map((routine) => (
+                <div key={routine.id} className="exercise-wrapper" style={{ marginTop: "1rem" }}>
                     <div className="exercise-content align-items-center">
-                        {isEditing[routineName] ? (
+                        {isEditing[routine.id] ? (
                             <input
-                                ref={titleRefs.current[routineName]}
+                                ref={titleRefs.current[routine.id]}
                                 type="text"
-                                value={title[routineName] || routineName}
-                                onChange={(e) => handleTitleChange(routineName, e.target.value)}
-                                onBlur={() => handleBlur(routineName)}
+                                value={title[routine.id] || routine.name}
+                                onChange={(e) => handleTitleChange(routine.id, e.target.value)}
+                                onBlur={() => handleBlur(routine.id)}
                                 className="title-input"
                                 style={{ marginTop: ".63rem" }}
                             />
                         ) : (
-                            <h1 className="workout-title" style={{ marginTop: "1rem" }} onClick={() => toggleEditing(routineName)}>
-                                {title[routineName] || routineName}
+                            <h1 className="workout-title" style={{ marginTop: "1rem" }} onClick={() => toggleEditing(routine.id)}>
+                                {title[routine.id] || routine.name}
                             </h1>
                         )}
-                        {details.days.map((dayInfo, index) => (
-                            <div key={`${routineName}-${dayInfo}`} className="login darken" style={{ fontWeight: '600', fontStyle: 'italic', backgroundImage: "none", backgroundColor: interpolateColor(index, details.days.length) }}>
-                                {dayInfo.day} - {dayInfo.type}
+                        {routine.sessions.map((session, index) => (
+                            <div key={`${routine.id}-${session.workout_type}`} className="login darken" style={{ fontWeight: '600', fontStyle: 'italic', backgroundImage: "none", backgroundColor: interpolateColor(index, routine.sessions.length) }}>
+                                {session.day_of_week} - {session.workout_type}
                             </div>
                         ))}
                         <div className="newDay darken">Add New Day</div>
