@@ -1,8 +1,8 @@
 import express, { Request, Response, Router } from 'express';
 import bcrypt from 'bcrypt'
-import { User } from '../entities/user.entity';
-import { LoginCredential } from '../entities/login-credential.entity';
-import { initORM } from '../db';
+import { User } from '../entities/user.entity.js';
+import { LoginCredential } from '../entities/login-credential.entity.js';
+import { initORM } from '../db.js';
 
 export async function registerUserRoutes(router: Router): Promise<express.Router> {
 
@@ -17,7 +17,8 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
 
       // If the user exists
       if (userCount > 0) {
-        return res.status(400).json({ error: 'An account with that email already exists' });
+        res.status(400).json({ error: 'An account with that email already exists' });
+        return
       }
 
       // Create the user
@@ -47,14 +48,16 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
       
       // If the credentials don't exist
       if (!credentials) {
-        return res.status(400).json({ error: errorMsg });
+        res.status(400).json({ error: errorMsg });
+        return 
       }
 
       // Compare the provided password with the stored hashed password
       const passwordMatch = await bcrypt.compare(password, credentials.password);
 
       if (!passwordMatch) {
-        return res.status(400).json({ error: errorMsg });
+        res.status(400).json({ error: errorMsg });
+        return 
       }
 
       // Passwords match, user is authenticated
@@ -70,10 +73,40 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
   router.get('/logout', async (req: Request, res: Response) => {
     try {
       req.session.destroy(() => {});
-      // TODO: redirect here
     } catch (error) {
       console.error('Error during logout user:', error);
       res.status(500).json({ error: 'Failed to logout user' });
+    }
+  });
+
+  router.post("/add-friend", async (req, res) => {
+    let userId = "";
+    const errorMsg = 'Failed to add friend'
+    const friendId = req.body.id;
+
+    if(req.query.id){
+      userId = (req.query.id).toString();
+    }else if(req.session.userId){
+      userId = req.session.userId;
+    }else{
+      res.status(500).json({ error: errorMsg });
+    }
+    const user: User = await db.user.findOne({id: +userId},{ populate: ['friends']});
+    if(user == null) {
+      console.error(errorMsg);
+      res.status(500).json({ error: errorMsg });
+    }else{
+      try {
+        console.log(friendId);
+        const friend: User = await db.user.findOne({id: friendId});
+        user.friends.add(friend)
+
+        await db.em.persistAndFlush(user);
+        res.status(200).json(user.profile);
+      } catch (error) {
+          console.error(errorMsg+':', error);
+          res.status(500).json({ error: errorMsg });
+      }
     }
   });
 

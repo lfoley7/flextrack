@@ -5,6 +5,7 @@ import { WorkoutPlan } from './workout-plan.entity.js';
 import { WorkoutLog } from './workout-log.entity.js';
 import { ChallengeLog } from './challenge-log.entity.js';
 import { PostShare } from './post-share.entity.js';
+import { Comment } from './comments.entity.js';
 
 @Entity()
 export class Post {
@@ -17,6 +18,9 @@ export class Post {
 
     @Property()
     caption!: string;
+
+    @Property()
+    date!: Date;
 
     @ManyToOne()
     created_by!: User;
@@ -35,4 +39,7 @@ export class Post {
 
     @OneToMany(() => PostShare, share => share.post)
     shares = new Collection<PostShare>(this);
+
+    @OneToMany(() => Comment, comment => comment.post)
+    comments = new Collection<Comment>(this);
 }

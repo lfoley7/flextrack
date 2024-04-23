@@ -8,10 +8,25 @@ export class FitnessProfile {
     id!: number;
   
     @Property()
+    username!: string;
+
+    @Property()
     height!: number;
   
     @Property()
     weight!: number;
+
+    @Property()
+    deadlift!: number;
+
+    @Property()
+    squat!: number;
+
+    @Property()
+    ohp!: number;
+  
+    @Property()
+    bench!: number;
 
     @Property()
     description!: string;
@@ -19,9 +34,14 @@ export class FitnessProfile {
     @OneToOne(() => User, user => user.profile, { orphanRemoval: true })
     user!: User;
 
-    public constructor() {
+    public constructor(username: string) {
+        this.username = username;
         this.height = -1;
         this.weight = -1;
+        this.deadlift = 0;
+        this.squat = 0;
+        this.ohp = 0;
+        this.bench = 0;
         this.description = "";
     }
 }

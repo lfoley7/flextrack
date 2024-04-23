@@ -6,6 +6,21 @@
     align-items: center;
 }
 
+.posts-modal-header {
+    background-color: #F58528;
+    color: white;
+    font-style: italic;
+}
+
+.posts-modal-text {
+    font-weight: 600 !important;
+}
+
+.posts-modal-button {
+    background-image: linear-gradient(to right, #FC6649, #FE5C54) !important;
+    border: #FE5C54;
+}
+
 .post-wrapper {
     background: linear-gradient(#F58528, #FC6649);
     width: 40rem;
@@ -131,4 +146,25 @@ h3 {
 
 .make-posts-button:hover {
     background-color: #f97910;
+}
+
+.make-comment-button {
+    border: none;
+    margin: 0;
+    font-weight: 500;
+    border-radius: .3rem;
+    height: 1.8rem;
+    width: 7rem;
+    background-color: #F58528;
+    color: white;
+}
+
+.make-comment-button:hover {
+    background-color: #f97910;
+}
+
+.comment-button-container {
+    display: flex;
+    justify-content: right;
+    align-items: right;
 }

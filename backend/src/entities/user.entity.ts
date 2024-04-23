@@ -14,9 +14,6 @@ export class User {
 
     @PrimaryKey()
     id!: number;
-  
-    @Property()
-    username!: string;
 
     @OneToOne()
     login!: LoginCredential;
@@ -57,8 +54,7 @@ export class User {
     @OneToMany(() => PostShare, share => share.recipient)
     recieved_posts = new Collection<PostShare>(this);
 
-    constructor(username: string, login: LoginCredential, profile: FitnessProfile=new FitnessProfile()) {
-        this.username = username;
+    constructor(username: string, login: LoginCredential, profile: FitnessProfile=new FitnessProfile(username)) {
         this.login = login;
         this.profile = profile;
     }

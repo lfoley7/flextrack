@@ -4,6 +4,7 @@ import axios from "axios";
 import './Login.css';
 
 const instance = axios.create({
+    withCredentials: true,
     baseURL: 'http://localhost:5000/api/user'
 });
 
@@ -36,7 +37,7 @@ function Login(props) {
             <div className="split left">
                 <div className="color-orange-red"></div>
                 <div className="flex">
-                    <div className="dropdown login-dropdown">
+                    <div className="login-dropdown dropdown">
                         <div className="logo-title">FLEXTRACK</div>
                         <a className="dropdown-text" href="#">The all-in-one fitness app!</a>
                     </div>
