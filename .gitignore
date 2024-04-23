@@ -6,8 +6,8 @@
 backend/temp/*
 
 # dependencies
-node_modules/
-node_modules/.cache/
+/flextrack/node_modules/
+/flextrack/node_modules/.cache/
 /.pnp
 .pnp.js
 
