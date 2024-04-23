@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, Modal, Button, Form } from 'react-bootstrap';
 import "./PageCreation.css";
 
 function Exercise({ name, onNameChange, sets, onSetChange }) {
@@ -7,14 +7,31 @@ function Exercise({ name, onNameChange, sets, onSetChange }) {
   const [localName, setLocalName] = useState(name);
   const nextId = useRef(2);
   const [localSets, setSets] = useState(sets);
+  const [showModal, setShowModal] = useState(false);
+  const [newExerciseName, setNewExerciseName] = useState('');
   const exerciseRef = useRef(null);
-  const exerciseOptions = ['Overhead Press', 'Bench Press', 'Squat', 'Deadlift'];
+  const [exerciseOptions, setExerciseOptions] = useState(['Overhead Press', 'Bench Press', 'Squat', 'Deadlift']);
 
   useEffect(() => {
     if (isEditing) {
       exerciseRef.current.focus();
     }
   }, [isEditing]);
+
+  const handleModalShow = () => setShowModal(true);
+  const handleModalClose = () => setShowModal(false);
+
+  const handleNewExerciseNameChange = (event) => {
+    setNewExerciseName(event.target.value);
+  };
+
+  const handleAddNewExercise = () => {
+    if (newExerciseName.trim() !== '') {
+      setExerciseOptions([...exerciseOptions, newExerciseName.trim()]);
+      setNewExerciseName('');
+      handleModalClose();
+    }
+  };
 
   const handleBlur = () => {
     setIsEditing(false);
@@ -124,22 +141,52 @@ function Exercise({ name, onNameChange, sets, onSetChange }) {
   return (
     <div className="exercise-wrapper">
       <div className="exercise-content">
-        <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic" className="exercise-header-dropdown">
-            {localName}
-          </Dropdown.Toggle>
+        <div className="header-controls">
+          <Dropdown>
+            <Dropdown.Toggle id="dropdown-basic" className="exercise-header-dropdown darken">
+              {localName}
+            </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            {exerciseOptions.map(option => (
-              <Dropdown.Item key={option} onClick={() => setLocalName(option)}>
-                {option}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
+            <Dropdown.Menu>
+              {exerciseOptions.map(option => (
+                <Dropdown.Item key={option} onClick={() => setLocalName(option)}>
+                  {option}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <button className="make-posts-button darken" onClick={handleModalShow} style={{ marginLeft: "2rem", marginTop: "0", backgroundImage: "linear-gradient(to right, #FC6649, #FE5C54)", fontSize: ".9rem" }}>+ Exercise</button>
+        </div>
         <SetsRepsWeight />
         <button className="newSet" onClick={handleAddSet}>Add Set</button>
       </div>
+
+      <Modal className="posts-modal" show={showModal} onHide={handleModalClose}>
+        <Modal.Header className="posts-modal-header" closeButton>
+          <Modal.Title className="posts-modal-text">Add a New Exercise</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Exercise Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter new exercise name"
+                value={newExerciseName}
+                onChange={handleNewExerciseNameChange}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Close
+          </Button>
+          <Button className="posts-modal-button darken" onClick={handleAddNewExercise}>
+            Add Exercise
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

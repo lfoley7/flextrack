@@ -55,6 +55,11 @@
     align-items: center;
 }
 
+.profile-table {
+    margin: 0 auto;
+    width: 100%;
+}
+
 .profile-table th,
 .profile-table td {
     text-align: center;
@@ -67,6 +72,11 @@
     font-weight: 900;
 }
 
+.profile-table thead th,
+.profile-table tbody td {
+    width: 50%;
+}
+
 .porfile-table td {
     color: #777;
     font-weight: 500;
@@ -74,6 +84,8 @@
 
 .right-content {
     padding-left: 20px;
+    align-items: center;
+    width: 100%;
 }
 
 .user-stats {

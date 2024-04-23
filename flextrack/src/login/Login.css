@@ -107,6 +107,12 @@
     font-weight: 500;
 }
 
+.username-label {
+    position: relative;
+    right: 9.8rem;
+    font-weight: 500;
+}
+
 .email-label {
     position: relative;
     right: 10.9rem;
@@ -115,7 +121,13 @@
 
 .pswd-label {
     position: relative;
-    right: 10rem;
+    right: 9.8rem;
+    font-weight: 500;
+}
+
+.conf-pswd-label {
+    position: relative;
+    right: 7.6rem;
     font-weight: 500;
 }
 
@@ -126,6 +138,11 @@
     font-size: 56px;
     font-weight: 700;
     color: #FE5C54;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 1rem;
 }
 
 .input-password-eye {

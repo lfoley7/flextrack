@@ -58,7 +58,7 @@ function Profile(props) {
                     <div className="right-content d-flex flex-column align-items-center">
                     <div className="row mb-3">
                             <div className="col" style={{ width: '20rem', height: '5rem' }}>
-                                <table className="table">
+                                <table className="profile-table">
                                     <thead>
                                         <tr>
                                             <th>Deadlift</th>

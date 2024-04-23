@@ -8,6 +8,14 @@
     margin-bottom: 1rem;
 }
 
+.header-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
 .exercise-content table {
     width: 100%;
     margin: 0;
@@ -37,20 +45,20 @@
 .exercise-header-dropdown {
     font-size: calc(.6rem + 1.2vw);
     font-weight: 700;
-    color: #555;
+    color: #070707;
     background-color: transparent;
     box-shadow: none;
     align-items: center;
     text-align: center;
     font-style: italic;
-    margin-bottom: 1rem;
     cursor: pointer;
+    border: none;
 }
 
 .exercise-header-dropdown:hover,
 .exercise-header-dropdown:focus {
-    color: #666;
-    background-color: transparent;
+    background: rgb(245, 245, 245) !important;
+    color: #070707;
 }
 
 .dropdown-menu {
