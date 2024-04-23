@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import './CreateWorkoutPlan.css';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
+=======
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
 import axios from 'axios';
 import Loading from '../loading/Loading';
 
@@ -18,7 +21,11 @@ const createWorkoutRoutine = async (post) => {
 }
 
 const updateRoutineName = async (id, name) => {
+<<<<<<< HEAD
     return await instance.post("update-name", { id: id, name: name });
+=======
+    return await instance.post("update-name", {id: id, name: name});
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
 }
 
 function CreateWorkoutPlan(props) {
@@ -66,6 +73,7 @@ function CreateWorkoutPlan(props) {
 
     useEffect(() => {
         getRoutines()
+<<<<<<< HEAD
             .then((res) => {
                 console.log(res.data)
                 setRoutines(res.data);
@@ -82,6 +90,24 @@ function CreateWorkoutPlan(props) {
     }, []);
 
     if (routines === undefined) {
+=======
+        .then((res) => {
+            console.log(res.data)
+            setRoutines(res.data);
+            const loadTitle = {}
+            res.data.forEach(routine => {
+                loadTitle[routine.id] = routine.name;
+                titleRefs.current[routine.id] = React.createRef();
+            });
+            setTitle(loadTitle)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+      }, []);
+
+    if(routines === undefined) {
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
         return (
             <>
                 <Loading margin={0} minHeight={"1000px"} />
@@ -101,6 +127,7 @@ function CreateWorkoutPlan(props) {
     const handleBlur = (routineId) => {
         setIsEditing(prev => ({ ...prev, [routineId]: false }));
         updateRoutineName(routineId, title[routineId])
+<<<<<<< HEAD
             .then((res) => {
                 console.log(res.data)
                 getRoutines()
@@ -114,10 +141,28 @@ function CreateWorkoutPlan(props) {
                     .catch((err) => {
                         console.log(err);
                     });
+=======
+        .then((res) => {
+            console.log(res.data)
+            getRoutines()
+            .then((res) => {
+                console.log(res.data)
+                setRoutines(res.data);
+                res.data.forEach(routine => {
+                    titleRefs.current[routine.id] = React.createRef();
+                });
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
             })
             .catch((err) => {
                 console.log(err);
             });
+<<<<<<< HEAD
+=======
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
     };
 
     const interpolateColor = (index, total) => {
@@ -163,9 +208,13 @@ function CreateWorkoutPlan(props) {
                     </div>
                 </div>
             ))}
+<<<<<<< HEAD
             <div className="newDay darken text-align-center">
                 <Link to="/createworkout" style={{ textDecoration: 'none', color: 'inherit' }}>+ Add New Workout Routine</Link>
             </div>
+=======
+            <div className="newDay darken text-align-center">Add New Workout Routine</div>
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
         </div>
     );
 }

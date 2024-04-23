@@ -8,6 +8,7 @@
     margin-bottom: 1rem;
 }
 
+<<<<<<< HEAD
 .header-controls {
     display: flex;
     justify-content: center;
@@ -16,6 +17,8 @@
     margin-bottom: 1rem;
 }
 
+=======
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
 .exercise-content table {
     width: 100%;
     margin: 0;
@@ -45,20 +48,34 @@
 .exercise-header-dropdown {
     font-size: calc(.6rem + 1.2vw);
     font-weight: 700;
+<<<<<<< HEAD
     color: #070707;
+=======
+    color: #555;
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
     background-color: transparent;
     box-shadow: none;
     align-items: center;
     text-align: center;
     font-style: italic;
+<<<<<<< HEAD
     cursor: pointer;
     border: none;
+=======
+    margin-bottom: 1rem;
+    cursor: pointer;
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
 }
 
 .exercise-header-dropdown:hover,
 .exercise-header-dropdown:focus {
+<<<<<<< HEAD
     background: rgb(245, 245, 245) !important;
     color: #070707;
+=======
+    color: #666;
+    background-color: transparent;
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
 }
 
 .dropdown-menu {

@@ -9,7 +9,10 @@
 .top-message {
     margin-top: 1rem;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
 /*
 .dashboard-container {
     display: flex;
@@ -17,6 +20,10 @@
     min-height: 100vh;
     background-color: #f4f4f4;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
 */
 
 .dashboard-content {
@@ -28,8 +35,12 @@
 }
 
 h1 {
+<<<<<<< HEAD
     color: #2A5783;
     /* Dark blue color */
+=======
+    color: #2A5783; /* Dark blue color */
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
     margin: 20px 0;
 }
 
@@ -41,13 +52,18 @@ h1 {
 }
 
 .menu-button {
+<<<<<<< HEAD
     background-color: #FF4500;
     /* Orange color matching the Navbar */
+=======
+    background-color: #FF4500; /* Orange color matching the Navbar */
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
     color: white;
     border: none;
     padding: 10px 20px;
     margin: 10px 0;
     border-radius: 8px;
+<<<<<<< HEAD
     width: 80%;
     /* Responsive width */
     cursor: pointer;
@@ -61,3 +77,14 @@ h1 {
     background-color: #e69500;
     /* Slightly darker orange on hover */
 }
+=======
+    width: 80%; /* Responsive width */
+    cursor: pointer;
+    font-size: 18px; /* Larger font for better readability */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+.menu-button:hover {
+    background-color: #e69500; /* Slightly darker orange on hover */
+}
+>>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
