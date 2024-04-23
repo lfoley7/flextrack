@@ -37,11 +37,7 @@ function Login(props) {
             <div className="split left">
                 <div className="color-orange-red"></div>
                 <div className="flex">
-<<<<<<< HEAD
                     <div className="login-dropdown dropdown">
-=======
-                    <div className="dropdown login-dropdown">
->>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
                         <div className="logo-title">FLEXTRACK</div>
                         <a className="dropdown-text" href="#">The all-in-one fitness app!</a>
                     </div>

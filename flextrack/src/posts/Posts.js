@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
 import { Modal, Button, Form } from 'react-bootstrap';
-=======
->>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
 import './Posts.css';
 
 import axios from 'axios';
@@ -32,7 +29,6 @@ function Posts(props) {
 
     const [posts, setPosts] = useState();
     const [update, setUpdate] = useState(false);
-<<<<<<< HEAD
     const [showModal, setShowModal] = useState(false);
     const [postTitle, setPostTitle] = useState('');
     const [postText, setPostText] = useState('');
@@ -58,36 +54,13 @@ function Posts(props) {
                 .catch((err) => {
                     console.error(err);
                 });
-=======
-
-    const onHandleCommentClick = (id) => {
-        navigate('/profile/'+id);
-    };
-
-    const handleMakePost = async () => {
-        const postText = window.prompt("Write your post text:");
-        if (postText) {
-            const newPost = {
-                title: "Title",
-                caption: postText,
-                date: new Date(),
-            };
-            await createPost(newPost).then((res) => {
-                setPosts(res.data);
-            }).catch((err) => {
-                console.log(err);
-            });
->>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
             setUpdate(!update);
         }
     };
 
-<<<<<<< HEAD
     const handleModalClose = () => setShowModal(false);
     const handleModalShow = () => setShowModal(true);
 
-=======
->>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
     const handleAddComment = async (postId) => {
         const commentText = window.prompt("Write your comment text:");
         if (commentText) {
@@ -105,7 +78,6 @@ function Posts(props) {
 
     useEffect(() => {
         getPosts()
-<<<<<<< HEAD
             .then((res) => {
                 console.log(res.data)
                 setPosts(res.data);
@@ -116,25 +88,12 @@ function Posts(props) {
     }, [update]);
 
     if (posts === undefined) {
-=======
-        .then((res) => {
-            console.log(res.data)
-            setPosts(res.data);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-      }, [update]);
-    
-    if(posts === undefined) {
->>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
         return (
             <>
                 <Loading margin={0} minHeight={"1000px"} />
             </>
         );
     }
-<<<<<<< HEAD
 
     return (
         <div className="display-container" style={{ alignItems: 'flex-start' }}>
@@ -227,64 +186,6 @@ function Posts(props) {
                         </div>
                     </div>
                 )) : <p>No posts found</p>
-=======
-    
-    return (
-        <div className="display-container" style={{ alignItems: 'flex-start' }}>
-            <button className="make-posts-button" onClick={handleMakePost}>Make a Post</button>
-            { posts.length > 0 ?
-            posts.map((post) => (
-                <div>
-                    <div key={post.id} className="post-wrapper">
-                        <div className="post-content">
-                            <div className="post-top d-flex align-items-center">
-                                <div className="posts-profile-image-container">
-                                    <img src={"/profile.png"} alt="Profile" className="posts-profile-img" />
-                                </div>
-                                <h3 onClick={() => onHandleCommentClick(post.created_by.id)} style={{ color: 'white', fontWeight: '700', marginLeft: '1rem' }}>{post.created_by.profile.username}</h3>
-                            </div>
-                            <div className="post-bottom">
-                                <h4 style={{ color: 'black', fontWeight: '700' }}>{post.title}</h4>
-                                <p style={{ fontStyle: 'italic', color: '#777' }}>{post.caption}</p>
-                                <div>
-                                    <div className="date-container">
-                                        {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                    </div>
-                                    <div className="comment-button-container">
-                                        <button className='make-comment-button' value={post.id} onClick={(e) => handleAddComment(e.target.value)}>Comment</button>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div className="comments">
-                        {post.comments.map((comment, idx) => (
-                            <div
-                                key={comment.id}
-                                className={`comment d-flex-column align-items-center ${idx === post.comments.length - 1 ? 'last-comment' : ''}`}
-                            >
-                                <div className={`d-flex align-items-center`}>
-                                    <div className="posts-profile-image-container-small">
-                                        <img src="/profile.png" alt="Profile" className="posts-profile-img-small" />
-                                    </div>
-                                    <p style={{ color: 'black', fontWeight: '700', marginLeft: '.5rem' }}
-                                        onClick={() => onHandleCommentClick(comment.created_by.id)}>
-                                        {comment.created_by.profile.username}
-                                    </p>
-                                </div>
-                                <p style={{ fontStyle: 'italic', color: '#777' }}>
-                                        {comment.caption}
-                                </p>
-                                <div className="date-container">
-                                    {new Date(comment.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )) : <p>No posts found</p>
->>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
             }
         </div >
     );

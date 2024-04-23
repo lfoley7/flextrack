@@ -1,9 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-<<<<<<< HEAD
 import { Dropdown, Modal, Button, Form } from 'react-bootstrap';
-=======
-import { Dropdown } from 'react-bootstrap';
->>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
 import "./PageCreation.css";
 
 function Exercise({ name, onNameChange, sets, onSetChange }) {
@@ -11,15 +7,10 @@ function Exercise({ name, onNameChange, sets, onSetChange }) {
   const [localName, setLocalName] = useState(name);
   const nextId = useRef(2);
   const [localSets, setSets] = useState(sets);
-<<<<<<< HEAD
   const [showModal, setShowModal] = useState(false);
   const [newExerciseName, setNewExerciseName] = useState('');
   const exerciseRef = useRef(null);
   const [exerciseOptions, setExerciseOptions] = useState(['Overhead Press', 'Bench Press', 'Squat', 'Deadlift']);
-=======
-  const exerciseRef = useRef(null);
-  const exerciseOptions = ['Overhead Press', 'Bench Press', 'Squat', 'Deadlift'];
->>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
 
   useEffect(() => {
     if (isEditing) {
@@ -27,7 +18,6 @@ function Exercise({ name, onNameChange, sets, onSetChange }) {
     }
   }, [isEditing]);
 
-<<<<<<< HEAD
   const handleModalShow = () => setShowModal(true);
   const handleModalClose = () => setShowModal(false);
 
@@ -43,8 +33,6 @@ function Exercise({ name, onNameChange, sets, onSetChange }) {
     }
   };
 
-=======
->>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
   const handleBlur = () => {
     setIsEditing(false);
     onNameChange(localName);
@@ -153,7 +141,6 @@ function Exercise({ name, onNameChange, sets, onSetChange }) {
   return (
     <div className="exercise-wrapper">
       <div className="exercise-content">
-<<<<<<< HEAD
         <div className="header-controls">
           <Dropdown>
             <Dropdown.Toggle id="dropdown-basic" className="exercise-header-dropdown darken">
@@ -200,24 +187,6 @@ function Exercise({ name, onNameChange, sets, onSetChange }) {
           </Button>
         </Modal.Footer>
       </Modal>
-=======
-        <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic" className="exercise-header-dropdown">
-            {localName}
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            {exerciseOptions.map(option => (
-              <Dropdown.Item key={option} onClick={() => setLocalName(option)}>
-                {option}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-        <SetsRepsWeight />
-        <button className="newSet" onClick={handleAddSet}>Add Set</button>
-      </div>
->>>>>>> 97804d27f8370be363aad661ea3c770b43398b9a
     </div>
   );
 }
