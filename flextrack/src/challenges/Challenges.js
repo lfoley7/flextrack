@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import * as React from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -203,8 +203,8 @@ function Challenges() {
         },
         // Additional challenges can be similarly structured
         {
-             id: 2,
-             name: 'JAGRUTIGAINZ333',
+            id: 2,
+            name: 'JAGRUTIGAINZ333',
             exercises: [
                 { name: 'Deadlift', sets: ['3 reps', '5 reps', '1 rep', '3 reps'] },
                 { name: 'Squats', sets: ['8 reps', '4 reps', '2 reps', '1 rep'] },
@@ -234,7 +234,7 @@ function Challenges() {
                         </div>
                     ))
                 }
-                {!selectedChallenge && <button className="new-challenge-btn" onClick={() => { navigate('/social')}}>New Challenge</button>}
+                {!selectedChallenge && <button className="new-challenge-btn" onClick={() => { navigate('/social') }}>New Challenge</button>}
                 {selectedChallenge && selectedChallenge.exercises.map((exercise, index) => (
                     <div key={index} className="exercise-detail">
                         <h2 className="exercise-name">{exercise.name}</h2>
@@ -245,12 +245,6 @@ function Challenges() {
                     </div>
                 ))}
             </div>
-            <footer className="bottom-nav">
-                <span onClick={() => navigate('/home')}>HOME</span>
-                <span onClick={() => navigate('/challenges')}>CHALLENGES</span>
-                <span onClick={() => navigate('/friends')}>FRIENDS</span>
-                <span onClick={() => navigate('/settings')}>SETTINGS</span>
-            </footer>
         </div>
     );
 }
