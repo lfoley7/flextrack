@@ -24,6 +24,7 @@ export class WorkoutPlan {
     public addSessions(sessions: WorkoutSession[]) {
         sessions.forEach((session) => {
             this.sessions.add(session)
+            session.plan = this;
         });
     } 
 }

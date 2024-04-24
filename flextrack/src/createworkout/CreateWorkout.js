@@ -9,6 +9,19 @@ const instance = axios.create({
   baseURL: 'http://localhost:5000/api/workout'
 });
 
+const exerciseInstance = axios.create({
+  withCredentials: true,
+  baseURL: 'http://localhost:5000/api/exercise'
+});
+
+const postWorkout = async (workout) => {
+  return await instance.post("create",workout);
+}
+
+const addSessionsWorkout = async (workout) => {
+  return await instance.post("add-sessions",workout);
+}
+
 function CreateWorkout() {
   const [title, setTitle] = useState('My Workout');
   const [isEditing, setIsEditing] = useState(false);
@@ -23,13 +36,13 @@ function CreateWorkout() {
   const defaultSet = [{ id: 1, reps: 1, weight: 10 }];
 
   const createWorkout = async (name, day_of_week, workout_type, exercises) => {
-    
+    console.log(exercises)
     let formattedSets = []
     exercises.map((exercise) => {
       exercise.sets.forEach(set => {
         let formattedSet = {
           "set_number": set.id,
-          "exercise": exercise.id,
+          "exercise_id": exercise.id,
           "target_weight": set.weight,
           "target_reps": set.reps
         }
@@ -37,7 +50,7 @@ function CreateWorkout() {
         formattedSets.push(formattedSet);
       });
     })
-
+    console.log(formattedSets)
     let body = 
     { 
       "name": name, 
@@ -52,9 +65,14 @@ function CreateWorkout() {
 
     console.log(body)
 
-    instance.post("create", body)
+    postWorkout({name: body.name})
     .then((e) => {
-      navigate("/dashboard");
+      body.plan_id = e.data.plan.id
+      console.log(e)
+      addSessionsWorkout(body).then((e) => {
+        console.log(e.data)
+        navigate("/dashboard");
+      });
     }).catch((error) => {
       window.alert(error.response.data.error);
       console.log(error);
@@ -73,16 +91,18 @@ function CreateWorkout() {
       name: `Exercise ${exercises.length + 1}`,
       sets: defaultSet
     };
+
     setExercises([...exercises, newExercise]);
   };
 
-  const handleNameChange = (id, newName) => {
+  const handleExerciseChange = (oldId, id, newName) => {
     const updatedExercises = exercises.map(exercise => {
-      if (exercise.id === id) {
-        return { ...exercise, name: newName };
+      if (exercise.id === oldId) {
+        return { ...exercise, id: id, name: newName };
       }
       return exercise;
     });
+    console.log(updatedExercises)
     setExercises(updatedExercises);
   };
 
@@ -116,10 +136,11 @@ function CreateWorkout() {
       {exercises.map((exercise) => (
         <Exercise
           key={exercise.id}
+          id={exercise.id}
           name={exercise.name}
           sets={exercise.sets}
-          onNameChange={(newName) => handleNameChange(exercise.id, newName)}
           onSetChange={(set) => handleSetChange(exercise.id, set)}
+          onExerciseChange={(newId, newName) => handleExerciseChange(exercise.id, newId, newName)}
         />
       ))}
       <button className="login" onClick={handleAddExercise}>New Exercise</button>

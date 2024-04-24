@@ -33,4 +33,8 @@ export class SessionSet {
         this.target_weight = target_weight;
         this.target_reps = target_reps;
     }
+
+    public addSession(session: WorkoutSession) {
+        this.session = session;
+    } 
 }
