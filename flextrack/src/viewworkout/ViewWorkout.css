@@ -7,6 +7,12 @@
     margin-bottom: 1rem;
 }
 
+.updateable-workout-value {
+    border: none;
+    width: 4rem;
+    text-align: center;
+}
+
 .exercise-display {
     margin-bottom: 2rem;
 }

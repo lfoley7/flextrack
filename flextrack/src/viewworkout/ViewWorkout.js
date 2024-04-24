@@ -52,8 +52,8 @@ function ViewWorkout() {
                                 {exercise.sets.map((set, setIndex) => (
                                     <tr key={setIndex}>
                                         <td>Set {setIndex + 1}</td>
-                                        <td>{set.reps}</td>
-                                        <td>{set.weight} lbs</td>
+                                        <td><input className="updateable-workout-value" placeholder={set.reps}></input></td>
+                                        <td><input className="updateable-workout-value" placeholder={set.weight + " lbs"}></input></td>
                                         <td>
                                             <button
                                                 className="completion-button"
@@ -72,7 +72,7 @@ function ViewWorkout() {
                     </div>
                 </div>
             ))}
-            <button className="login" style={{ marginTop: "2rem" }} onClick={() => { navigate("/dashboard"); }}>Submit</button>
+            <button className="login" style={{ marginTop: "2rem" }} onClick={() => { navigate("/createWorkoutPlan"); }}>Submit</button>
         </div>
     );
 }
