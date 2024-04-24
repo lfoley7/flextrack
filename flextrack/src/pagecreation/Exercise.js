@@ -1,22 +1,52 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Dropdown, Modal, Button, Form } from 'react-bootstrap';
 import "./PageCreation.css";
+import axios from "axios";
 
-function Exercise({ name, onNameChange, sets, onSetChange }) {
+const exerciseInstance = axios.create({
+  withCredentials: true,
+  baseURL: 'http://localhost:5000/api/exercise'
+});
+
+const postExercise = async (name) => {
+  return await exerciseInstance.post("create", {name: name, targetMuscle: "any"});
+}
+
+const getExercises = async () => {
+  return await exerciseInstance.get("get-all");
+}
+
+function Exercise({ name, sets, onSetChange, id, onExerciseChange }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [localName, setLocalName] = useState(name);
+  const [localExercise, setLocalExercise] = useState({id: id, name: name});
   const nextId = useRef(2);
   const [localSets, setSets] = useState(sets);
   const [showModal, setShowModal] = useState(false);
   const [newExerciseName, setNewExerciseName] = useState('');
   const exerciseRef = useRef(null);
-  const [exerciseOptions, setExerciseOptions] = useState(['Overhead Press', 'Bench Press', 'Squat', 'Deadlift']);
+  const [exerciseOptions, setExerciseOptions] = useState([{id: 1, name: "bench"}]);
 
   useEffect(() => {
     if (isEditing) {
       exerciseRef.current.focus();
     }
   }, [isEditing]);
+
+  useEffect(() => {
+    getExercises()
+    .then((res) => {
+        console.log(res.data)
+
+        const newExercises = (res.data).map((exercise) => {
+          return {id: exercise.id, name: exercise.name};
+        })
+
+        setExerciseOptions(newExercises);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+  }, []);
 
   const handleModalShow = () => setShowModal(true);
   const handleModalClose = () => setShowModal(false);
@@ -27,25 +57,34 @@ function Exercise({ name, onNameChange, sets, onSetChange }) {
 
   const handleAddNewExercise = () => {
     if (newExerciseName.trim() !== '') {
-      setExerciseOptions([...exerciseOptions, newExerciseName.trim()]);
-      setNewExerciseName('');
-      handleModalClose();
+      postExercise(newExerciseName)
+      .then((e) => {
+        getExercises()
+        .then((res) => {
+            console.log(res.data)
+    
+            const newExercises = (res.data).map((exercise) => {
+              return {id: exercise.id, name: exercise.name};
+            })
+    
+            setExerciseOptions(newExercises);
+            setNewExerciseName('');
+            handleModalClose();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+      }).catch((error) => {
+        console.log(error);
+      });
     }
   };
 
-  const handleBlur = () => {
-    setIsEditing(false);
-    onNameChange(localName);
-  };
-
-  const handleChange = (e) => {
-    setLocalName(e.target.value);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleBlur();
-    }
+  const handleExerciseChange = (exercise) => {
+    onExerciseChange(exercise.id ,exercise.name)
+    console.log(exercise)
+    setLocalExercise(exercise)
   };
 
   const handleAddSet = () => {
@@ -144,13 +183,13 @@ function Exercise({ name, onNameChange, sets, onSetChange }) {
         <div className="header-controls">
           <Dropdown>
             <Dropdown.Toggle id="dropdown-basic" className="exercise-header-dropdown darken">
-              {localName}
+              {localExercise.name}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
               {exerciseOptions.map(option => (
-                <Dropdown.Item key={option} onClick={() => setLocalName(option)}>
-                  {option}
+                <Dropdown.Item key={option.id} value={option} onClick={() => handleExerciseChange({id: option.id, name: option.name})}>
+                  {option.name}
                 </Dropdown.Item>
               ))}
             </Dropdown.Menu>

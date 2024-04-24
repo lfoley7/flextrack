@@ -29,6 +29,7 @@ export class WorkoutSession {
     public addSets(sets: SessionSet[]) {
         sets.forEach((set) => {
             this.sets.add(set)
+            set.session = this;
         });
     } 
 }

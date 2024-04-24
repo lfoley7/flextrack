@@ -3,6 +3,7 @@ import { initORM } from '../db.js';
 import { WorkoutSession } from '../entities/workout-session.entity.js';
 import { Collection } from '@mikro-orm/core';
 import { SessionSet } from '../entities/set.entity.js';
+import { setSafeTimers } from 'vitest/utils.js';
 
 export async function registerWorkoutRoutes(router: Router): Promise<express.Router> {
 
@@ -77,9 +78,10 @@ export async function registerWorkoutRoutes(router: Router): Promise<express.Rou
             console.log(sets)
             return new WorkoutSession(session.day_of_week, session.workout_type, plan, sets)
           }))
-  
+          
           plan.addSessions(workoutSessions)
         }
+        
         await db.em.persistAndFlush(plan);
         res.status(200).json({ plan: plan});
         return
@@ -95,7 +97,8 @@ export async function registerWorkoutRoutes(router: Router): Promise<express.Rou
     const { sessions, plan_id } = req.body;
     const errorMsg = 'Error adding sessions to plan'
     let userId = "";
-    
+    console.log(sessions);
+    console.log(plan_id)
     if(req.session.userId){
       userId = req.session.userId;
     }else{
