@@ -13,10 +13,6 @@ const getRoutines = async () => {
     return await instance.get("get-all");
 }
 
-const createWorkoutRoutine = async (post) => {
-    return await instance.post("create", post);
-}
-
 const updateRoutineName = async (id, name) => {
     return await instance.post("update-name", { id: id, name: name });
 }
@@ -123,7 +119,8 @@ function CreateWorkoutPlan(props) {
     const interpolateColor = (index, total) => {
         const startColor = [0xF5, 0x85, 0x28];
         const endColor = [0xFE, 0x5C, 0x54];
-        const step = index / (total - 1);
+        const divisor = total > 1 ? (total - 1) : 1;
+        const step = index / divisor;
 
         const interpolatedColor = startColor.map((start, i) => {
             const end = endColor[i];
@@ -155,11 +152,17 @@ function CreateWorkoutPlan(props) {
                             </h1>
                         )}
                         {routine.sessions.map((session, index) => (
+                            console.log(session),
+                            console.log(index),
+                            console.log(routine.sessions.length),
                             <div key={`${routine.id}-${session.workout_type}`} className="login darken" style={{ fontWeight: '600', fontStyle: 'italic', backgroundImage: "none", backgroundColor: interpolateColor(index, routine.sessions.length) }}>
-                                {session.day_of_week} - {session.workout_type}
+                                <Link to={"/viewworkout/"+routine.id+"/"+session.workout_type+"/"+session.day_of_week} style={{ textDecoration: 'none', color: 'inherit' }}>{session.day_of_week} - {session.workout_type}</Link>
+
                             </div>
                         ))}
-                        <div className="newDay darken">Add New Day</div>
+                        <div className="newDay darken">
+                            <Link to={"/editworkout/"+routine.id} style={{ textDecoration: 'none', color: 'inherit' }}>+ Add New Day</Link>
+                        </div>
                     </div>
                 </div>
             ))}

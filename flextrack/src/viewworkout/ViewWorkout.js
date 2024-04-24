@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faCircle } from '@fortawesome/free-solid-svg-icons';
 import './ViewWorkout.css';
+import axios from 'axios';
+import Loading from '../loading/Loading';
+
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: 'http://localhost:5000/api/workout'
+});
+
+const getRoutine = async (id, session, day) => {
+    return await instance.get("get", { params: { id: id, session: session, day: day } });
+}
 
 function ViewWorkout() {
     const navigate = useNavigate();
-    const [workout, setWorkout] = useState({
-        title: "My Workout",
-        exercises: [
-            {
-                name: "Bench Press",
-                sets: [
-                    { reps: 10, weight: 100, completed: false },
-                    { reps: 8, weight: 120, completed: false }
-                ]
-            },
-            {
-                name: "Squat",
-                sets: [
-                    { reps: 8, weight: 150, completed: false },
-                    { reps: 6, weight: 170, completed: false }
-                ]
-            }
-        ]
-    });
+
+    let { planId, sessionType, day } = useParams();
+    const [title, setTitle] = useState('My Workout')
+    const [session, setSession] = useState(sessionType)
+    const [dayInput, setDay] = useState(day)
+    const [workout, setWorkout] = useState();
 
     const toggleCompletion = (exerciseIndex, setIndex) => {
         const newWorkout = { ...workout };
@@ -32,9 +30,30 @@ function ViewWorkout() {
         setWorkout(newWorkout);
     };
 
+    useEffect(() => {
+        getRoutine(planId, sessionType, day)
+            .then((res) => {
+                console.log(res.data)
+                setTitle(res.data.session.plan.name)
+                setWorkout(res.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
+    if(workout === undefined) {
+        return (
+            <>
+              <Loading margin={0} minHeight={"1000px"} />
+            </>
+          );
+    }
+
     return (
         <div className="display-container">
-            <h1 className="view-workout-title" style={{ marginBottom: "2rem" }}>{workout.title}</h1>
+            <h1 className="view-workout-title">{title}</h1>
+            <h3 className="" style={{ marginBottom: "2rem" }}>{dayInput +"-"+ session}</h3>
             {workout.exercises.map((exercise, exerciseIndex) => (
                 <div key={exerciseIndex} className="exercise-wrapper">
                     <div className="exercise-content">

@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Exercise from '../pagecreation/Exercise';
 import axios from "axios";
-import './CreateWorkout.css';
+import './EditWorkout.css';
 import { TextField } from '@mui/material';
+import Loading from '../loading/Loading';
 
 const instance = axios.create({
   withCredentials: true,
   baseURL: 'http://localhost:5000/api/workout'
 });
 
-const exerciseInstance = axios.create({
-  withCredentials: true,
-  baseURL: 'http://localhost:5000/api/exercise'
-});
+const getRoutine = async (id, session, day) => {
+  return await instance.get("get-plan", { params: { id: id} });
+}
 
 const postWorkout = async (workout) => {
   return await instance.post("create",workout);
@@ -23,20 +23,40 @@ const addSessionsWorkout = async (workout) => {
   return await instance.post("add-sessions",workout);
 }
 
-function CreateWorkout() {
-  const [title, setTitle] = useState('My Workout');
+function EditWorkout() {
+  const [title, setTitle] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const [exercises, setExercises] = useState([]);
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedType, setSelectedType] = useState('');
 
   const navigate = useNavigate();
-
+  let { planId } = useParams();
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const workoutTypes = { push: 'Push', pull: 'Pull', legs: 'Legs' };
   const defaultSet = [{ id: 1, reps: 1, weight: 10 }];
 
-  const createWorkout = async (name, day_of_week, workout_type, exercises) => {
+  useEffect(() => {
+    getRoutine(planId)
+        .then((res) => {
+            console.log(res.data)
+            setTitle(res.data.plan.name)
+            // setWorkout(res.data)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+  }, []);
+
+  if(title === undefined) {
+      return (
+          <>
+            <Loading margin={0} minHeight={"1000px"} />
+          </>
+        );
+  }
+
+  const createWorkout = async (day_of_week, workout_type, exercises, plan_id) => {
     console.log(exercises)
     let formattedSets = []
     exercises.map((exercise) => {
@@ -54,7 +74,7 @@ function CreateWorkout() {
     console.log(formattedSets)
     let body = 
     { 
-      "name": name, 
+      "plan_id": plan_id,
       "sessions": [
         {
           "day_of_week": day_of_week,
@@ -66,22 +86,14 @@ function CreateWorkout() {
 
     console.log(body)
 
-    postWorkout({name: body.name})
-    .then((e) => {
-      body.plan_id = e.data.plan.id
-      console.log(e)
-      addSessionsWorkout(body).then((e) => {
+    addSessionsWorkout(body).then((e) => {
         console.log(e.data)
-        navigate("/dashboard");
+        navigate("/createworkoutplan");
       });
-    }).catch((error) => {
-      window.alert(error.response.data.error);
-      console.log(error);
-    });
   }
 
   const handleSubmit = async () => {
-    await createWorkout(title, selectedDay, selectedType, exercises)
+    await createWorkout(selectedDay, selectedType, exercises, planId)
   };
 
   const toggleEditing = () => setIsEditing(true);
@@ -117,31 +129,9 @@ function CreateWorkout() {
     setExercises(updatedExercises);
   };
 
-const handleTitleChange = (value) => {
-    setTitle(value);
-};
-
-const handleBlur = () => {
-    setIsEditing(false);
-};
-
   return (
     <div className="display-container">
-      {isEditing ? (
-        <input
-            type="text"
-            value={title}
-            onChange={(e) => handleTitleChange(e.target.value)}
-            onBlur={() => handleBlur()}
-            className="title-input"
-            style={{ marginTop: ".63rem" }}
-        />
-    ) : (
-        <h1 className="workout-title" style={{ marginTop: "1rem" }} onClick={() => toggleEditing()}>
-            {title}
-        </h1>
-    )}
-
+      <h1 className="workout-title" onClick={toggleEditing}>{title}</h1>
       <div className="d-flex justify-content-start mb-3">
         <select className="form-select me-2" value={selectedDay} onChange={e => setSelectedDay(e.target.value)} style={{ maxWidth: 200, cursor: 'pointer' }}>
           <option value="">Select a Day</option>
@@ -169,4 +159,4 @@ const handleBlur = () => {
   );
 }
 
-export default CreateWorkout;
+export default EditWorkout;

@@ -16,6 +16,7 @@ import Profile from "./profile/Profile";
 import ViewWorkout from "./viewworkout/ViewWorkout";
 import './App.css';
 import WebFont from 'webfontloader';
+import EditWorkout from './editworkout/EditWorkout';
 
 export default function App() {
   WebFont.load({
@@ -55,7 +56,12 @@ export default function App() {
         <Route path='/profile'>
           <Route path=":userId" element={<Profile />} />
         </Route>
-        <Route path='/viewworkout' element={<ViewWorkout />} />
+        <Route path='/viewworkout'>
+          <Route path=":planId/:sessionType/:day" element={<ViewWorkout />} />  
+        </Route>
+        <Route path='/editworkout'>
+          <Route path=":planId" element={<EditWorkout />} />  
+        </Route>
         <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>
     </div>

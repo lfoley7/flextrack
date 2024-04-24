@@ -112,7 +112,7 @@ export async function registerWorkoutRoutes(router: Router): Promise<express.Rou
       res.status(500).json({ error: errorMsg });
     }else{
       try {
-        const plan = user.plans.find((plan: { id: any; }) => {return plan.id === plan_id})
+        const plan = user.plans.find((plan: { id: any; }) => {return plan.id == plan_id})
         if(plan == null) {
             console.error(errorMsg);
             res.status(500).json({ error: errorMsg });
@@ -215,6 +215,152 @@ export async function registerWorkoutRoutes(router: Router): Promise<express.Rou
         }
         plan.name = name;
         await db.em.persistAndFlush(plan);
+        res.status(200).json({ plan: plan});
+        return
+      } catch (error) {
+          console.error(errorMsg+':', error);
+          res.status(500).json({ error: errorMsg });
+          return
+      }
+    }
+  });
+
+  router.get("/get", async (req, res) => {
+
+    const errorMsg = 'Error getting plan'
+    console.log(req.body)
+    let userId = "";
+  
+    if(req.session.userId){
+      userId = req.session.userId;
+    }else{
+      console.error(errorMsg);
+      res.status(500).json({ error: errorMsg });
+      return
+    } 
+
+    let plan_id;
+    if(req.query.id){
+      plan_id = req.query.id;
+    }else{
+      console.error(errorMsg);
+      res.status(500).json({ error: errorMsg });
+      return
+    } 
+
+    let sessionType="";
+    if(req.query.session){
+      sessionType = req.query.session +"";
+    }else{
+      console.error(errorMsg);
+      res.status(500).json({ error: errorMsg });
+      return
+    }
+
+    
+    let day = "";
+    if(req.query.day){
+      day = req.query.day+"";
+    }else{
+      console.error(errorMsg);
+      res.status(500).json({ error: errorMsg });
+      return
+    }
+
+    const user = await db.user.findOne({id: +userId});
+
+    if(user == null) {
+      console.error(errorMsg);
+      res.status(500).json({ error: errorMsg });
+      return
+    }else{
+      try {
+        const plan = await db.workoutPlan.findOne({id: +plan_id}, { populate: ['sessions','sessions.sets']});
+        if(plan == null) {
+          console.error(errorMsg);
+          res.status(500).json({ error: errorMsg });
+          return
+        }
+        const session = await db.workoutSession.findOne({plan:plan, workout_type: sessionType, day_of_week: day}, 
+          { populate: ['plan.name','sets','sets.exercise.*', 'sets.set_number', 'sets.target_reps', 'sets.target_weight']});
+        if(session == null) {
+          console.error(errorMsg);
+          res.status(500).json({ error: errorMsg });
+          return
+        }
+
+        const exercises = new Map<string, object[]>()
+
+        session.sets.map((set: SessionSet) => {
+          console.log(set.exercise.name)
+          if(exercises.has(set.exercise.name)){
+            
+            const current = exercises.get(set.exercise.name);
+
+            if(current){
+              current?.push({reps: set.target_reps, weight: set.target_weight, completed: false})
+              console.log(current)
+              exercises.set(set.exercise.name, current)
+            }
+
+          }else{
+            const current = new Array();
+            current.push({reps: set.target_reps, weight: set.target_weight, completed: false});
+            console.log(current)
+            exercises.set(set.exercise.name, current)
+          }
+        })
+
+        const exerciseArray = [...exercises].map(([name, sets]) => ({ name, sets }));
+
+        res.status(200).json({ session: session, exercises: exerciseArray});
+        return
+      } catch (error) {
+          console.error(errorMsg+':', error);
+          res.status(500).json({ error: errorMsg });
+          return
+      }
+    }
+  });
+
+  router.get("/get-plan", async (req, res) => {
+
+    const errorMsg = 'Error getting plan'
+    console.log(req.body)
+    let userId = "";
+  
+    if(req.session.userId){
+      userId = req.session.userId;
+    }else{
+      console.error(errorMsg);
+      res.status(500).json({ error: errorMsg });
+      return
+    } 
+
+    let plan_id;
+    if(req.query.id){
+      plan_id = req.query.id;
+    }else{
+      console.error(errorMsg);
+      res.status(500).json({ error: errorMsg });
+      return
+    } 
+
+    const user = await db.user.findOne({id: +userId});
+
+    if(user == null) {
+      console.error(errorMsg);
+      res.status(500).json({ error: errorMsg });
+      return
+    }else{
+      try {
+        const plan = await db.workoutPlan.findOne({id: +plan_id}, { populate: ['sessions','sessions.sets']});
+        if(plan == null) {
+          console.error(errorMsg);
+          res.status(500).json({ error: errorMsg });
+          return
+        }
+
         res.status(200).json({ plan: plan});
         return
       } catch (error) {
