@@ -7,6 +7,7 @@ import Navbar from './navbar/Navbar';
 import Login from "./login/Login";
 import Register from "./register/Register";
 import Challenges from "./challenges/Challenges";
+import CreateChallenge from "./createchallenge/CreateChallenge";
 import CreateWorkoutPlan from "./createworkoutplan/CreateWorkoutPlan";
 import CreateWorkout from "./createworkout/CreateWorkout";
 import Settings from "./settings/Settings";
@@ -48,6 +49,7 @@ export default function App() {
         <Route path='/login' element={<Login email={email} setEmail={setEmail} password={password} setPassword={setPassword} setSignedIn={setSignedIn} />} />
         <Route path='/register' element={<Register />} />
         <Route path='/challenges' element={<Challenges />} />
+        <Route path='/createchallenge' element={<CreateChallenge />} />
         <Route path='/createworkoutplan' element={<CreateWorkoutPlan />} />
         <Route path='/createworkout' element={<CreateWorkout />} />
         <Route path='/settings' element={<Settings />} />
@@ -57,10 +59,10 @@ export default function App() {
           <Route path=":userId" element={<Profile />} />
         </Route>
         <Route path='/viewworkout'>
-          <Route path=":planId/:sessionType/:day" element={<ViewWorkout />} />  
+          <Route path=":planId/:sessionType/:day" element={<ViewWorkout />} />
         </Route>
         <Route path='/editworkout'>
-          <Route path=":planId" element={<EditWorkout />} />  
+          <Route path=":planId" element={<EditWorkout />} />
         </Route>
         <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>

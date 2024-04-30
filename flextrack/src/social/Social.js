@@ -31,7 +31,7 @@ function Social() {
     const [update, setUpdate] = useState(false);
 
     const onHandleCardClick = (id) => {
-        navigate('/profile/'+id);
+        navigate('/profile/' + id);
     };
 
     const onHandleAddFriend = async (index) => {
@@ -41,16 +41,16 @@ function Social() {
 
     useEffect(() => {
         getProfiles()
-        .then((res) => {
-            console.log(res.data)
-            setUsers(res.data);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-      }, [update]);
+            .then((res) => {
+                console.log(res.data)
+                setUsers(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [update]);
 
-    if(users === undefined) {
+    if (users === undefined) {
         return (
             <>
                 <Loading margin={0} minHeight={"1000px"} />
@@ -80,45 +80,45 @@ function Social() {
 
             {
                 users.length > 0 ?
-                users.map((user, index) => (
-                    <div key={index} onClick={(e) => {
-                        e.stopPropagation();
-                        onHandleCardClick(user.id);
-                    }} className="card-wrapper mb-3">
-                        <div className="card" style={{ background: 'rgba(0,0,0,0.6)', color: 'white' }}>
-                            <div className="card-body d-flex align-items-center">
-                                <div className="profile-img-container me-3">
-                                    <img src="/profile.png" alt="profile" />
-                                </div>
-                                <div style={{ flex: 1 }}>
-                                    <label className="username mb-2">{user.username}</label>
-                                    {user.friend == false ? <button className='add-friend' onClick={(e) => {
-                                        e.stopPropagation();
-                                        onHandleAddFriend(index);
-                                    }}>+ Add</button> : <button className='added-friend' onClick={() => { }}>Added</button>}
-                                    <table className="social-table w-100">
-                                        <thead>
-                                            <tr>
-                                                <th>Deadlift</th>
-                                                <th>Squat</th>
-                                                <th>OHP</th>
-                                                <th>Bench</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>{user.deadlift}</td>
-                                                <td>{user.squat}</td>
-                                                <td>{user.ohp}</td>
-                                                <td>{user.bench}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                    users.map((user, index) => (
+                        <div key={index} onClick={(e) => {
+                            e.stopPropagation();
+                            onHandleCardClick(user.id);
+                        }} className="card-wrapper mb-3">
+                            <div className="card" style={{ background: 'rgba(0,0,0,0.6)', color: 'white' }}>
+                                <div className="card-body d-flex align-items-center">
+                                    <div className="profile-img-container me-3">
+                                        <img src="/profile.png" alt="profile" />
+                                    </div>
+                                    <div style={{ flex: 1 }}>
+                                        <label className="username mb-2">{user.username}</label>
+                                        {user.friend == false ? <button className='add-friend' onClick={(e) => {
+                                            e.stopPropagation();
+                                            onHandleAddFriend(index);
+                                        }}>+ Add</button> : <button className='added-friend' onClick={() => { }}>Added</button>}
+                                        <table className="social-table w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>Deadlift</th>
+                                                    <th>Squat</th>
+                                                    <th>OHP</th>
+                                                    <th>Bench</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{user.deadlift}</td>
+                                                    <td>{user.squat}</td>
+                                                    <td>{user.ohp}</td>
+                                                    <td>{user.bench}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div >
-                )) : <p>No users found</p>
+                        </div >
+                    )) : <p>No users found</p>
             }
         </div >
     );

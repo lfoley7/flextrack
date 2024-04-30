@@ -1,4 +1,3 @@
-/* General Resets */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +5,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Main layout styles */
 .challenge-layout {
     padding: 1rem;
     display: flex;
@@ -16,15 +14,30 @@
     justify-content: flex-start;
 }
 
+.challenges-title {
+    font-size: calc(1.375rem + 1.2vw);
+    font-style: italic;
+    color: #FE5C54;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.challenge-text {
+    color: #fa713e;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
 .challenge-header {
     width: 100%;
-    background-color: #FF4500; /* Bright orange to keep it vibrant and visible */
+    background-color: #FF4500;
     color: white;
     padding: 20px;
     text-align: center;
-    font-size: calc(1.375rem + 1.2vw); /* Dynamic size based on the viewport width */
-    font-weight: bold; /* Makes header text bold */
-    margin-bottom: 1rem; /* Adds space below the header */
+    font-size: calc(1.375rem + 1.2vw);
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
 .challenge-list {
@@ -40,40 +53,39 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for 3D effect */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
 }
 
 .challenge-item:hover {
-    background-color: #f7f7f7; /* Light grey background on hover */
+    background-color: #f7f7f7;
 }
 
 .challenge-name {
     color: #333;
     font-weight: bold;
-    text-align: left; /* Aligns text to the left */
-    margin-bottom: 0.5rem; /* Space below each challenge name */
+    text-align: left;
+    margin-bottom: 0.5rem;
 }
 
 .new-challenge-btn {
-    background-color: #FF4500; /* Matching the header background */
+    background-color: #FF4500;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
-    width: 90%; /* Takes most of the container width */
+    width: 90%;
     text-align: center;
-    margin-top: 20px; /* Space from the last element */
-    font-size: 1rem; /* Reasonable font size for readability */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* More pronounced shadow for better visibility */
+    margin-top: 20px;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .new-challenge-btn:hover {
-    background-color: #e69500; /* Darker shade of orange for hover state */
+    background-color: #e69500;
 }
 
-/* Styling for the bottom navigation bar, if included */
 .bottom-nav {
     background-color: #FF4500;
     color: white;
@@ -90,19 +102,18 @@
     font-size: 20px;
 }
 
-/* Exercise details styling if used */
 .exercise-detail {
     background-color: #fff;
     border-radius: 8px;
     margin: 10px 0;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .exercise-name {
     font-size: calc(0.8rem + 1.2vw);
-    color: #FA713E; /* A shade of orange that stands out */
+    color: #FA713E;
     font-weight: bold;
     margin-top: 0;
-    text-align: left; /* Consistent text alignment for exercise names */
+    text-align: left;
 }

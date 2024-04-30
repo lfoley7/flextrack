@@ -1,249 +1,131 @@
 import { useEffect, useState } from "react";
 import * as React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import './Challenges.css';
 
-/* function Challenges(props) {
-    const navigate = useNavigate();
-
-    return (
-        <div className="display-container">
-            <div className="top-message">
-                Welcome to the Challenges Page!
-            </div>
-            <a className="orange-link" onClick={() => { navigate("/dashboard"); }}>Dashboard Page!</a>
-            <a className="orange-link" onClick={() => { navigate("/createworkoutplan"); }}>Create Workout Page!</a>
-            <a className="orange-link" onClick={() => { navigate("/viewworkout"); }}>View Workout Page!</a>
-            <a className="orange-link" onClick={() => { navigate("/social"); }}>Social Page!</a>
-            <a className="orange-link" onClick={() => { navigate("/challenges"); }}>Challenges Page!</a>
-            <a className="orange-link" onClick={() => { navigate("/settings"); }}>Settings Page!</a>
-        </div>
-    )
-};
-
-export default Challenges; */
-/*
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import './ChallengeDetail.css'; // Ensure this is the correct path to your CSS file
-*/
-
-/*function Challenges() {
-    const navigate = useNavigate();
-
-    // You would fetch the actual challenges from your state or props
-    const challenges = [
-        { id: 1, name: 'MIKEYLIFTS204', description: 'Deadlift, Bench Pre...' },
-        { id: 2, name: 'JAGRUTIGAINZ333', description: 'Squat, Incline Dumbe...' },
-        // ... other challenges
-    ];
-
-    return (
-        <div className="challenge-layout">
-            <aside className="sidebar">
-                <h1>Challenges Home Page</h1>
-                <div className="challenge-list">
-                    {challenges.map(challenge => (
-                        <div key={challenge.id} className="challenge-item" onClick={() => navigate('/challenge/${challenge.id}')}>
-                            <div className="challenge-title">{challenge.name}</div>
-                            <div className="challenge-description">{challenge.description}</div>
-                        </div>
-                    ))}
-                </div>
-                <button className="new-challenge-btn" onClick={() => navigate('/new-challenge')}>New Challenge</button>
-            </aside>
-
-            <footer className="bottom-nav">
-                <span onClick={() => navigate('/home')}>H</span>
-                <span onClick={() => navigate('/challenges')}>CHL</span>
-                <span onClick={() => navigate('/friends')}>FRN</span>
-                <span onClick={() => navigate('/settings')}>SET</span>
-            </footer>
-        </div>
-    );
-}
-
-export default Challenges;
-*/
-
-/*
-
 function Challenges() {
-    const navigate = useNavigate();
-
-    const challenges = [
-        { id: 1, name: 'MIKEYLIFTS204', description: 'Deadlift, Bench Pre...' },
-        { id: 2, name: 'JAGRUTIGAINZ333', description: 'Squat, Incline Dumbe...' },
-        // ... other challenges
-    ];
-
-    const navigateToChallenge = (id) => {
-        navigate('/challenge/${id}');
-    };
-
-    const navigateToNewChallenge = () => {
-        navigate('/new-challenge');
-    };
-
-    return (
-        <div className="challenge-layout">
-            <header className="challenge-header">
-                <h1>Challenges Home Page</h1>
-            </header>
-            
-            <div className="challenge-list">
-                {challenges.map(challenge => (
-                    <div key={challenge.id} className="challenge-item" onClick={() => navigateToChallenge(challenge.id)}>
-                        <div className="challenge-name">{challenge.name}</div>
-                        <div className="challenge-description">{challenge.description}</div>
-                    </div>
-                ))}
-                <button className="new-challenge-btn" onClick={navigateToNewChallenge}>New Challenge</button>
-            </div>
-
-            <footer className="bottom-nav">
-                <span onClick={() => navigate('/home')}>H</span>
-                <span onClick={() => navigate('/challenges')}>CHL</span>
-                <span onClick={() => navigate('/friends')}>FRN</span>
-                <span onClick={() => navigate('/settings')}>SET</span>
-            </footer>
-        </div>
-    );
-}
-
-export default Challenges;
-*/
-
-/*
-function Challenges() {
-    const navigate = useNavigate();
-
-    const [selectedChallenge, setSelectedChallenge] = useState(null);
-
-    const challenges = [
-        {
-            id: 1,
-            name: 'MIKEYLIFTS204',
-            exercises: [
-                { name: 'Deadlift', sets: ['5 reps', '3 reps', '1 rep', '3 reps'] },
-                { name: 'Bench Press', sets: ['8 reps', '4 reps', '2 reps', '1 rep'] },
-            ]
-        },
-        // Assume similar structure for other challenges...
-    ];
-
-    const selectChallenge = (challengeId) => {
-        const challenge = challenges.find(c => c.id === challengeId);
-        setSelectedChallenge(challenge);
-    };
-
-    const createNewChallenge = () => {
-        setSelectedChallenge({
-            id: challenges.length + 1,
-            name: '',
-            exercises: []
-        });
-        // Optionally navigate to a different route if necessary
-        // navigate('/new-challenge');
-    };
-
-    return (
-        <div className="challenge-layout">
-            <header className="challenge-header">
-                <h1>{selectedChallenge ? '${selectedChallenge.name} CHALLENGES YOU!' :'Challenges Home Page'}</h1>
-            </header>
-
-            <div className="challenge-list">
-                {!selectedChallenge &&
-                    challenges.map((challenge) => (
-                        <div key={challenge.id} className="challenge-item" onClick={() => selectChallenge(challenge.id)}>
-                            <div className="challenge-name">{challenge.name}</div>
-                        </div>
-                    ))
-                }
-                {!selectedChallenge && <button className="new-challenge-btn" onClick={createNewChallenge}>New Challenge</button>}
-
-                {selectedChallenge && selectedChallenge.exercises.map((exercise, index) => (
-                    <div key={index} className="exercise-detail">
-                        <h2 className="exercise-name">{exercise.name}</h2>
-                        {exercise.sets.map((set, index) => (
-                            <div key={index} className="set-detail">{set}</div>
-                        ))}
-                        <button className="max-button">Your Max</button>
-                    </div>
-                ))}
-            </div>
-
-            <footer className="bottom-nav">
-                <span onClick={() => navigate('/home')}>H</span>
-                <span onClick={() => navigate('/challenges')}>CHL</span>
-                <span onClick={() => navigate('/friends')}>FRN</span>
-                <span onClick={() => navigate('/settings')}>SET</span>
-            </footer>
-        </div>
-    );
-}
-
-*/
-
-
-function Challenges() {
+    const [workout, setWorkout] = useState();
+    const [maxWeights, setMaxWeights] = useState({});
     const navigate = useNavigate();
     const [selectedChallenge, setSelectedChallenge] = useState(null);
 
     const challenges = [
         {
             id: 1,
-            name: 'MIKEYLIFTS204',
+            name: '2 Plate Bench-Off',
             exercises: [
-                { name: 'Deadlift', sets: ['5 reps', '3 reps', '1 rep', '3 reps'] },
-                { name: 'Bench Press', sets: ['8 reps', '4 reps', '2 reps', '1 rep'] },
+                {
+                    name: 'Deadlift',
+                    sets: ['5 reps', '3 reps', '1 rep', '3 reps'],
+                    weight: ['250', '275', '300', '280']
+                },
+                {
+                    name: 'Bench Press',
+                    sets: ['8 reps', '4 reps', '2 reps', '1 rep'],
+                    weight: ['150', '175', '200', '180']
+                },
             ]
         },
-        // Additional challenges can be similarly structured
         {
             id: 2,
-            name: 'JAGRUTIGAINZ333',
+            name: 'CBUM Special Challenge',
             exercises: [
-                { name: 'Deadlift', sets: ['3 reps', '5 reps', '1 rep', '3 reps'] },
-                { name: 'Squats', sets: ['8 reps', '4 reps', '2 reps', '1 rep'] },
+                { name: 'Deadlift', sets: ['3 reps', '5 reps', '1 rep', '3 reps'], weight: ['320', '300', '350', '320'] },
+                { name: 'Squats', sets: ['8 reps', '4 reps', '2 reps', '1 rep'], weight: ['200', '240', '260', '280'] },
             ]
         }
     ];
 
+    const toggleCompletion = (exerciseIndex, setIndex) => {
+        const newWorkout = { ...workout };
+        newWorkout.exercises[exerciseIndex].sets[setIndex].completed = !newWorkout.exercises[exerciseIndex].sets[setIndex].completed;
+        setWorkout(newWorkout);
+    };
+
     const selectChallenge = (challengeId) => {
         const challenge = challenges.find(c => c.id === challengeId);
+        const initializedExercises = challenge.exercises.map(exercise => ({
+            ...exercise,
+            sets: exercise.sets.map(set => ({
+                reps: set,
+                weight: exercise.weight[exercise.sets.indexOf(set)],
+                completed: false
+            }))
+        }));
+
         setSelectedChallenge(challenge);
+        setWorkout({ ...challenge, exercises: initializedExercises });
     };
 
     const createNewChallenge = () => {
-        navigate('/friends'); // Redirects to the Friends page for selecting friends to challenge
+        navigate('/createchallenge');
+    };
+
+    const enterWeight = (exerciseIndex) => {
+        const weight = prompt("Enter your max weight for this exercise (lbs):");
+        if (weight) {
+            setMaxWeights(prev => ({ ...prev, [exerciseIndex]: weight }));
+        }
     };
 
     return (
-        <div className="challenge-layout">
-            <header className="challenge-header">
-                <h1>{selectedChallenge ? `${selectedChallenge.name.toUpperCase()} CHALLENGES YOU!` : 'Challenges Home Page'}</h1>
+        <div className="display-container">
+            <header className="challenges-title">
+                <div>{selectedChallenge ? `${selectedChallenge.name.toUpperCase()}!` : 'My Challenges'}</div>
             </header>
             <div className="challenge-list">
                 {!selectedChallenge &&
                     challenges.map((challenge) => (
-                        <div key={challenge.id} className="challenge-item" onClick={() => selectChallenge(challenge.id)}>
-                            <div className="challenge-name">{challenge.name}</div>
+                        <div key={challenge.id} className="exercise-wrapper" style={{ width: "inherit" }} onClick={() => selectChallenge(challenge.id)}>
+                            <div className="exercise-content darken" style={{ cursor: 'pointer' }}>
+                                <div className="challenge-text">
+                                    {challenge.name}
+                                </div>
+                            </div>
                         </div>
                     ))
                 }
-                {!selectedChallenge && <button className="new-challenge-btn" onClick={() => { navigate('/social') }}>New Challenge</button>}
-                {selectedChallenge && selectedChallenge.exercises.map((exercise, index) => (
-                    <div key={index} className="exercise-detail">
-                        <h2 className="exercise-name">{exercise.name}</h2>
-                        {exercise.sets.map((set, index) => (
-                            <div key={index} className="set-detail">{set}</div>
-                        ))}
-                        <button className="max-button">Record Your Max</button>
+                {!selectedChallenge && <button className="newDay darken" style={{ marginLeft: 'auto', marginRight: 'auto' }} onClick={() => { navigate('/createchallenge') }}>New Challenge</button>}
+                {selectedChallenge && workout.exercises.map((exercise, index) => (
+                    <div key={index} className="exercise-wrapper">
+                        <div className="exercise-content">
+                            <div className="exercise-name">{exercise.name}</div>
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>Set</th>
+                                        <th>Reps</th>
+                                        <th>Weight</th>
+                                        <th>Completed</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {exercise.sets.map((set, setIndex) => (
+                                        <tr key={setIndex}>
+                                            <td>Set {setIndex + 1}</td>
+                                            <td>{set.reps}</td>
+                                            <td>{set.weight + " lbs"}</td>
+                                            <td>
+                                                <button className="completion-button" onClick={() => toggleCompletion(index, setIndex)}>
+                                                    <FontAwesomeIcon icon={faCheckCircle} className={set.completed ? "checked" : "unchecked"} />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <button className="view-posts-button" onClick={() => enterWeight(index)} style={{ width: 'inherit', padding: '0 1rem' }}>
+                                {maxWeights[index] ? `${maxWeights[index]} lbs` : 'Record Your Max'}
+                            </button>
+                        </div>
                     </div>
                 ))}
+                <div style={{ display: "flex", width: "40rem" }}>
+                    {selectedChallenge ? <button className="login" style={{ marginLeft: "auto", marginRight: 'auto' }} onClick={() => { setSelectedChallenge(null); }}>Submit</button> : null}
+                </div>
             </div>
         </div>
     );
