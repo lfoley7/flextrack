@@ -28,12 +28,13 @@ function Challenges() {
         getChallenges().then((res) => {
             console.log(res.data)
             const newChallenges = res.data.challenges;
+            console.log(res.data.exercises)
             newChallenges.map((challenge) => {
                 
 
-                const filteredExercises = res.data.exercises.filter((exercise) => {
-                    return exercise.id = challenge.id
-                })
+                const filteredExercises = res.data.exercises.filter((exercise) => 
+                    exercise.id == challenge.id
+                )
 
                 challenge.exercises = filteredExercises[0].exercises;
             })
