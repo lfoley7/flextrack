@@ -25,4 +25,15 @@ export class ChallengeSet {
 
     @OneToMany(() => ChallengeLog, (log: ChallengeLog) => log.set, { cascade: [Cascade.ALL] })
     logs = new Collection<ChallengeLog>(this);
+
+    public constructor(set_number: number, exercise: Exercise, target_weight: number, target_reps: number) {
+        this.set_number = set_number;
+        this.exercise = exercise;
+        this.target_weight = target_weight;
+        this.target_reps = target_reps;
+    }
+
+    public addChallenge(challenge: Challenge) {
+        this.challenge = challenge;
+    } 
 }

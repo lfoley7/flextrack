@@ -4,11 +4,13 @@ import Select from 'react-select';
 import axios from "axios";
 import { Dropdown } from 'react-bootstrap';
 import Exercise from '../pagecreation/Exercise';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import './CreateChallenge.css';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://localhost:5000/api/workout'
+    baseURL: 'http://localhost:5000/api/challenge'
 });
 
 const userInstance = axios.create({
@@ -16,12 +18,37 @@ const userInstance = axios.create({
     baseURL: 'http://localhost:5000/api/user'
 });
 
+const postChallenge = async (users, exercises, name) => {
+    console.log(exercises)
+    let formattedSets = []
+    exercises.map((exercise) => {
+      exercise.sets.forEach(set => {
+        let formattedSet = {
+          "set_number": set.id,
+          "exercise_id": exercise.id,
+          "target_weight": set.weight,
+          "target_reps": set.reps
+        }
+
+        formattedSets.push(formattedSet);
+      });
+    })
+    console.log(formattedSets)
+    const user_ids = users.map((user) => {
+        return user.value
+    })
+    const body = {
+        users: user_ids,
+        sets: formattedSets,
+        name: name
+    }
+    await instance.post("/create",body);
+};
+
 function CreateChallenge() {
     const [title, setTitle] = useState('My Challenge');
     const [isEditing, setIsEditing] = useState(false);
     const [exercises, setExercises] = useState([]);
-    const [selectedDay, setSelectedDay] = useState('');
-    const [selectedType, setSelectedType] = useState('');
     const [users, setUsers] = useState([]);
     const [selectedUsers, setSelectedUsers] = useState([]);
 
@@ -33,14 +60,20 @@ function CreateChallenge() {
 
     const fetchUsers = async () => {
         try {
-            const response = await userInstance.get("/list");
-            setUsers(response.data.users);
+            const response = await userInstance.get("/get-all-friends");
+            console.log(response.data)
+            const options = response.data.map((user) => {
+                return { value: user.id, label: user.profile.username }
+            })
+            console.log(options)
+            setUsers(options);
         } catch (error) {
             console.error('Error fetching users:', error);
         }
     };
 
     const handleSubmit = async () => {
+        await postChallenge(selectedUsers, exercises, title);
         navigate("/challenges");
     };
 
@@ -99,13 +132,6 @@ function CreateChallenge() {
                     classNamePrefix="select"
                     placeholder="Select Users"
                 />
-                <select className="form-select me-2" value={selectedDay} onChange={e => setSelectedDay(e.target.value)} style={{ maxWidth: 200, cursor: 'pointer' }}>
-                    <option value="">Select a Day</option>
-                    {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
-                        <option key={day} value={day}>{day}</option>
-                    ))}
-                </select>
-                <input type="text" className="form-control me-2" value={selectedType} onChange={e => setSelectedType(e.target.value)} placeholder="Type" style={{ maxWidth: 200 }} />
             </div>
 
             {exercises.map((exercise, index) => (

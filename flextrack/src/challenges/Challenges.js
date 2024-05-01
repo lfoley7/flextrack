@@ -1,43 +1,54 @@
 import { useEffect, useState } from "react";
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faAlignCenter, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import './Challenges.css';
+import Loading from "../loading/Loading";
+
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: 'http://localhost:5000/api/challenge'
+});
+
+const getChallenges = async () => {
+    return await instance.get("get-all");
+}
 
 function Challenges() {
     const [workout, setWorkout] = useState();
     const [maxWeights, setMaxWeights] = useState({});
+    const [challenges, setChallenges] = useState();
     const navigate = useNavigate();
     const [selectedChallenge, setSelectedChallenge] = useState(null);
 
-    const challenges = [
-        {
-            id: 1,
-            name: '2 Plate Bench-Off',
-            exercises: [
-                {
-                    name: 'Deadlift',
-                    sets: ['5 reps', '3 reps', '1 rep', '3 reps'],
-                    weight: ['250', '275', '300', '280']
-                },
-                {
-                    name: 'Bench Press',
-                    sets: ['8 reps', '4 reps', '2 reps', '1 rep'],
-                    weight: ['150', '175', '200', '180']
-                },
-            ]
-        },
-        {
-            id: 2,
-            name: 'CBUM Special Challenge',
-            exercises: [
-                { name: 'Deadlift', sets: ['3 reps', '5 reps', '1 rep', '3 reps'], weight: ['320', '300', '350', '320'] },
-                { name: 'Squats', sets: ['8 reps', '4 reps', '2 reps', '1 rep'], weight: ['200', '240', '260', '280'] },
-            ]
-        }
-    ];
+    
+    useEffect(() => {
+        getChallenges().then((res) => {
+            console.log(res.data)
+            const newChallenges = res.data.challenges;
+            newChallenges.map((challenge) => {
+                
+
+                const filteredExercises = res.data.exercises.filter((exercise) => {
+                    return exercise.id = challenge.id
+                })
+
+                challenge.exercises = filteredExercises[0].exercises;
+            })
+            setChallenges(res.data.challenges);
+            console.log(res.data.challenges)
+        })
+    }, []);
+
+    if (challenges === undefined) {
+        return (
+            <>
+                <Loading margin={0} minHeight={"1000px"} />
+            </>
+        );
+    }
 
     const toggleCompletion = (exerciseIndex, setIndex) => {
         const newWorkout = { ...workout };
@@ -47,14 +58,8 @@ function Challenges() {
 
     const selectChallenge = (challengeId) => {
         const challenge = challenges.find(c => c.id === challengeId);
-        const initializedExercises = challenge.exercises.map(exercise => ({
-            ...exercise,
-            sets: exercise.sets.map(set => ({
-                reps: set,
-                weight: exercise.weight[exercise.sets.indexOf(set)],
-                completed: false
-            }))
-        }));
+        console.log(challenge.exercises)
+        const initializedExercises = challenge.exercises;
 
         setSelectedChallenge(challenge);
         setWorkout({ ...challenge, exercises: initializedExercises });
@@ -77,7 +82,7 @@ function Challenges() {
                 <div>{selectedChallenge ? `${selectedChallenge.name.toUpperCase()}!` : 'My Challenges'}</div>
             </header>
             <div className="challenge-list">
-                {!selectedChallenge &&
+                {challenges.length > 0 ? !selectedChallenge &&
                     challenges.map((challenge) => (
                         <div key={challenge.id} className="exercise-wrapper" style={{ width: "inherit" }} onClick={() => selectChallenge(challenge.id)}>
                             <div className="exercise-content darken" style={{ cursor: 'pointer' }}>
@@ -87,7 +92,7 @@ function Challenges() {
                             </div>
                         </div>
                     ))
-                }
+                    : <p style={{textAlign: 'center'}}>No challenges found</p>}
                 {!selectedChallenge && <button className="newDay darken" style={{ marginLeft: 'auto', marginRight: 'auto' }} onClick={() => { navigate('/createchallenge') }}>New Challenge</button>}
                 {selectedChallenge && workout.exercises.map((exercise, index) => (
                     <div key={index} className="exercise-wrapper">

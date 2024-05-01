@@ -10,6 +10,7 @@ import { registerExerciseRoutes } from './routes/exercises.js';
 import { registerWorkoutRoutes } from './routes/workout.js';
 import { registerProfileRoutes } from './routes/profiles.js';
 import { registerPostRoutes } from './routes/posts.js';
+import { registerChallengeRoutes } from './routes/challenge.js';
 
 export async function bootstrap(port = 5000) {
   const db = await initORM();
@@ -68,12 +69,14 @@ export async function bootstrap(port = 5000) {
   const workoutRouter = await registerWorkoutRoutes(express.Router())
   const profileRouter = await registerProfileRoutes(express.Router())
   const postRouter = await registerPostRoutes(express.Router())
+  const challengeRouter = await registerChallengeRoutes(express.Router())
   
   router.use('/user',userRouter);
   router.use('/exercise',exerciseRouter);
   router.use('/workout',workoutRouter);
   router.use('/profile',profileRouter);
   router.use('/post',postRouter)
+  router.use('/challenge',challengeRouter)
 
   app.use("/api", router)
 

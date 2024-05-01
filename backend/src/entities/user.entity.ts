@@ -31,7 +31,7 @@ export class User {
     friends = new Collection<User>(this);
 
     @OneToMany(() => Challenge, challenge => challenge.owner)
-    challenges = new Collection<Post>(this);
+    challenges = new Collection<Challenge>(this);
 
     @ManyToMany(() => Challenge, challenge => challenge.participants, { owner: true })
     participating_challenges = new Collection<Challenge>(this);

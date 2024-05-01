@@ -110,5 +110,31 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
     }
   });
 
+  router.get("/get-all-friends", async (req, res) => {
+    let userId = "";
+    const errorMsg = 'Failed to get users'
+
+    if(req.query.id){
+      userId = (req.query.id).toString();
+    }else if(req.session.userId){
+      userId = req.session.userId;
+    }else{
+      res.status(500).json({ error: errorMsg });
+    }
+    
+    const user = await db.user.findOne({id: +userId},{ populate: ['friends.profile.username']});
+    if(user == null) {
+      console.error(errorMsg);
+      res.status(500).json({ error: errorMsg });
+    }else{
+      try {
+        res.status(200).json(user.friends);
+      } catch (error) {
+          console.error(errorMsg+':', error);
+          res.status(500).json({ error: errorMsg });
+      }
+    }
+  });
+
   return router;
 }

@@ -40,4 +40,21 @@ export class Challenge {
 
     @OneToMany(() => ChallengeInvite, invite => invite.challenge)
     invites = new Collection<ChallengeInvite>(this);
+
+    constructor (sets: ChallengeSet[], name: string, owner: User) {
+        this.addSets(sets);
+        this.name = name;
+        this.owner = owner;
+        this.description = '';
+        this.start = new Date();
+        this.end = new Date();
+        this.status = 'In Progress'
+    }
+
+    private addSets(sets: ChallengeSet[]) {
+        sets.forEach((set) => {
+            this.sets.add(set)
+            set.addChallenge(this);
+        });
+    } 
 }
