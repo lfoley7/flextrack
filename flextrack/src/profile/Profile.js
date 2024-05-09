@@ -22,7 +22,6 @@ function Profile(props) {
     useEffect(() => {
         getProfile(userId)
         .then((res) => {
-            console.log(res.data)
             setUser(res.data);
         })
         .catch((err) => {

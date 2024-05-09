@@ -7,7 +7,7 @@
 }
 
 .posts-modal-header {
-    background-color: #F58528;
+    background-image: linear-gradient(to right, #F58528, #f9703e);
     color: white;
     font-style: italic;
 }

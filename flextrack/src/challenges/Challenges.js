@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignCenter, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { Modal, Button, Form } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import './Challenges.css';
@@ -17,29 +18,25 @@ const getChallenges = async () => {
 }
 
 function Challenges() {
+    const [challenges, setChallenges] = useState([]);
+    const [selectedChallenge, setSelectedChallenge] = useState(null);
     const [workout, setWorkout] = useState();
     const [maxWeights, setMaxWeights] = useState({});
-    const [challenges, setChallenges] = useState();
+    const [showWeightModal, setShowWeightModal] = useState(false);
+    const [currentWeight, setCurrentWeight] = useState('');
+    const [currentExerciseIndex, setCurrentExerciseIndex] = useState(null);
     const navigate = useNavigate();
-    const [selectedChallenge, setSelectedChallenge] = useState(null);
 
-    
     useEffect(() => {
         getChallenges().then((res) => {
-            console.log(res.data)
             const newChallenges = res.data.challenges;
-            console.log(res.data.exercises)
             newChallenges.map((challenge) => {
-                
-
-                const filteredExercises = res.data.exercises.filter((exercise) => 
+                const filteredExercises = res.data.exercises.filter((exercise) =>
                     exercise.id == challenge.id
                 )
-
                 challenge.exercises = filteredExercises[0].exercises;
             })
             setChallenges(res.data.challenges);
-            console.log(res.data.challenges)
         })
     }, []);
 
@@ -59,9 +56,7 @@ function Challenges() {
 
     const selectChallenge = (challengeId) => {
         const challenge = challenges.find(c => c.id === challengeId);
-        console.log(challenge.exercises)
         const initializedExercises = challenge.exercises;
-
         setSelectedChallenge(challenge);
         setWorkout({ ...challenge, exercises: initializedExercises });
     };
@@ -74,6 +69,23 @@ function Challenges() {
         const weight = prompt("Enter your max weight for this exercise (lbs):");
         if (weight) {
             setMaxWeights(prev => ({ ...prev, [exerciseIndex]: weight }));
+        }
+    };
+
+    const handleEnterWeight = (index) => {
+        setCurrentExerciseIndex(index);
+        setCurrentWeight(maxWeights[index] || '');
+        setShowWeightModal(true);
+    };
+
+    const handleWeightChange = (e) => {
+        setCurrentWeight(e.target.value);
+    };
+
+    const saveWeight = () => {
+        if (currentWeight) {
+            setMaxWeights(prev => ({ ...prev, [currentExerciseIndex]: currentWeight }));
+            setShowWeightModal(false);
         }
     };
 
@@ -93,7 +105,7 @@ function Challenges() {
                             </div>
                         </div>
                     ))
-                    : <p style={{textAlign: 'center'}}>No challenges found</p>}
+                    : <p style={{ textAlign: 'center' }}>No challenges found</p>}
                 {!selectedChallenge && <button className="newDay darken" style={{ marginLeft: 'auto', marginRight: 'auto' }} onClick={() => { navigate('/createchallenge') }}>New Challenge</button>}
                 {selectedChallenge && workout.exercises.map((exercise, index) => (
                     <div key={index} className="exercise-wrapper">
@@ -123,7 +135,7 @@ function Challenges() {
                                     ))}
                                 </tbody>
                             </table>
-                            <button className="view-posts-button" onClick={() => enterWeight(index)} style={{ width: 'inherit', padding: '0 1rem' }}>
+                            <button className="view-posts-button" onClick={() => handleEnterWeight(index)} style={{ width: 'inherit', padding: '0 1rem' }}>
                                 {maxWeights[index] ? `${maxWeights[index]} lbs` : 'Record Your Max'}
                             </button>
                         </div>
@@ -132,6 +144,23 @@ function Challenges() {
                 <div style={{ display: "flex", width: "40rem" }}>
                     {selectedChallenge ? <button className="login" style={{ marginLeft: "auto", marginRight: 'auto' }} onClick={() => { setSelectedChallenge(null); }}>Submit</button> : null}
                 </div>
+                <Modal className="posts-modal" show={showWeightModal} onHide={() => setShowWeightModal(false)}>
+                    <Modal.Header className="posts-modal-header" closeButton>
+                        <Modal.Title className="posts-modal-text">Enter Max Weight</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group>
+                                <Form.Label>Weight (lbs)</Form.Label>
+                                <Form.Control type="text" value={currentWeight} onChange={handleWeightChange} />
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setShowWeightModal(false)}>Close</Button>
+                        <Button className="posts-modal-button darken" onClick={saveWeight}>Save</Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         </div>
     );

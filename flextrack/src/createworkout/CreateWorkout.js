@@ -16,11 +16,11 @@ const exerciseInstance = axios.create({
 });
 
 const postWorkout = async (workout) => {
-  return await instance.post("create",workout);
+  return await instance.post("create", workout);
 }
 
 const addSessionsWorkout = async (workout) => {
-  return await instance.post("add-sessions",workout);
+  return await instance.post("add-sessions", workout);
 }
 
 function CreateWorkout() {
@@ -37,7 +37,6 @@ function CreateWorkout() {
   const defaultSet = [{ id: 1, reps: 1, weight: 10 }];
 
   const createWorkout = async (name, day_of_week, workout_type, exercises) => {
-    console.log(exercises)
     let formattedSets = []
     exercises.map((exercise) => {
       exercise.sets.forEach(set => {
@@ -51,33 +50,27 @@ function CreateWorkout() {
         formattedSets.push(formattedSet);
       });
     })
-    console.log(formattedSets)
-    let body = 
-    { 
-      "name": name, 
+    let body =
+    {
+      "name": name,
       "sessions": [
         {
           "day_of_week": day_of_week,
           "workout_type": workout_type,
           "sets": formattedSets
         }
-      ] 
+      ]
     };
 
-    console.log(body)
-
-    postWorkout({name: body.name})
-    .then((e) => {
-      body.plan_id = e.data.plan.id
-      console.log(e)
-      addSessionsWorkout(body).then((e) => {
-        console.log(e.data)
-        navigate("/dashboard");
+    postWorkout({ name: body.name })
+      .then((e) => {
+        body.plan_id = e.data.plan.id
+        addSessionsWorkout(body).then((e) => {
+          navigate("/createWorkoutPlan");
+        });
+      }).catch((error) => {
+        window.alert(error.response.data.error);
       });
-    }).catch((error) => {
-      window.alert(error.response.data.error);
-      console.log(error);
-    });
   }
 
   const handleSubmit = async () => {
@@ -103,7 +96,6 @@ function CreateWorkout() {
       }
       return exercise;
     });
-    console.log(updatedExercises)
     setExercises(updatedExercises);
   };
 
@@ -117,30 +109,30 @@ function CreateWorkout() {
     setExercises(updatedExercises);
   };
 
-const handleTitleChange = (value) => {
+  const handleTitleChange = (value) => {
     setTitle(value);
-};
+  };
 
-const handleBlur = () => {
+  const handleBlur = () => {
     setIsEditing(false);
-};
+  };
 
   return (
     <div className="display-container">
       {isEditing ? (
         <input
-            type="text"
-            value={title}
-            onChange={(e) => handleTitleChange(e.target.value)}
-            onBlur={() => handleBlur()}
-            className="title-input"
-            style={{ marginTop: ".63rem" }}
+          type="text"
+          value={title}
+          onChange={(e) => handleTitleChange(e.target.value)}
+          onBlur={() => handleBlur()}
+          className="title-input"
+          style={{ marginTop: ".63rem" }}
         />
-    ) : (
+      ) : (
         <h1 className="workout-title" style={{ marginTop: "1rem" }} onClick={() => toggleEditing()}>
-            {title}
+          {title}
         </h1>
-    )}
+      )}
 
       <div className="d-flex justify-content-start mb-3">
         <select className="form-select me-2" value={selectedDay} onChange={e => setSelectedDay(e.target.value)} style={{ maxWidth: 200, cursor: 'pointer' }}>

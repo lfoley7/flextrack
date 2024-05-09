@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
 import axios from "axios";
@@ -15,25 +18,23 @@ const getProfile = async () => {
 
 function Navbar(props) {
     const navigate = useNavigate();
-    const location = useLocation();  // Get the current location
+    const location = useLocation();
 
-    // Function to determine if the link is active
     const isActive = (route) => {
         return location.pathname === route ? "nav-link active" : "nav-link";
     };
 
-    const [user, setUser] = useState({username: "Username"});
+    const [user, setUser] = useState({ username: "Username" });
 
     useEffect(() => {
         getProfile()
-        .then((res) => {
-            console.log(res.data)
-            setUser(res.data);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-      }, []);
+            .then((res) => {
+                setUser(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "rgba(42,87,131,1)" }}>
@@ -58,8 +59,15 @@ function Navbar(props) {
                         </li>
                     </ul>
                     <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <a className={isActive('/settings')} onClick={() => navigate('/settings')} style={{ cursor: 'pointer' }}>{user.username}</a>
+                        <li className="nav-item dropdown">
+                            <a className="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ cursor: 'pointer', textDecoration: "none", color: "white" }}>
+                                {user.username}
+                            </a>
+                            <ul className="dropdown-menu dropdown-menu-end">
+                                <li><a className="dropdown-item nav-darken" style={{ cursor: "pointer", fontWeight: "500", color: "#f77a33", backgroundColor: "white" }} onClick={() => { navigate("/settings") }}><FontAwesomeIcon icon={faGear} />&nbsp;Settings</a></li>
+                                <li><a className="dropdown-item nav-darken" href="https://github.com/cscopetski/CS542-Project" target="_blank" rel="noopener noreferrer" style={{ fontWeight: "500", color: "#f77a33", backgroundColor: "white" }}><FontAwesomeIcon icon={faGithub} />&nbsp;View the Repo</a></li>
+                                <li><a className="dropdown-item nav-darken" style={{ cursor: "pointer", fontWeight: "500", color: "#f77a33", backgroundColor: "white" }} onClick={() => { navigate("/login") }}><FontAwesomeIcon icon={faSignOut} />&nbsp;Sign Out</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

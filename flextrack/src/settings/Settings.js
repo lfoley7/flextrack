@@ -3,6 +3,15 @@ import './Settings.css';
 import Loading from '../loading/Loading';
 import axios from "axios";
 
+const workoutInstance = axios.create({
+    withCredentials: true,
+    baseURL: 'http://localhost:5000/api/workout'
+});
+
+const getWorkoutPlans = async () => {
+    return await workoutInstance.get("get-all");
+}
+
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'http://localhost:5000/api/profile'
@@ -10,8 +19,13 @@ const instance = axios.create({
 
 function Settings(props) {
     const [user, setUser] = useState();
+    const [workoutPlans, setWorkoutPlans] = useState([]);
+    const [editValues, setEditValues] = useState({});
     const [isEditing, setIsEditing] = useState({
         username: false,
+        height: false,
+        weight: false,
+        description: false,
         deadlift: false,
         squat: false,
         ohp: false,
@@ -20,67 +34,87 @@ function Settings(props) {
 
     // Function to handle field changes
     const handleChange = (field, value) => {
-        setUser(prev => ({ ...prev, [field]: value }));
+        setEditValues(prev => ({ ...prev, [field]: value }));
     };
 
     // Function to toggle editing state
     const toggleEdit = (field) => {
-        setIsEditing(prev => ({ ...prev, [field]: !prev[field] }));
+        setIsEditing(prev => ({
+            ...prev,
+            [field]: !prev[field]
+        }));
+        if (!isEditing[field]) {
+            setEditValues(prev => ({ ...prev, [field]: '' }));
+        } else {
+            const newValue = editValues[field] !== '' ? editValues[field] : user[field];
+            setUser(prev => ({ ...prev, [field]: newValue }));
+        }
     };
 
     const getProfile = async () => {
         return await instance.get("get");
-    }
+    };
 
-    const updateProfile = async (profile) => {
-        return await instance.post("update", profile);
-    }
+    const updateProfile = async () => {
+        return await instance.post("update", user);
+    };
 
     useEffect(() => {
-        getProfile()
-        .then((res) => {
-            console.log(res.data)
+        getProfile().then((res) => {
             setUser(res.data);
-        })
-        .catch((err) => {
+        }).catch((err) => {
             console.log(err);
         });
-      }, []);
 
-      useEffect(() => {
+        getWorkoutPlans().then((res) => {
+            setWorkoutPlans(res.data);
+        }).catch((err) => {
+            console.error("Error fetching workout plans:", err);
+        });
+    }, []);
+
+    const interpolateColor = (index, total) => {
+        const startColor = [245, 133, 41];
+        const endColor = [254, 92, 84];
+        const step = total > 1 ? index / (total - 1) : 1;
+        return `rgb(${startColor.map((start, i) => Math.round(start + (endColor[i] - start) * step))})`;
+    };
+
+    useEffect(() => {
         updateProfile(user)
-        .then((res) => {
-            console.log(res.data)
-            setUser(res.data);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-      }, [isEditing]);
+            .then((res) => {
+                setUser(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [isEditing]);
 
-    function editableField(field, unit) {
+    function editableField(field, unit = '', isTableField = false, isDescriptionField = false) {
+        const inputClass = isTableField ? "max-weight-input" : "user-info-input";
+        const inputWidth = isTableField ? "inherit" : isDescriptionField ? "10rem" : "2rem";
+
         return isEditing[field] ? (
-            <div className="d-flex align-items-center">
-                <input
-                    type="text"
-                    value={user[field]}
-                    onChange={(e) => handleChange(field, e.target.value)}
-                    onBlur={() => toggleEdit(field)}
-                    className="max-weight-input"
-                    autoFocus
-                />
-            </div>
+            <input
+                type="text"
+                value={editValues[field] || ''}
+                onChange={(e) => handleChange(field, e.target.value)}
+                onBlur={() => toggleEdit(field)}
+                className={inputClass}
+                style={{ width: inputWidth }}
+                autoFocus
+            />
         ) : (
-            <span onClick={() => toggleEdit(field)}>{user[field]} {unit}</span>
+            <span className={inputClass} onClick={() => toggleEdit(field)}>{user[field]} {unit}</span>
         );
     }
-    
-    if(user === undefined) {
+
+    if (user === undefined) {
         return (
             <>
-              <Loading margin={0} minHeight={"1000px"} />
+                <Loading margin={0} minHeight={"1000px"} />
             </>
-          );
+        );
     }
 
     return (
@@ -90,28 +124,28 @@ function Settings(props) {
                     <div className="profile-image-container">
                         <img src="/profile.png" alt="Profile" className="profile-img mb-3" />
                     </div>
-                    {isEditing.username ? (
-                        <input
-                            type="text"
-                            value={user.username}
-                            onChange={(e) => handleChange('username', e.target.value)}
-                            onBlur={() => toggleEdit('username')}
-                            className="username-input"
-                            autoFocus
-                        />
-                    ) : (
-                        <div className="username" onClick={() => toggleEdit('username')}>{user.username}</div>
-                    )}
+                    <div className="username" onClick={() => toggleEdit('username')}>
+                        {isEditing.username ? editableField('username', '', false) : user.username}
+                    </div>
                     <div className="user-stats">
-                        <p><strong>Height:</strong> {editableField('height', 'ft')}</p>
-                        <p><strong>Weight:</strong> {editableField('weight', 'lbs')}</p>
-                        <p className="user-description"><strong>Description:</strong>{editableField('description', '')}</p>
+                        <div className="profile-field">
+                            <strong>Height:&nbsp;</strong>
+                            {editableField('height', isEditing.height ? '' : 'ft', false, false)}
+                        </div>
+                        <div className="profile-field">
+                            <strong>Weight:&nbsp;</strong>
+                            {editableField('weight', isEditing.weight ? '' : 'lbs', false, false)}
+                        </div>
+                        <div className="profile-field">
+                            <strong>Description:&nbsp;</strong>
+                            {editableField('description', '', false, true)}
+                        </div>
                     </div>
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
                     <div className="right-content d-flex flex-column align-items-center">
                         <div className="row mb-3">
-                            <div className="col" style={{ width: '20rem', height: '5rem' }}>
+                            <div className="col" style={{ width: '20rem' }}>
                                 <table className="profile-table">
                                     <thead>
                                         <tr>
@@ -121,8 +155,8 @@ function Settings(props) {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{editableField('deadlift')}</td>
-                                            <td>{editableField('squat')}</td>
+                                            <td>{editableField('deadlift', 'lbs', true, false)}</td>
+                                            <td>{editableField('squat', 'lbs', true, false)}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -139,16 +173,19 @@ function Settings(props) {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{editableField('ohp')}</td>
-                                            <td>{editableField('bench')}</td>
+                                            <td>{editableField('ohp', 'lbs', true, false)}</td>
+                                            <td>{editableField('bench', 'lbs', true, false)}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        {/* <button className="btn btn-primary login" style={{ width: '20rem' }}>Day 1 - Push</button> */}
-                        <button className="btn btn-primary login" style={{ width: '20rem' }}>5 Day Split</button>
-                        {/* Add more routines here! */}
+                        <br />
+                        {workoutPlans.map((plan, index) => (
+                            <div key={plan.id} className="workout-list darken" style={{ backgroundColor: interpolateColor(index, workoutPlans.length) }}>
+                                {plan.name}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

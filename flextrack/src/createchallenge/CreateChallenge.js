@@ -19,7 +19,6 @@ const userInstance = axios.create({
 });
 
 const postChallenge = async (users, exercises, name) => {
-    console.log(exercises)
     let formattedSets = []
     exercises.map((exercise) => {
       exercise.sets.forEach(set => {
@@ -33,7 +32,6 @@ const postChallenge = async (users, exercises, name) => {
         formattedSets.push(formattedSet);
       });
     })
-    console.log(formattedSets)
     const user_ids = users.map((user) => {
         return user.value
     })
@@ -61,11 +59,9 @@ function CreateChallenge() {
     const fetchUsers = async () => {
         try {
             const response = await userInstance.get("/get-all-friends");
-            console.log(response.data)
             const options = response.data.map((user) => {
                 return { value: user.id, label: user.profile.username }
             })
-            console.log(options)
             setUsers(options);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -96,7 +92,6 @@ function CreateChallenge() {
             }
             return exercise;
         });
-        console.log(updatedExercises)
         setExercises(updatedExercises);
     };
 

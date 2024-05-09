@@ -33,7 +33,6 @@ function ViewWorkout() {
     useEffect(() => {
         getRoutine(planId, sessionType, day)
             .then((res) => {
-                console.log(res.data)
                 setTitle(res.data.session.plan.name)
                 setWorkout(res.data)
             })

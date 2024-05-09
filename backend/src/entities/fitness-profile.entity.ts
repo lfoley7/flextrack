@@ -36,12 +36,12 @@ export class FitnessProfile {
 
     public constructor(username: string) {
         this.username = username;
-        this.height = -1;
-        this.weight = -1;
+        this.height = 0;
+        this.weight = 0;
         this.deadlift = 0;
         this.squat = 0;
         this.ohp = 0;
         this.bench = 0;
-        this.description = "";
+        this.description = "I just joined Flextrack!";
     }
 }

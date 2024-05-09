@@ -92,7 +92,6 @@
     display: flex;
 }
 
-/* Set a style for buttons */
 .login {
     background-image: linear-gradient(to right, #FC6649, #FE5C54);
     border: none;

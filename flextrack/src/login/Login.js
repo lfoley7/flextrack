@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Modal, Button } from 'react-bootstrap';
 import axios from "axios";
 import './Login.css';
 
@@ -10,25 +11,27 @@ const instance = axios.create({
 
 function Login(props) {
     const [showPassword, setShowPassword] = useState(true);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     document.body.style.height = '0';
 
     const email = createContext();
 
+    const handleCloseErrorModal = () => setShowErrorModal(false);
+
     const verifyAccount = () => {
         let email = document.getElementById("email-input").value;
         let password = document.getElementById("pswd").value;
-        //Verify Account
         instance.post("login", { "email": email, "password": password })
             .then(function (response) {
-                console.log(email + " " + password);
-                navigate("/dashboard")
+                navigate("/dashboard");
             })
             .catch(function (error) {
-                window.alert(error.response.data.error);
-                console.log(error);
-            })
+                setErrorMessage(error.response.data.error || 'Login failed');
+                setShowErrorModal(true);
+            });
     }
 
     return (
@@ -70,6 +73,17 @@ function Login(props) {
                     <div className="copy-right">Powered by Group 7</div>
                 </div>
             </div>
+            <Modal className="posts-modal" show={showErrorModal} onHide={handleCloseErrorModal}>
+                <Modal.Header className="posts-modal-header" closeButton>
+                    <Modal.Title className="posts-modal-text">Login Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{errorMessage}</Modal.Body>
+                <Modal.Footer>
+                    <Button className="posts-modal-button darken" onClick={handleCloseErrorModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

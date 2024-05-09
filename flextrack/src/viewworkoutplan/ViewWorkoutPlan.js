@@ -25,71 +25,12 @@ function ViewWorkoutPlan() {
     useEffect(() => {
         getRoutine(planId)
             .then((res) => {
-                console.log(res.data)
                 setRoutine(res.data);
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
-
-    // const [title, setTitle] = useState({});
-    // const [isEditing, setIsEditing] = useState({});
-    // const titleRefs = useRef({});
-
-    // const workoutRoutines = {
-    //     "Push Pull Legs": {
-    //         days: [
-    //             { day: "Monday", type: "Push" },
-    //             { day: "Wednesday", type: "Pull" },
-    //             { day: "Friday", type: "Legs" }
-    //         ]
-    //     },
-    //     "5 Day Split": {
-    //         days: [
-    //             { day: "Monday", type: "Chest" },
-    //             { day: "Tuesday", type: "Back" },
-    //             { day: "Wednesday", type: "Shoulders" },
-    //             { day: "Thursday", type: "Legs" },
-    //             { day: "Friday", type: "Arms" }
-    //         ]
-    //     },
-    //     "NSuns Program": {
-    //         days: [
-    //             { day: "Monday", type: "Bench/Deadlift" },
-    //             { day: "Tuesday", type: "Squat/Sumo" },
-    //             { day: "Wednesday", type: "Bench/Front Squat" },
-    //             { day: "Thursday", type: "Deadlift/Bench" },
-    //             { day: "Friday", type: "Squat/Bench" },
-    //             { day: "Saturday", type: "Volume" }
-    //         ]
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     Object.keys(isEditing).forEach(routine => {
-    //         if (isEditing[routine] && titleRefs.current[routine].current) {
-    //             titleRefs.current[routine].current.focus();
-    //         }
-    //     });
-    // }, [isEditing]);
-
-    // useEffect(() => {
-    //     getRoutines()
-    //         .then((res) => {
-    //             console.log(res.data)
-    //             setRoutines(res.data);
-    //             const loadTitle = {}
-    //             res.data.forEach(routine => {
-    //                 loadTitle[routine.id] = routine.name;
-    //                 titleRefs.current[routine.id] = React.createRef();
-    //             });
-    //             setTitle(loadTitle)
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // }, []);
 
     if (routine === undefined) {
         return (
@@ -98,37 +39,6 @@ function ViewWorkoutPlan() {
             </>
         );
     }
-
-    // const toggleEditing = (routineId) => {
-    //     setIsEditing(prev => ({ ...prev, [routineId]: !prev[routineId] }));
-
-    // };
-
-    // const handleTitleChange = (routineName, value) => {
-    //     setTitle(prev => ({ ...prev, [routineName]: value }));
-    // };
-
-    // const handleBlur = (routineId) => {
-    //     setIsEditing(prev => ({ ...prev, [routineId]: false }));
-    //     updateRoutineName(routineId, title[routineId])
-    //         .then((res) => {
-    //             console.log(res.data)
-    //             getRoutines()
-    //                 .then((res) => {
-    //                     console.log(res.data)
-    //                     setRoutines(res.data);
-    //                     res.data.forEach(routine => {
-    //                         titleRefs.current[routine.id] = React.createRef();
-    //                     });
-    //                 })
-    //                 .catch((err) => {
-    //                     console.log(err);
-    //                 });
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // };
 
     const interpolateColor = (index, total) => {
         const startColor = [0xF5, 0x85, 0x28];
@@ -165,9 +75,6 @@ function ViewWorkoutPlan() {
                         </h1>
                     )}
                     {routine.sessions.map((session, index) => (
-                        console.log(session),
-                        console.log(index),
-                        console.log(routine.sessions.length),
                         <div key={`${routine.id}-${session.workout_type}`} className="login darken" style={{ fontWeight: '600', fontStyle: 'italic', backgroundImage: "none", backgroundColor: interpolateColor(index, routine.sessions.length) }}>
                             {session.day_of_week} - {session.workout_type}
                         </div>
@@ -184,4 +91,4 @@ function ViewWorkoutPlan() {
     );
 }
 
-export default ViewWorkout;
+export default ViewWorkoutPlan;

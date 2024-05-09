@@ -23,35 +23,6 @@ function CreateWorkoutPlan(props) {
     const [isEditing, setIsEditing] = useState({});
     const titleRefs = useRef({});
 
-    const workoutRoutines = {
-        "Push Pull Legs": {
-            days: [
-                { day: "Monday", type: "Push" },
-                { day: "Wednesday", type: "Pull" },
-                { day: "Friday", type: "Legs" }
-            ]
-        },
-        "5 Day Split": {
-            days: [
-                { day: "Monday", type: "Chest" },
-                { day: "Tuesday", type: "Back" },
-                { day: "Wednesday", type: "Shoulders" },
-                { day: "Thursday", type: "Legs" },
-                { day: "Friday", type: "Arms" }
-            ]
-        },
-        "NSuns Program": {
-            days: [
-                { day: "Monday", type: "Bench/Deadlift" },
-                { day: "Tuesday", type: "Squat/Sumo" },
-                { day: "Wednesday", type: "Bench/Front Squat" },
-                { day: "Thursday", type: "Deadlift/Bench" },
-                { day: "Friday", type: "Squat/Bench" },
-                { day: "Saturday", type: "Volume" }
-            ]
-        }
-    };
-
     useEffect(() => {
         Object.keys(isEditing).forEach(routine => {
             if (isEditing[routine] && titleRefs.current[routine].current) {
@@ -63,7 +34,6 @@ function CreateWorkoutPlan(props) {
     useEffect(() => {
         getRoutines()
             .then((res) => {
-                console.log(res.data)
                 setRoutines(res.data);
                 const loadTitle = {}
                 res.data.forEach(routine => {
@@ -98,10 +68,8 @@ function CreateWorkoutPlan(props) {
         setIsEditing(prev => ({ ...prev, [routineId]: false }));
         updateRoutineName(routineId, title[routineId])
             .then((res) => {
-                console.log(res.data)
                 getRoutines()
                     .then((res) => {
-                        console.log(res.data)
                         setRoutines(res.data);
                         res.data.forEach(routine => {
                             titleRefs.current[routine.id] = React.createRef();
@@ -152,16 +120,12 @@ function CreateWorkoutPlan(props) {
                             </h1>
                         )}
                         {routine.sessions.map((session, index) => (
-                            console.log(session),
-                            console.log(index),
-                            console.log(routine.sessions.length),
                             <div key={`${routine.id}-${session.workout_type}`} className="login darken" style={{ fontWeight: '600', fontStyle: 'italic', backgroundImage: "none", backgroundColor: interpolateColor(index, routine.sessions.length) }}>
-                                <Link to={"/viewworkout/"+routine.id+"/"+session.workout_type+"/"+session.day_of_week} style={{ textDecoration: 'none', color: 'inherit' }}>{session.day_of_week} - {session.workout_type}</Link>
-
+                                <Link to={"/viewworkout/" + routine.id + "/" + session.workout_type + "/" + session.day_of_week} style={{ textDecoration: 'none', color: 'inherit' }}>{session.day_of_week} - {session.workout_type}</Link>
                             </div>
                         ))}
                         <div className="newDay darken">
-                            <Link to={"/editworkout/"+routine.id} style={{ textDecoration: 'none', color: 'inherit' }}>+ Add New Day</Link>
+                            <Link to={"/editworkout/" + routine.id} style={{ textDecoration: 'none', color: 'inherit' }}>+ Add New Day</Link>
                         </div>
                     </div>
                 </div>

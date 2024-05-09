@@ -39,9 +39,7 @@ function EditWorkout() {
   useEffect(() => {
     getRoutine(planId)
         .then((res) => {
-            console.log(res.data)
             setTitle(res.data.plan.name)
-            // setWorkout(res.data)
         })
         .catch((err) => {
             console.log(err);
@@ -57,7 +55,6 @@ function EditWorkout() {
   }
 
   const createWorkout = async (day_of_week, workout_type, exercises, plan_id) => {
-    console.log(exercises)
     let formattedSets = []
     exercises.map((exercise) => {
       exercise.sets.forEach(set => {
@@ -71,7 +68,6 @@ function EditWorkout() {
         formattedSets.push(formattedSet);
       });
     })
-    console.log(formattedSets)
     let body = 
     { 
       "plan_id": plan_id,
@@ -84,10 +80,7 @@ function EditWorkout() {
       ] 
     };
 
-    console.log(body)
-
     addSessionsWorkout(body).then((e) => {
-        console.log(e.data)
         navigate("/createworkoutplan");
       });
   }
@@ -115,7 +108,6 @@ function EditWorkout() {
       }
       return exercise;
     });
-    console.log(updatedExercises)
     setExercises(updatedExercises);
   };
 

@@ -94,8 +94,7 @@
     height: 4rem;
     width: 100%;
     top: 0rem;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 0px 1px 0px;
-    border-bottom: 1px dotted gray;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px, rgba(0, 0, 0, 0.25) 0px 0px 2px 0px;
     z-index: 1000;
     overflow: visible;
     font-family: 'Poppins', 'Sans-serif' !important;
@@ -119,4 +118,8 @@
 
 .nav-link.active {
     color: #FA713E;
+}
+
+.nav-darken:hover {
+    filter: brightness(90%);
 }

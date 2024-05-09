@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Modal, Button } from 'react-bootstrap';
 import './Register.css';
 
 const instance = axios.create({
@@ -9,6 +10,10 @@ const instance = axios.create({
 
 function Register(props) {
     const [showPassword, setShowPassword] = useState(true);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
 
     document.body.style.height = '0';
@@ -19,17 +24,23 @@ function Register(props) {
         let username = document.getElementById("username-input").value;
         let email = document.getElementById("email-input").value;
         let password = document.getElementById("pswd").value;
-        //Verify Account
-        instance.post("signup", { "username": username, "email": email, "password": password })
-            .then(function (response) {
-                console.log(username + " " + email + " " + password);
-                window.alert("Account Created!");
+
+        instance.post("signup", { username, email, password })
+            .then(response => {
+                setSuccessMessage("Account Successfully Created!");
+                setShowSuccessModal(true);
+                setTimeout(() => {
+                    navigate("/login");
+                }, 2500);
             })
-            .catch(function (error) {
-                window.alert(error.response.data.error);
-                console.log(error);
-            })
+            .catch(error => {
+                setErrorMessage(error.response?.data?.error || 'Registration failed');
+                setShowErrorModal(true);
+            });
     }
+
+    const handleCloseErrorModal = () => setShowErrorModal(false);
+    const handleCloseSuccessModal = () => setShowSuccessModal(false);
 
     return (
         <div>
@@ -53,7 +64,7 @@ function Register(props) {
                     <div className="username-label">Username</div>
                     <input id="username-input" type="text" placeholder="Enter Your Username" name="uname" required />
                     <div className="email-label">Email</div>
-                    <input id="email-input" type="text" placeholder="Enter Your Email" name="email" required />
+                    <input id="email-input" type="email" placeholder="Enter Your Email" name="email" required />
                     <div className="pswd-label">Password</div>
                     <div>
                         <input id="pswd" type={showPassword ? "password" : "text"} placeholder="Enter Your Password" name="psw" required />
@@ -78,6 +89,28 @@ function Register(props) {
                     <div className="copy-right">Powered by Group 7</div>
                 </div>
             </div>
+            <Modal className="posts-modal" show={showErrorModal} onHide={handleCloseErrorModal}>
+                <Modal.Header className="posts-modal-header" closeButton>
+                    <Modal.Title className="posts-modal-text">Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{errorMessage}</Modal.Body>
+                <Modal.Footer>
+                    <Button className="posts-modal-button darken" onClick={handleCloseErrorModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal className="posts-modal" show={showSuccessModal} onHide={handleCloseSuccessModal}>
+                <Modal.Header className="posts-modal-header" closeButton>
+                    <Modal.Title className="posts-modal-text">Success</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{successMessage}</Modal.Body>
+                <Modal.Footer>
+                    <Button className="posts-modal-button darken" onClick={handleCloseSuccessModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

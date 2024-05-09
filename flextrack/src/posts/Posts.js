@@ -79,7 +79,6 @@ function Posts(props) {
     useEffect(() => {
         getPosts()
             .then((res) => {
-                console.log(res.data)
                 setPosts(res.data);
             })
             .catch((err) => {

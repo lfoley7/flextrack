@@ -35,12 +35,9 @@ function Exercise({ name, sets, onSetChange, id, onExerciseChange }) {
   useEffect(() => {
     getExercises()
     .then((res) => {
-        console.log(res.data)
-
         const newExercises = (res.data).map((exercise) => {
           return {id: exercise.id, name: exercise.name};
         })
-
         setExerciseOptions(newExercises);
     })
     .catch((err) => {
@@ -61,12 +58,9 @@ function Exercise({ name, sets, onSetChange, id, onExerciseChange }) {
       .then((e) => {
         getExercises()
         .then((res) => {
-            console.log(res.data)
-    
             const newExercises = (res.data).map((exercise) => {
               return {id: exercise.id, name: exercise.name};
             })
-    
             setExerciseOptions(newExercises);
             setNewExerciseName('');
             handleModalClose();
@@ -83,7 +77,6 @@ function Exercise({ name, sets, onSetChange, id, onExerciseChange }) {
 
   const handleExerciseChange = (exercise) => {
     onExerciseChange(exercise.id ,exercise.name)
-    console.log(exercise)
     setLocalExercise(exercise)
   };
 
@@ -96,7 +89,6 @@ function Exercise({ name, sets, onSetChange, id, onExerciseChange }) {
     onSetChange([...localSets, newSet])
     setSets([...localSets, newSet]);
     nextId.current += 1;
-    console.log([...localSets, newSet]);
   };
 
   const handleWeightChange = (set, e, index) => {
@@ -104,7 +96,6 @@ function Exercise({ name, sets, onSetChange, id, onExerciseChange }) {
     newSets[index] = { ...set, weight: parseInt(e.target.value) };
     setSets(newSets);
     onSetChange(newSets);
-    console.log(newSets);
   };
 
   const handleRepsChange = (set, e, index) => {
@@ -112,7 +103,6 @@ function Exercise({ name, sets, onSetChange, id, onExerciseChange }) {
     newSets[index] = { ...set, reps: parseInt(e.target.value) };
     setSets(newSets);
     onSetChange(newSets);
-    console.log(newSets);
   };
 
   const handleDeleteSet = (id) => {
@@ -123,7 +113,6 @@ function Exercise({ name, sets, onSetChange, id, onExerciseChange }) {
     }));
     setSets(updatedSets);
     onSetChange(updatedSets);
-    console.log(updatedSets);
   };
 
   function SetsRepsWeight() {
@@ -194,7 +183,7 @@ function Exercise({ name, sets, onSetChange, id, onExerciseChange }) {
               ))}
             </Dropdown.Menu>
           </Dropdown>
-          <button className="make-posts-button darken" onClick={handleModalShow} style={{ marginLeft: "2rem", marginTop: "0", backgroundImage: "linear-gradient(to right, #FC6649, #FE5C54)", fontSize: ".9rem" }}>+ Exercise</button>
+          <button className="make-posts-button darken" onClick={handleModalShow} style={{ fontStyle: "italic", fontWeight: "600", marginLeft: "2rem", marginTop: "0", backgroundImage: "linear-gradient(to right, #FC6649, #FE5C54)", fontSize: ".9rem" }}>+ Exercise</button>
         </div>
         <SetsRepsWeight />
         <button className="newSet" onClick={handleAddSet}>Add Set</button>

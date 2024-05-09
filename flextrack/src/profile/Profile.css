@@ -30,7 +30,7 @@
 
 .max-weight-input {
     font-size: 1.3rem;
-    color: #777;
+    color: rgb(70, 70, 70);
     font-weight: 300;
     border: none;
     background: none;
@@ -39,13 +39,32 @@
     text-align: center;
 }
 
+.profile-field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: .4rem;
+}
+
+.user-info-input {
+    font-size: 1rem;
+    color: #777;
+    font-weight: 300;
+    border: none;
+    background: none;
+    outline: none;
+    width: auto;
+}
+
 .username {
     margin-top: .5rem;
 }
 
 .username,
 .username-input,
-.max-weight-input {
+.max-weight-input,
+.user-info-input {
     cursor: pointer;
 }
 
