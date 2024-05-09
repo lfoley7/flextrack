@@ -1,6 +1,6 @@
 # *FLEXTRACK*
 
-*FLEXTRACK* is a comprehensive fitness tracking web application, created as a final project for the Database Management Systems course (CS542) during the Spring semester of 2024. This application helps users track their fitness progress, manage workout plans, participate in fitness challenges, and engage with other fitness enthusiasts through social features.
+*FLEXTRACK* is a comprehensive fitness tracking web application, created as a final project for the Database Management Systems course (CS542) taught by Professor Ben Ngan during the Spring semester of 2024. This application helps users track their fitness progress, manage workout plans, participate in fitness challenges, and engage with other fitness enthusiasts through social features.
 
 ## Website
 
