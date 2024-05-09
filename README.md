@@ -1,6 +1,6 @@
 # *FLEXTRACK*
 
-*FLEXTRACK* is a comprehensive fitness tracking web application, created as a final project for the Database Management Systems course (CS542) during the Spring semester of 2024. This application helps users track their fitness progress, manage workout plans, participate in fitness challenges, and engage with other fitness enthusiasts through social features.
+*FLEXTRACK* is a comprehensive fitness tracking web application, created by Luke Foley, Caleb Scopetski, and Jagrutti Chitte as our final project for Database Management Systems (CS542) taught by Professor Ben Ngan during the Spring semester of 2024 at WPI. This application helps users track their fitness progress, manage workout plans, participate in fitness challenges, and engage with other fitness enthusiasts through social features.
 
 ## Website
 
@@ -8,9 +8,9 @@ The application is live and can be accessed at [flextrack.glitch.me](http://flex
 
 ## Motivation
 
-In the United States, 39% of the population are members of a commercial gym, predominantly younger generations[1]. Studies show that using a fitness tracker can significantly enhance fitness progress, leading users to walk an additional 40 minutes per day and lose an extra 2 pounds over 5 months. This underlines that there is a robust market for an integrated fitness tracking solution[2].
+In the United States, 39% of the population are members of a commercial gym, predominantly younger generations [1]. Studies show that using a fitness tracker can significantly enhance fitness progress, leading users to walk an additional 40 minutes per day and lose an extra 2 pounds over 5 months. This underlines that there is a robust market for an integrated fitness tracking solution [2].
 
-## Setup Instructions
+## Local Setup Instructions
 
 ### Launch the React Project Locally
 
@@ -18,7 +18,7 @@ In the United States, 39% of the population are members of a commercial gym, pre
 - Then, navigate to the react app directory by typing `cd flextrack`
 - Finally, run the project with `npm start`, and the project should load in your browser on localhost:3000!
 
-## Launch the Backend Locally
+### Launch the Backend Locally
 
 - Open a new terminal, and from the main directory, type `cd backend`
 - Update the libraries with `npm install`
