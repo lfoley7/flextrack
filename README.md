@@ -10,7 +10,7 @@ The application is live and can be accessed at [flextrack.glitch.me](http://flex
 
 In the United States, 39% of the population are members of a commercial gym, predominantly younger generations [1]. Studies show that using a fitness tracker can significantly enhance fitness progress, leading users to walk an additional 40 minutes per day and lose an extra 2 pounds over 5 months. This underlines that there is a robust market for an integrated fitness tracking solution [2].
 
-## Setup Instructions
+## Local Setup Instructions
 
 ### Launch the React Project Locally
 
