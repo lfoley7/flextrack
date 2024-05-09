@@ -66,5 +66,5 @@ Potential areas for expansion include:
 
 ## References
 
-[1] Godman, H. (2022, October 1). [Do activity trackers make us exercise more?](https://www.health.harvard.edu/exercise-and-fitness/do-activity-trackers-make-us-exercise-more) Harvard Health.
-[2] Gough, C. (2024, January 22). [Frequency of using the gym by generation US 2023](https://www.statista.com/statistics/1445818/generational-share-workout-gym/) Statista.
+- [1] Godman, H. (2022, October 1). [Do activity trackers make us exercise more?](https://www.health.harvard.edu/exercise-and-fitness/do-activity-trackers-make-us-exercise-more) Harvard Health.
+- [2] Gough, C. (2024, January 22). [Frequency of using the gym by generation US 2023](https://www.statista.com/statistics/1445818/generational-share-workout-gym/) Statista.
