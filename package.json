@@ -10,7 +10,7 @@
         "install": "cd flextrack && npm install && cd ../backend && npm install"
     },
     "engines": {
-        "node": "18.18.0",
+        "node": "16.x",
         "npm": "10.2.0"
     }
 }
