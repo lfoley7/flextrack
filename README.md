@@ -18,7 +18,7 @@ In the United States, 39% of the population are members of a commercial gym, pre
 - Then, navigate to the react app directory by typing `cd flextrack`
 - Finally, run the project with `npm start`, and the project should load in your browser on localhost:3000!
 
-## Launch the Backend Locally
+### Launch the Backend Locally
 
 - Open a new terminal, and from the main directory, type `cd backend`
 - Update the libraries with `npm install`
