@@ -1,10 +1,16 @@
 {
+    "name": "flextrack",
+    "version": "1.0.0",
     "scripts": {
         "start": "concurrently \"npm run setup-backend\" \"npm run start-frontend\"",
         "start-backend": "cd backend && node server.js",
-        "start-frontend": "cd frontend && npm start",
+        "start-frontend": "cd flextrack && npm start",
         "setup-backend": "cd backend && npm run schema:reset && npm start",
         "schema:reset": "npx mikro-orm-esm schema:drop --run && npx mikro-orm-esm schema:create --run",
-        "install": "cd frontend && npm install && cd ../backend && npm install"
+        "install": "cd flextrack && npm install && cd ../backend && npm install"
+    },
+    "engines": {
+        "node": "18.18.0",
+        "npm": "10.2.0"
     }
 }
