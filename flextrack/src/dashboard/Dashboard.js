@@ -1,26 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import { profileInstance, workoutInstance } from '../api/axiosInstances';
 import { Modal, Button } from 'react-bootstrap';
 import Loading from '../loading/Loading';
 import './Dashboard.css';
 
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/profile'
-});
-
 const getProfile = async (id) => {
-    return await instance.get("get", { params: { id: id } });
+    return await profileInstance.get("get", { params: { id: id } });
 }
 
-const planInstance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/workout'
-});
-
 const getAllPlans = async (id) => {
-    return await planInstance.get("get-all");
+    return await workoutInstance.get("get-all");
 }
 
 function Dashboard(props) {

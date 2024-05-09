@@ -1,20 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import './CreateWorkoutPlan.css';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { workoutInstance } from '../api/axiosInstances';
 import Loading from '../loading/Loading';
 
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/workout'
-});
-
 const getRoutines = async () => {
-    return await instance.get("get-all");
+    return await workoutInstance.get("get-all");
 }
 
 const updateRoutineName = async (id, name) => {
-    return await instance.post("update-name", { id: id, name: name });
+    return await workoutInstance.post("update-name", { id: id, name: name });
 }
 
 function CreateWorkoutPlan(props) {

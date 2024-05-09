@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { postInstance } from '../api/axiosInstances';
 import './Posts.css';
-
-import axios from 'axios';
 import Loading from '../loading/Loading';
 
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/post'
-});
-
 const getPosts = async () => {
-    return await instance.get("get-all");
+    return await postInstance.get("get-all");
 }
 
 const createPost = async (post) => {
-    return await instance.post("create", post);
+    return await postInstance.post("create", post);
 }
 
 const addComment = async (comment) => {
-    return await instance.post("add-comment", comment);
+    return await postInstance.post("add-comment", comment);
 }
 
 function Posts(props) {

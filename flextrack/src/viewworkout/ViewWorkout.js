@@ -2,17 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { workoutInstance } from '../api/axiosInstances';
 import './ViewWorkout.css';
-import axios from 'axios';
 import Loading from '../loading/Loading';
 
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/workout'
-});
-
 const getRoutine = async (id, session, day) => {
-    return await instance.get("get", { params: { id: id, session: session, day: day } });
+    return await workoutInstance.get("get", { params: { id: id, session: session, day: day } });
 }
 
 function ViewWorkout() {

@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
-import axios from "axios";
+import { challengeInstance, userInstance } from '../api/axiosInstances';
 import { Dropdown } from 'react-bootstrap';
 import Exercise from '../pagecreation/Exercise';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import './CreateChallenge.css';
-
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/challenge'
-});
-
-const userInstance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/user'
-});
 
 const postChallenge = async (users, exercises, name) => {
     let formattedSets = []
@@ -40,7 +30,7 @@ const postChallenge = async (users, exercises, name) => {
         sets: formattedSets,
         name: name
     }
-    await instance.post("/create",body);
+    await challengeInstance.post("/create",body);
 };
 
 function CreateChallenge() {

@@ -1,26 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import Exercise from '../pagecreation/Exercise';
-import axios from "axios";
+import { workoutInstance } from '../api/axiosInstances';
 import './CreateWorkout.css';
 import { TextField } from '@mui/material';
 
-const instance = axios.create({
-  withCredentials: true,
-  baseURL: 'http://localhost:5000/api/workout'
-});
-
-const exerciseInstance = axios.create({
-  withCredentials: true,
-  baseURL: 'http://localhost:5000/api/exercise'
-});
-
 const postWorkout = async (workout) => {
-  return await instance.post("create", workout);
+  return await workoutInstance.post("create", workout);
 }
 
 const addSessionsWorkout = async (workout) => {
-  return await instance.post("add-sessions", workout);
+  return await workoutInstance.post("add-sessions", workout);
 }
 
 function CreateWorkout() {

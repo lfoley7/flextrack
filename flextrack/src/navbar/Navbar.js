@@ -2,18 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faSignOut } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from "@fortawesome/free-brands-svg-icons"
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { profileInstance } from '../api/axiosInstances';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
-import axios from "axios";
-
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/profile'
-});
 
 const getProfile = async () => {
-    return await instance.get("get");
+    return await profileInstance.get("get");
 }
 
 function Navbar(props) {

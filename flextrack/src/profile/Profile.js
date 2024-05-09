@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams }  from 'react-router-dom';
 import './Profile.css';
-import axios from "axios";
+import { profileInstance } from '../api/axiosInstances';
 import Loading from '../loading/Loading';
 
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/profile'
-});
-
 const getProfile = async (id) => {
-    return await instance.get("get", { params: { id: id } });
+    return await profileInstance.get("get", { params: { id: id } });
 }
 
 function Profile(props) {

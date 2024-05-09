@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import cors from 'cors';
-import { MikroORM, RequestContext }from '@mikro-orm/sqlite';
+import { MikroORM, RequestContext } from '@mikro-orm/sqlite';
 import { initORM } from './db.js';
 import { registerUserRoutes } from './routes/users.js';
 import { registerExerciseRoutes } from './routes/exercises.js';
@@ -28,7 +28,7 @@ export async function bootstrap(port = 5000) {
   // allow localhost:3000 cross origin requests
   app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin: ['https://flextrack.glitch.me', 'http://localhost:3000']
   }));
 
   // add cookies for managing session state and persistent login  
@@ -49,7 +49,7 @@ export async function bootstrap(port = 5000) {
     console.log("url:", req.url);
     next();
   };
-  
+
   app.use(logger);
 
   // register request context hook
@@ -58,7 +58,7 @@ export async function bootstrap(port = 5000) {
   });
 
   // shut down the connection when closing the app
-  process.on('exit', async function() {
+  process.on('exit', async function () {
     await db.orm.close();
   });
 
@@ -70,13 +70,13 @@ export async function bootstrap(port = 5000) {
   const profileRouter = await registerProfileRoutes(express.Router())
   const postRouter = await registerPostRoutes(express.Router())
   const challengeRouter = await registerChallengeRoutes(express.Router())
-  
-  router.use('/user',userRouter);
-  router.use('/exercise',exerciseRouter);
-  router.use('/workout',workoutRouter);
-  router.use('/profile',profileRouter);
-  router.use('/post',postRouter)
-  router.use('/challenge',challengeRouter)
+
+  router.use('/user', userRouter);
+  router.use('/exercise', exerciseRouter);
+  router.use('/workout', workoutRouter);
+  router.use('/profile', profileRouter);
+  router.use('/post', postRouter)
+  router.use('/challenge', challengeRouter)
 
   app.use("/api", router)
 

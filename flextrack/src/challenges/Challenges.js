@@ -4,17 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignCenter, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { challengeInstance } from '../api/axiosInstances';
 import './Challenges.css';
 import Loading from "../loading/Loading";
 
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/challenge'
-});
-
 const getChallenges = async () => {
-    return await instance.get("get-all");
+    return await challengeInstance.get("get-all");
 }
 
 function Challenges() {

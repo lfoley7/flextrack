@@ -1,12 +1,8 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { userInstance } from '../api/axiosInstances';
 import { Modal, Button } from 'react-bootstrap';
 import './Register.css';
-
-const instance = axios.create({
-    baseURL: 'http://localhost:5000/api/user'
-});
 
 function Register(props) {
     const [showPassword, setShowPassword] = useState(true);
@@ -25,7 +21,7 @@ function Register(props) {
         let email = document.getElementById("email-input").value;
         let password = document.getElementById("pswd").value;
 
-        instance.post("signup", { username, email, password })
+        userInstance.post("signup", { username, email, password })
             .then(response => {
                 setSuccessMessage("Account Successfully Created!");
                 setShowSuccessModal(true);

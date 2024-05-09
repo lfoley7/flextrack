@@ -1,12 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Dropdown, Modal, Button, Form } from 'react-bootstrap';
+import { exerciseInstance } from '../api/axiosInstances';
 import "./PageCreation.css";
-import axios from "axios";
-
-const exerciseInstance = axios.create({
-  withCredentials: true,
-  baseURL: 'http://localhost:5000/api/exercise'
-});
 
 const postExercise = async (name) => {
   return await exerciseInstance.post("create", {name: name, targetMuscle: "any"});

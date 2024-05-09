@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { workoutInstance, profileInstance } from '../api/axiosInstances';
 import './Settings.css';
 import Loading from '../loading/Loading';
-import axios from "axios";
-
-const workoutInstance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/workout'
-});
 
 const getWorkoutPlans = async () => {
     return await workoutInstance.get("get-all");
 }
-
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/profile'
-});
 
 function Settings(props) {
     const [user, setUser] = useState();
@@ -52,11 +42,11 @@ function Settings(props) {
     };
 
     const getProfile = async () => {
-        return await instance.get("get");
+        return await profileInstance.get("get");
     };
 
     const updateProfile = async () => {
-        return await instance.post("update", user);
+        return await profileInstance.post("update", user);
     };
 
     useEffect(() => {

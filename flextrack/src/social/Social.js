@@ -2,26 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { profileInstance, userInstance } from '../api/axiosInstances';
 import './Social.css';
-import axios from 'axios';
 import Loading from '../loading/Loading';
 
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/profile'
-});
-
-const friendInstance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/user'
-});
-
 const getProfiles = async () => {
-    return await instance.get("get-all");
+    return await profileInstance.get("get-all");
 }
 
 const addFriend = async (user) => {
-    return await friendInstance.post("add-friend", user);
+    return await userInstance.post("add-friend", user);
 }
 
 function Social() {

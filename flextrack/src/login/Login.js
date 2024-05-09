@@ -1,13 +1,8 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal, Button } from 'react-bootstrap';
-import axios from "axios";
+import { userInstance } from '../api/axiosInstances';
 import './Login.css';
-
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'http://localhost:5000/api/user'
-});
 
 function Login(props) {
     const [showPassword, setShowPassword] = useState(true);
@@ -24,7 +19,7 @@ function Login(props) {
     const verifyAccount = () => {
         let email = document.getElementById("email-input").value;
         let password = document.getElementById("pswd").value;
-        instance.post("login", { "email": email, "password": password })
+        userInstance.post("login", { "email": email, "password": password })
             .then(function (response) {
                 navigate("/dashboard");
             })
