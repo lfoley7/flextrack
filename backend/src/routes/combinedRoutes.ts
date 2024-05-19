@@ -98,24 +98,30 @@ async function initializeRouter() {
         } else if (req.session.userId) {
             userId = req.session.userId;
         } else {
-            res.status(500).json({ error: errorMsg });
+            res.status(500).json({ error: errorMsg })
+            return;
         }
         const user: User | null = await db.user.findOne({ id: +userId }, { populate: ['friends'] });
         if (user == null) {
             console.error(errorMsg);
             res.status(500).json({ error: errorMsg });
-        } else {
-            try {
-                console.log(friendId);
-                const friend: User | null = await db.user.findOne({ id: friendId });
-                user.friends.add(friend)
+            return;
+        }
 
-                await db.em.persistAndFlush(user);
-                res.status(200).json(user.profile);
-            } catch (error) {
-                console.error(errorMsg + ':', error);
-                res.status(500).json({ error: errorMsg });
-            }
+        const friend: User | null = await db.user.findOne({ id: friendId });
+        if (friend === null) {
+            console.error(`Friend with id ${friendId} not found`);
+            res.status(404).json({ error: `Friend with id ${friendId} not found` });
+            return;
+        }
+
+        try {
+            user.friends.add(friend);
+            await db.em.persistAndFlush(user);
+            res.status(200).json(user.profile);
+        } catch (error) {
+            console.error(errorMsg + ':', error);
+            res.status(500).json({ error: errorMsg });
         }
     });
 

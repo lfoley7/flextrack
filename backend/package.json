@@ -48,5 +48,8 @@
   },
   "mikro-orm": {
     "useTsNode": true
+  },
+  "compilerOptions": {
+    "allowImportingTsExtensions": true
   }
 }
