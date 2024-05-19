@@ -42,7 +42,7 @@ export default function App() {
 
   return (
     <div>
-      {location.pathname != "/login" && location.pathname != "/register" ? <Navbar signedIn={signedIn} /> : null}
+      {location.pathname !== "/login" && location.pathname !== "/register" ? <Navbar signedIn={signedIn} /> : null}
       <Routes>
         <Route path="/" element={<Navigate replace to="/login" />} />
         <Route path='/dashboard' element={<Dashboard email={email} password={password} signedIn={signedIn} />} />

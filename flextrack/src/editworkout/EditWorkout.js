@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import Exercise from '../pagecreation/Exercise';
 import { workoutInstance } from '../api/axiosInstances';
@@ -7,20 +7,15 @@ import { TextField } from '@mui/material';
 import Loading from '../loading/Loading';
 
 const getRoutine = async (id, session, day) => {
-  return await workoutInstance.get("get-plan", { params: { id: id} });
-}
-
-const postWorkout = async (workout) => {
-  return await workoutInstance.post("create",workout);
+  return await workoutInstance.get("get-plan", { params: { id: id } });
 }
 
 const addSessionsWorkout = async (workout) => {
-  return await workoutInstance.post("add-sessions",workout);
+  return await workoutInstance.post("add-sessions", workout);
 }
 
 function EditWorkout() {
   const [title, setTitle] = useState();
-  const [isEditing, setIsEditing] = useState(false);
   const [exercises, setExercises] = useState([]);
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedType, setSelectedType] = useState('');
@@ -28,25 +23,24 @@ function EditWorkout() {
   const navigate = useNavigate();
   let { planId } = useParams();
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const workoutTypes = { push: 'Push', pull: 'Pull', legs: 'Legs' };
   const defaultSet = [{ id: 1, reps: 1, weight: 10 }];
 
   useEffect(() => {
     getRoutine(planId)
-        .then((res) => {
-            setTitle(res.data.plan.name)
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-  }, []);
+      .then((res) => {
+        setTitle(res.data.plan.name)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [planId]);
 
-  if(title === undefined) {
-      return (
-          <>
-            <Loading margin={0} minHeight={"1000px"} />
-          </>
-        );
+  if (title === undefined) {
+    return (
+      <>
+        <Loading margin={0} minHeight={"1000px"} />
+      </>
+    );
   }
 
   const createWorkout = async (day_of_week, workout_type, exercises, plan_id) => {
@@ -62,9 +56,10 @@ function EditWorkout() {
 
         formattedSets.push(formattedSet);
       });
+      return null;
     })
-    let body = 
-    { 
+    let body =
+    {
       "plan_id": plan_id,
       "sessions": [
         {
@@ -72,19 +67,17 @@ function EditWorkout() {
           "workout_type": workout_type,
           "sets": formattedSets
         }
-      ] 
+      ]
     };
 
     addSessionsWorkout(body).then((e) => {
-        navigate("/createworkoutplan");
-      });
+      navigate("/createworkoutplan");
+    });
   }
 
   const handleSubmit = async () => {
     await createWorkout(selectedDay, selectedType, exercises, planId)
   };
-
-  const toggleEditing = () => setIsEditing(true);
 
   const handleAddExercise = () => {
     const newExercise = {
@@ -118,7 +111,7 @@ function EditWorkout() {
 
   return (
     <div className="display-container">
-      <h1 className="workout-title" onClick={toggleEditing}>{title}</h1>
+      <h1 className="workout-title">{title}</h1>
       <div className="d-flex justify-content-start mb-3">
         <select className="form-select me-2" value={selectedDay} onChange={e => setSelectedDay(e.target.value)} style={{ maxWidth: 200, cursor: 'pointer' }}>
           <option value="">Select a Day</option>

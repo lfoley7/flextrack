@@ -17,8 +17,6 @@ function Dashboard(props) {
     const [user, setUser] = useState();
     const [currentPlan, setCurrentPlan] = useState();
     const [showErrorModal, setShowErrorModal] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
-    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     let { userId } = useParams();
     const navigate = useNavigate();
 
@@ -47,7 +45,6 @@ function Dashboard(props) {
                 throw new Error("You don't have any workouts yet. Try creating a workout plan on the \"My Workouts\" page first!");
             }
         } catch (err) {
-            setErrorMessage(err.message);
             setShowErrorModal(true);
         }
     }
@@ -103,7 +100,7 @@ function Dashboard(props) {
                 <Modal.Header className="posts-modal-header" closeButton>
                     <Modal.Title className="posts-modal-text">Error</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>You don't have any workouts yet. Try creating a workout plan on the <a className="orange-link" onClick={() => { navigate("/createworkoutplan"); }}>My Workouts</a> page first!</Modal.Body>
+                <Modal.Body>You don't have any workouts yet. Try creating a workout plan on the <a className="orange-link" href="/createworkoutplan">My Workouts</a> page first!</Modal.Body>
                 <Modal.Footer>
                     <Button className="posts-modal-button darken" onClick={handleCloseErrorModal}>
                         Close

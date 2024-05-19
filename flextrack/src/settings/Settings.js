@@ -78,7 +78,7 @@ function Settings(props) {
             .catch((err) => {
                 console.log(err);
             });
-    }, [updateProfile, setUser, user]);
+    }, [setUser, user]);
 
     function editableField(field, unit = '', isTableField = false, isDescriptionField = false) {
         const inputClass = isTableField ? "max-weight-input" : "user-info-input";

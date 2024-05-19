@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Exercise from '../pagecreation/Exercise';
 import { workoutInstance } from '../api/axiosInstances';
@@ -23,7 +23,6 @@ function CreateWorkout() {
   const navigate = useNavigate();
 
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const workoutTypes = { push: 'Push', pull: 'Pull', legs: 'Legs' };
   const defaultSet = [{ id: 1, reps: 1, weight: 10 }];
 
   const createWorkout = async (name, day_of_week, workout_type, exercises) => {
@@ -39,7 +38,9 @@ function CreateWorkout() {
 
         formattedSets.push(formattedSet);
       });
+      return null;
     })
+
     let body =
     {
       "name": name,

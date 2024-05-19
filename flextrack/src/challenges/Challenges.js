@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAlignCenter, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import { challengeInstance } from '../api/axiosInstances';
@@ -27,11 +27,12 @@ function Challenges() {
             const newChallenges = res.data.challenges;
             newChallenges.map((challenge) => {
                 const filteredExercises = res.data.exercises.filter((exercise) =>
-                    exercise.id == challenge.id
+                    exercise.id === challenge.id
                 )
                 challenge.exercises = filteredExercises[0].exercises;
             })
             setChallenges(res.data.challenges);
+            return null;
         })
     }, []);
 
@@ -54,17 +55,6 @@ function Challenges() {
         const initializedExercises = challenge.exercises;
         setSelectedChallenge(challenge);
         setWorkout({ ...challenge, exercises: initializedExercises });
-    };
-
-    const createNewChallenge = () => {
-        navigate('/createchallenge');
-    };
-
-    const enterWeight = (exerciseIndex) => {
-        const weight = prompt("Enter your max weight for this exercise (lbs):");
-        if (weight) {
-            setMaxWeights(prev => ({ ...prev, [exerciseIndex]: weight }));
-        }
     };
 
     const handleEnterWeight = (index) => {

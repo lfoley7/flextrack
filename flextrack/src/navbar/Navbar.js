@@ -12,7 +12,6 @@ const getProfile = async () => {
 }
 
 function Navbar(props) {
-    const navigate = useNavigate();
     const location = useLocation();
 
     const isActive = (route) => {

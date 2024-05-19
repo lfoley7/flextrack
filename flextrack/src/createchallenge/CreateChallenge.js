@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
 import { challengeInstance, userInstance } from '../api/axiosInstances';
-import { Dropdown } from 'react-bootstrap';
 import Exercise from '../pagecreation/Exercise';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import './CreateChallenge.css';
 
 const postChallenge = async (users, exercises, name) => {
@@ -21,6 +18,7 @@ const postChallenge = async (users, exercises, name) => {
 
         formattedSets.push(formattedSet);
       });
+      return null;
     })
     const user_ids = users.map((user) => {
         return user.value

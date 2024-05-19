@@ -34,7 +34,7 @@ function ViewWorkout() {
             .catch((err) => {
                 console.log(err);
             });
-    }, [getRoutine, day, planId, sessionType]);
+    }, [day, planId, sessionType]);
 
     if(workout === undefined) {
         return (
@@ -47,7 +47,7 @@ function ViewWorkout() {
     return (
         <div className="display-container">
             <h1 className="view-workout-title">{title}</h1>
-            <h3 className="" style={{ marginBottom: "2rem" }}>{dayInput +"-"+ session}</h3>
+            <h3 style={{ marginBottom: "2rem" }}>{dayInput +"-"+ session}</h3>
             {workout.exercises.map((exercise, exerciseIndex) => (
                 <div key={exerciseIndex} className="exercise-wrapper">
                     <div className="exercise-content">

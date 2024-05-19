@@ -22,7 +22,7 @@ function Profile(props) {
         .catch((err) => {
             console.log(err);
         });
-      }, [getProfile, userId]);
+      }, [userId]);
 
       
     if(user === undefined) {
