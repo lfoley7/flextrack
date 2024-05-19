@@ -78,11 +78,7 @@ function Settings(props) {
             .catch((err) => {
                 console.log(err);
             });
-<<<<<<< HEAD
     }, [updateProfile, setUser, user]);
-=======
-    }, [isEditing]);
->>>>>>> 64d80152bb4a2462a48f2859cb8703791b8d6cd5
 
     function editableField(field, unit = '', isTableField = false, isDescriptionField = false) {
         const inputClass = isTableField ? "max-weight-input" : "user-info-input";
