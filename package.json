@@ -6,8 +6,7 @@
         "start": "concurrently \"npm run setup-backend\" \"npm run start-frontend\"",
         "start-frontend": "cd flextrack && npm start",
         "setup-backend": "cd backend && npm run schema:reset && npm start",
-        "start:prod": "cd flextrack && npm run build && cd ../backend && npm run start",
-        "compile": "echo 'Add your compile script here'"
+        "start:prod": "cd flextrack && npm run build && cd ../backend && npm start"
     },
     "engines": {
         "node": "^18.17.0 || >=20.5.0",

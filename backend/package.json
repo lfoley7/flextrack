@@ -2,24 +2,13 @@
   "name": "cs542-project",
   "version": "1.0.0",
   "description": "CS542 Semester RDBMS Project",
-  "main": "app.ts",
+  "main": "src/server.ts",
   "scripts": {
     "schema:reset": "npx mikro-orm-esm schema:drop --run && npx mikro-orm-esm schema:create --run",
     "build": "tsc",
     "start": "npx tsx src/server.ts",
     "test": "jest --runInBand --silent"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cscopetski/CS542-Project.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cscopetski/CS542-Project/issues"
-  },
-  "homepage": "https://github.com/cscopetski/CS542-Project#readme",
-  "type": "module",
   "dependencies": {
     "@mikro-orm/cli": "^6.1.12",
     "@mikro-orm/core": "^6.1.12",
@@ -34,8 +23,8 @@
     "fastify": "^4.26.2",
     "sequelize": "^6.37.1",
     "sequelize-typescript": "^2.1.6",
-    "typescript": "^5.4.5",
     "sqlite3": "^5.1.7",
+    "typescript": "^5.4.5",
     "ts-jest": "^29.1.2",
     "vitest": "^1.4.0"
   },
