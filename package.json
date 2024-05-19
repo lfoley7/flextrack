@@ -11,7 +11,7 @@
         "postinstall": "cd flextrack && npm install && npm run build"
     },
     "engines": {
-        "node": "16.x",
+        "node": "^18.17.0 || >=20.5.0",
         "npm": "10.2.0"
     },
     "dependencies": {
