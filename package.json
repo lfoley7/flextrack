@@ -12,6 +12,12 @@
         "npm": "10.2.0"
     },
     "dependencies": {
-        "concurrently": "^6.0.0"
+        "concurrently": "^6.0.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "5.0.1"
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.14.5"
     }
 }

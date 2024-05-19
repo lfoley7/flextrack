@@ -4,10 +4,10 @@
   "description": "CS542 Semester RDBMS Project",
   "main": "app.ts",
   "scripts": {
+    "schema:reset": "npx mikro-orm-esm schema:drop --run && npx mikro-orm-esm schema:create --run",
     "build": "tsc",
     "start": "npx tsx src/server.ts",
-    "test": "jest --runInBand --silent",
-    "schema:reset": "npx mikro-orm-esm schema:drop --run && npx mikro-orm-esm schema:create --run"
+    "test": "jest --runInBand --silent"
   },
   "repository": {
     "type": "git",
