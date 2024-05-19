@@ -12,8 +12,6 @@ function Login(props) {
 
     document.body.style.height = '0';
 
-    const email = createContext();
-
     const handleCloseErrorModal = () => setShowErrorModal(false);
 
     const verifyAccount = () => {
@@ -37,7 +35,7 @@ function Login(props) {
                 <div className="flex">
                     <div className="login-dropdown dropdown">
                         <div className="logo-title">FLEXTRACK</div>
-                        <a className="dropdown-text" href="#">The all-in-one fitness app!</a>
+                        <a className="dropdown-text" href="/login">The all-in-one fitness app!</a>
                     </div>
                     <div className="message-container">
                         <div className="welcome-back">Welcome Back!</div>
@@ -63,7 +61,7 @@ function Login(props) {
                     }}>Login</button>
                     <div>
                         <label>New to your fitness journey?&nbsp;</label>
-                        <a className="orange-link" onClick={() => { navigate("/register"); }}>Click here to register!</a>
+                        <a href="/register" className="orange-link">Click here to register!</a>
                     </div>
                     <div className="copy-right">Powered by Group 7</div>
                 </div>

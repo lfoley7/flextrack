@@ -12,7 +12,7 @@ const getExercises = async () => {
 }
 
 function Exercise({ name, sets, onSetChange, id, onExerciseChange }) {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing] = useState(false);
   const [localExercise, setLocalExercise] = useState({id: id, name: name});
   const nextId = useRef(2);
   const [localSets, setSets] = useState(sets);

@@ -3,12 +3,9 @@
     "version": "1.0.0",
     "scripts": {
         "start": "concurrently \"npm run setup-backend\" \"npm run start-frontend\"",
-        "start-backend": "cd backend && node server.js",
         "start-frontend": "cd flextrack && npm start",
         "setup-backend": "cd backend && npm run schema:reset && npm start",
-        "schema:reset": "npx mikro-orm-esm schema:drop --run && npx mikro-orm-esm schema:create --run",
-        "install": "cd flextrack && npm install && cd ../backend && npm install",
-        "postinstall": "cd flextrack && npm install && npm run build"
+        "start:prod": "cd flextrack && npm run build && cd ../backend && npm run start"
     },
     "engines": {
         "node": "^18.17.0 || >=20.5.0",

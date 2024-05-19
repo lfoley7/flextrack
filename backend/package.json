@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "npx tsx src/server.ts",
-    "test": "jest --runInBand --silent"
+    "test": "jest --runInBand --silent",
+    "schema:reset": "npx mikro-orm-esm schema:drop --run && npx mikro-orm-esm schema:create --run"
   },
   "repository": {
     "type": "git",
