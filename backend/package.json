@@ -1,6 +1,7 @@
 {
   "name": "cs542-project",
   "version": "1.0.0",
+  "type": "module",
   "description": "CS542 Semester RDBMS Project",
   "main": "src/server.ts",
   "scripts": {

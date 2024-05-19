@@ -10,9 +10,9 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
 
   router.post("/signup", async (req, res) => {
     const { username, email, password } = req.body;
-    
+
     try {
-      
+
       const userCount = await db.em.count(LoginCredential, { email: email });
 
       // If the user exists
@@ -31,7 +31,7 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
       //Set userId session cookie
       req.session.userId = newUser.id.toString();
 
-      res.status(200).json({ user: newUser});
+      res.status(200).json({ user: newUser });
     } catch (error) {
       console.error('Error creating user and credentials:', error);
       res.status(500).json({ error: 'Failed to signup user' });
@@ -45,11 +45,11 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
     try {
       // Find the corresponding credentials
       const credentials = await db.em.findOne(LoginCredential, { email: email });
-      
+
       // If the credentials don't exist
       if (!credentials) {
         res.status(400).json({ error: errorMsg });
-        return 
+        return
       }
 
       // Compare the provided password with the stored hashed password
@@ -57,13 +57,13 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
 
       if (!passwordMatch) {
         res.status(400).json({ error: errorMsg });
-        return 
+        return
       }
 
       // Passwords match, user is authenticated
       // Set session variable
       req.session.userId = credentials.user.id.toString();
-      res.json({ message: 'Login successful'});
+      res.json({ message: 'Login successful' });
     } catch (error) {
       console.error('Error during login:', error);
       res.status(500).json({ error: 'Login failed' });
@@ -72,7 +72,7 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
 
   router.get('/logout', async (req: Request, res: Response) => {
     try {
-      req.session.destroy(() => {});
+      req.session.destroy(() => { });
     } catch (error) {
       console.error('Error during logout user:', error);
       res.status(500).json({ error: 'Failed to logout user' });
@@ -84,28 +84,28 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
     const errorMsg = 'Failed to add friend'
     const friendId = req.body.id;
 
-    if(req.query.id){
+    if (req.query.id) {
       userId = (req.query.id).toString();
-    }else if(req.session.userId){
+    } else if (req.session.userId) {
       userId = req.session.userId;
-    }else{
+    } else {
       res.status(500).json({ error: errorMsg });
     }
-    const user: User = await db.user.findOne({id: +userId},{ populate: ['friends']});
-    if(user == null) {
+    const user: User | null = await db.user.findOne({ id: +userId }, { populate: ['friends'] });
+    if (user == null) {
       console.error(errorMsg);
       res.status(500).json({ error: errorMsg });
-    }else{
+    } else {
       try {
         console.log(friendId);
-        const friend: User = await db.user.findOne({id: friendId});
+        const friend: User = await db.user.findOne({ id: friendId });
         user.friends.add(friend)
 
         await db.em.persistAndFlush(user);
         res.status(200).json(user.profile);
       } catch (error) {
-          console.error(errorMsg+':', error);
-          res.status(500).json({ error: errorMsg });
+        console.error(errorMsg + ':', error);
+        res.status(500).json({ error: errorMsg });
       }
     }
   });
@@ -114,24 +114,24 @@ export async function registerUserRoutes(router: Router): Promise<express.Router
     let userId = "";
     const errorMsg = 'Failed to get users'
 
-    if(req.query.id){
+    if (req.query.id) {
       userId = (req.query.id).toString();
-    }else if(req.session.userId){
+    } else if (req.session.userId) {
       userId = req.session.userId;
-    }else{
+    } else {
       res.status(500).json({ error: errorMsg });
     }
-    
-    const user = await db.user.findOne({id: +userId},{ populate: ['friends.profile.username']});
-    if(user == null) {
+
+    const user = await db.user.findOne({ id: +userId }, { populate: ['friends.profile.username'] });
+    if (user == null) {
       console.error(errorMsg);
       res.status(500).json({ error: errorMsg });
-    }else{
+    } else {
       try {
         res.status(200).json(user.friends);
       } catch (error) {
-          console.error(errorMsg+':', error);
-          res.status(500).json({ error: errorMsg });
+        console.error(errorMsg + ':', error);
+        res.status(500).json({ error: errorMsg });
       }
     }
   });

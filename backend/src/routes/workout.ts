@@ -226,7 +226,6 @@ export async function registerWorkoutRoutes(router: Router): Promise<express.Rou
   });
 
   router.get("/get", async (req, res) => {
-
     const errorMsg = 'Error getting plan'
     console.log(req.body)
     let userId = "";
@@ -324,7 +323,6 @@ export async function registerWorkoutRoutes(router: Router): Promise<express.Rou
   });
 
   router.get("/get-plan", async (req, res) => {
-
     const errorMsg = 'Error getting plan'
     console.log(req.body)
     let userId = "";
