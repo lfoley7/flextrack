@@ -9,7 +9,7 @@
             "src": "flextrack/package.json",
             "use": "@vercel/static-build",
             "config": {
-                "distDir": "flextrack/build"
+                "distDir": "build"
             }
         }
     ],
@@ -20,7 +20,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "flextrack/build/$1"
+            "dest": "/build/$1"
         }
     ]
 }
