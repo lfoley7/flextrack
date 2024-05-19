@@ -34,7 +34,11 @@ function ViewWorkout() {
             .catch((err) => {
                 console.log(err);
             });
+<<<<<<< HEAD
     }, [getRoutine, day, planId, sessionType]);
+=======
+    }, []);
+>>>>>>> 64d80152bb4a2462a48f2859cb8703791b8d6cd5
 
     if(workout === undefined) {
         return (

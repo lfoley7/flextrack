@@ -13,7 +13,7 @@ function Register(props) {
     const navigate = useNavigate();
 
     document.body.style.height = '0';
-
+    
     const verifyAccount = () => {
         let username = document.getElementById("username-input").value;
         let email = document.getElementById("email-input").value;
