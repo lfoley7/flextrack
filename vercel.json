@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "backend/src/**/*.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "flextrack/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "flextrack/build"
+        }
+      }
+    ],
+    "routes": [
+      { "src": "/src/(.*)", "dest": "backend/src/index.js" },
+      { "src": "/(.*)", "dest": "flextrack/build/$1" }
+    ]
+  }
+  
