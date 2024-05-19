@@ -2,11 +2,12 @@
     "name": "flextrack",
     "version": "1.0.0",
     "scripts": {
-        "build": "npm run clean && npm install && npm run compile",
+        "build": "npm install && npm run compile",
         "start": "concurrently \"npm run setup-backend\" \"npm run start-frontend\"",
         "start-frontend": "cd flextrack && npm start",
         "setup-backend": "cd backend && npm run schema:reset && npm start",
-        "start:prod": "cd flextrack && npm run build && cd ../backend && npm run start"
+        "start:prod": "cd flextrack && npm run build && cd ../backend && npm run start",
+        "compile": "echo 'Add your compile script here'"
     },
     "engines": {
         "node": "^18.17.0 || >=20.5.0",
