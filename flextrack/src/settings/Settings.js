@@ -69,7 +69,7 @@ function Settings(props) {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [updateProfile, user]);
 
     const interpolateColor = (index, total) => {
         const startColor = [245, 133, 41];
