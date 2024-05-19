@@ -8,6 +8,8 @@ import { Post } from '../entities/post.entity.js';
 import { Comment } from '../entities/comments.entity.js';
 import { WorkoutSession } from '../entities/workout-session.entity.js';
 import { SessionSet } from '../entities/set.entity.js';
+import { LoginCredential } from '../entities/login-credential.entity.js';
+import { FitnessProfile } from '../entities/fitness-profile.entity.js';
 
 const router = Router();
 
@@ -604,7 +606,7 @@ async function initializeRouter() {
         } else {
             res.status(500).json({ error: errorMsg });
         }
-        const user: User = await db.user.findOne({ id: +userId }, { populate: ['profile', 'friends'] });
+        const user: User | null = await db.user.findOne({ id: +userId }, { populate: ['profile', 'friends'] });
 
         if (user == null) {
             console.error(errorMsg);
@@ -639,7 +641,7 @@ async function initializeRouter() {
         } else {
             res.status(500).json({ error: errorMsg });
         }
-        const user: User = await db.user.findOne({ id: +userId }, { populate: ['profile'] });
+        const user: User | null = await db.user.findOne({ id: +userId }, { populate: ['profile'] });
 
         if (user == null) {
             console.error(errorMsg);
@@ -666,7 +668,7 @@ async function initializeRouter() {
         } else {
             res.status(500).json({ error: errorMsg });
         }
-        const user: User = await db.user.findOne({ id: +userId }, { populate: ['profile'] });
+        const user: User | null = await db.user.findOne({ id: +userId }, { populate: ['profile'] });
 
         if (user == null) {
             console.error(errorMsg);
