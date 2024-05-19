@@ -20,7 +20,7 @@ export async function registerProfileRoutes(router: Router): Promise<express.Rou
     }else{
       res.status(500).json({ error: errorMsg });
     }
-    const user: User = await db.user.findOne({id: +userId},{ populate: ['profile', 'friends']});
+    const user: User | null = await db.user.findOne({id: +userId},{ populate: ['profile', 'friends']});
 
     if(user == null) {
       console.error(errorMsg);
@@ -55,7 +55,7 @@ export async function registerProfileRoutes(router: Router): Promise<express.Rou
     }else{
       res.status(500).json({ error: errorMsg });
     }
-    const user: User = await db.user.findOne({id: +userId},{ populate: ['profile']});
+    const user: User | null = await db.user.findOne({id: +userId},{ populate: ['profile']});
     
     if(user == null) {
       console.error(errorMsg);
@@ -81,7 +81,7 @@ export async function registerProfileRoutes(router: Router): Promise<express.Rou
     }else{
       res.status(500).json({ error: errorMsg });
     }
-    const user: User = await db.user.findOne({id: +userId},{ populate: ['profile']});
+    const user: User | null = await db.user.findOne({id: +userId},{ populate: ['profile']});
     
     if(user == null) {
       console.error(errorMsg);
@@ -108,7 +108,7 @@ export async function registerProfileRoutes(router: Router): Promise<express.Rou
     }else{
       res.status(500).json({ error: errorMsg });
     }
-    const user: User = await db.user.findOne({id: +userId},{ populate: ['profile']});
+    const user: User | null = await db.user.findOne({id: +userId},{ populate: ['profile']});
 
     if(user == null) {
       console.error(errorMsg);

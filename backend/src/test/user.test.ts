@@ -1,6 +1,6 @@
 import { Server } from 'http';
 import request from "supertest";
-import { initTestApp } from '../utils';
+import { initTestApp } from '../utils.ts';
 
 let app: Server;
 

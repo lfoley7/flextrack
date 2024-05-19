@@ -107,7 +107,7 @@ async function initializeRouter() {
         } else {
             try {
                 console.log(friendId);
-                const friend: User = await db.user.findOne({ id: friendId });
+                const friend: User | null = await db.user.findOne({ id: friendId });
                 user.friends.add(friend)
 
                 await db.em.persistAndFlush(user);
