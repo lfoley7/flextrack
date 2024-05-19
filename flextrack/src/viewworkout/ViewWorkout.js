@@ -15,8 +15,8 @@ function ViewWorkout() {
 
     let { planId, sessionType, day } = useParams();
     const [title, setTitle] = useState('My Workout')
-    const [session, setSession] = useState(sessionType)
-    const [dayInput, setDay] = useState(day)
+    const [session] = useState(sessionType)
+    const [dayInput] = useState(day)
     const [workout, setWorkout] = useState();
 
     const toggleCompletion = (exerciseIndex, setIndex) => {
@@ -34,7 +34,7 @@ function ViewWorkout() {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [day, planId, sessionType]);
 
     if(workout === undefined) {
         return (

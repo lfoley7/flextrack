@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4f30a491.css",
+    "main.js": "/static/js/main.a73a3e3b.js",
+    "static/js/453.74d94e12.chunk.js": "/static/js/453.74d94e12.chunk.js",
+    "static/media/gym_background_fulldef.png": "/static/media/gym_background_fulldef.352f5544cbd0bc2274e1.png",
+    "static/media/group_exercising.png": "/static/media/group_exercising.24cbe8a827f91077820c.png",
+    "index.html": "/index.html",
+    "main.4f30a491.css.map": "/static/css/main.4f30a491.css.map",
+    "main.a73a3e3b.js.map": "/static/js/main.a73a3e3b.js.map",
+    "453.74d94e12.chunk.js.map": "/static/js/453.74d94e12.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4f30a491.css",
+    "static/js/main.a73a3e3b.js"
+  ]
+}

@@ -14,8 +14,6 @@ function Register(props) {
 
     document.body.style.height = '0';
 
-    const email = createContext();
-
     const verifyAccount = () => {
         let username = document.getElementById("username-input").value;
         let email = document.getElementById("email-input").value;
@@ -45,7 +43,7 @@ function Register(props) {
                 <div className="flex">
                     <div className="dropdown login-dropdown">
                         <div className="logo-title">FLEXTRACK</div>
-                        <a className="dropdown-text" href="#">The all-in-one fitness app!</a>
+                        <a className="dropdown-text" href="/login">The all-in-one fitness app!</a>
                     </div>
                     <div className="message-container">
                         <div className="welcome-back">Welcome Back!</div>
@@ -80,7 +78,7 @@ function Register(props) {
                     }}>Register</button>
                     <div>
                         <label>Already a user?&nbsp;</label>
-                        <a className="orange-link" onClick={() => { navigate("/login"); }}>Click here to log in!</a>
+                        <a href="/login" className="orange-link">Click here to log in!</a>
                     </div>
                     <div className="copy-right">Powered by Group 7</div>
                 </div>

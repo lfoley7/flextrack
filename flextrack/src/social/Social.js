@@ -81,7 +81,7 @@ function Social() {
                                     </div>
                                     <div style={{ flex: 1 }}>
                                         <label className="username mb-2">{user.username}</label>
-                                        {user.friend == false ? <button className='add-friend' onClick={(e) => {
+                                        {user.friend === false ? <button className='add-friend' onClick={(e) => {
                                             e.stopPropagation();
                                             onHandleAddFriend(index);
                                         }}>+ Add</button> : <button className='added-friend' onClick={() => { }}>Added</button>}
