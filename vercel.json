@@ -9,14 +9,14 @@
             "src": "flextrack/package.json",
             "use": "@vercel/static-build",
             "config": {
-                "distDir": "flextrack/build"
+                "distDir": "build"
             }
         }
     ],
     "routes": [
         {
             "src": "/api/(.*)",
-            "dest": "/backend/src/$1"
+            "dest": "backend/src/$1"
         },
         {
             "src": "/(.*)",
