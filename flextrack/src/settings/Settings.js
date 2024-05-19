@@ -45,10 +45,6 @@ function Settings(props) {
         return await profileInstance.get("get");
     };
 
-    const updateProfile = async () => {
-        return await profileInstance.post("update", user);
-    };
-
     useEffect(() => {
         getProfile().then((res) => {
             setUser(res.data);
@@ -62,6 +58,10 @@ function Settings(props) {
             console.error("Error fetching workout plans:", err);
         });
 
+        const updateProfile = async () => {
+            return await profileInstance.post("update", user);
+        };
+
         updateProfile(user)
             .then((res) => {
                 setUser(res.data);
@@ -69,7 +69,7 @@ function Settings(props) {
             .catch((err) => {
                 console.log(err);
             });
-    }, [updateProfile, user]);
+    }, [user, setUser]);
 
     const interpolateColor = (index, total) => {
         const startColor = [245, 133, 41];
