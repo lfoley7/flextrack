@@ -1,0 +1,29 @@
+{
+    "id": 1, //this would be automatically generated
+    "name": "PPL",
+    "sessions": [
+        {
+            "day_of_week": "Monday",
+            "workout_type": "Push",
+            "sets": [
+                {
+                    "set_number": 1,
+                    "exercise": 1,
+                    "target_weight": 135,
+                    "target_reps": 12
+                },
+                {
+                    "set_number": 2,
+                    "exercise": 1,
+                    "target_weight": 155,
+                    "target_reps": 10
+                }
+            ]
+        },
+        {
+            "day_of_week": "Tuesday",
+            "workout_type": "Pull",
+            "sets": []
+        }
+    ]
+}

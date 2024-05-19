@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.challenge-layout {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.challenges-title {
+    font-size: calc(1.375rem + 1.2vw);
+    font-style: italic;
+    color: #FE5C54;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.challenge-text {
+    color: #fa713e;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.challenge-header {
+    width: 100%;
+    background-color: #FF4500;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: calc(1.375rem + 1.2vw);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.challenge-list {
+    width: 100%;
+}
+
+.challenge-item {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.challenge-item:hover {
+    background-color: #f7f7f7;
+}
+
+.challenge-name {
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.new-challenge-btn {
+    background-color: #FF4500;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 90%;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.new-challenge-btn:hover {
+    background-color: #e69500;
+}
+
+.bottom-nav {
+    background-color: #FF4500;
+    color: white;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.bottom-nav span {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.exercise-detail {
+    background-color: #fff;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-name {
+    font-size: calc(0.8rem + 1.2vw);
+    color: #FA713E;
+    font-weight: bold;
+    margin-top: 0;
+    text-align: left;
+}
