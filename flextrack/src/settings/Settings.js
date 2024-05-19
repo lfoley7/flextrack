@@ -61,6 +61,14 @@ function Settings(props) {
         }).catch((err) => {
             console.error("Error fetching workout plans:", err);
         });
+
+        updateProfile(user)
+            .then((res) => {
+                setUser(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }, []);
 
     const interpolateColor = (index, total) => {
@@ -69,16 +77,6 @@ function Settings(props) {
         const step = total > 1 ? index / (total - 1) : 1;
         return `rgb(${startColor.map((start, i) => Math.round(start + (endColor[i] - start) * step))})`;
     };
-
-    useEffect(() => {
-        updateProfile(user)
-            .then((res) => {
-                setUser(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, [updateProfile, setUser, user]);
 
     function editableField(field, unit = '', isTableField = false, isDescriptionField = false) {
         const inputClass = isTableField ? "max-weight-input" : "user-info-input";
