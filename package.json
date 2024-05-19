@@ -10,8 +10,8 @@
         "compile": "echo 'Add your compile script here'"
     },
     "engines": {
-        "node": "^18.17.0 || >=20.5.0",
-        "npm": "10.2.0"
+        "node": "16.x",
+        "npm": "7.x"
     },
     "dependencies": {
         "concurrently": "^6.0.0",
